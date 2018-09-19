@@ -9,8 +9,11 @@
   "author": "Josh Pospisil",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.1.0",
     "@storybook/vue": "^3.4.11",
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "vue-loader": "^14.2.3",
+    "vue-template-compiler": "^2.5.17"
   },
   "dependencies": {
     "vue": "^2.5.17"

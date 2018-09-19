@@ -1,12 +1,12 @@
 import { configure } from '@storybook/vue';
 import Vue from 'vue';
-import Vuex from 'vuex'; // Vue plugins
+// import Vuex from 'vuex'; // Vue plugins
 
 // Import your custom components.
 // import Mybutton from '../src/stories/Button.vue';
 
 // Install Vue plugins.
-Vue.use(Vuex);
+// Vue.use(Vuex);
 
 // Register custom components.
 // Vue.component('my-button', Mybutton);
