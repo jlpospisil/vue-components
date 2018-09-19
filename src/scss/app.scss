@@ -1,0 +1,28 @@
+@import "imports";
+
+.application {
+  height: 100%;
+  font-family: $font-family;
+  color: $font-color;
+
+  .dropdown-menu.bg-primary {
+    .dropdown-item {
+      &:hover, &:focus {
+        background-color: $dark-primary;
+      }
+    }
+  }
+
+  a {
+    color: $info-color;
+
+    &:hover {
+      text-decoration: none;
+      color: darken($info-color, 10%);
+    }
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+}
