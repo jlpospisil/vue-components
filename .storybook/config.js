@@ -1,5 +1,6 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
+import { withInfo } from '@storybook/addon-info';
 import Vue from 'vue';
 // import Vuex from 'vuex'; // Vue plugins
 
@@ -19,6 +20,10 @@ setOptions({
   hierarchyRootSeparator: /\|/,
   sortStoriesByKind: true
 });
+
+// Add info decorator
+// TODO: figure out why this isn't working
+// addDecorator(withInfo);
 
 // Add theme to storybook
 addDecorator((story) => {

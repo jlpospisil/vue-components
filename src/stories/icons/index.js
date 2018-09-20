@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { Icon } from '../../components';
+import { withInfo } from '@storybook/addon-info';
 
 storiesOf('General|Icons', module)
 .add('Default', () => ({
