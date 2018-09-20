@@ -9,7 +9,7 @@ const notes = {
 };
 
 const components = {
-  default: () => () => ({
+  default: () => ({
     components: { ButtonItem },
     template: '<button-item text="Primary"></button-item>'
   }),
