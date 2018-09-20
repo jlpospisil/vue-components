@@ -1,6 +1,8 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
 import { withInfo } from '@storybook/addon-info';
+import { withNotes } from '@storybook/addon-notes';
+
 import Vue from 'vue';
 // import Vuex from 'vuex'; // Vue plugins
 
@@ -21,9 +23,13 @@ setOptions({
   sortStoriesByKind: true
 });
 
+// TODO: figure out why storysource webpack and these addons cause blank page
+
 // Add info decorator
-// TODO: figure out why this isn't working
 // addDecorator(withInfo);
+
+// Add notes decorator
+// addDecorator(withNotes);
 
 // Add theme to storybook
 addDecorator((story) => {
