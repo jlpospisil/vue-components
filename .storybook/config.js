@@ -3,17 +3,8 @@ import { setOptions } from '@storybook/addon-options';
 import { withInfo } from '@storybook/addon-info';
 import { withNotes } from '@storybook/addon-notes';
 
-import Vue from 'vue';
-// import Vuex from 'vuex'; // Vue plugins
-
 // Import your custom components
 import { Application } from '../src/components';
-
-// Install Vue plugins.
-// Vue.use(Vuex);
-
-// Register custom components
-Vue.component('application', Application);
 
 // Storybook options
 setOptions({
@@ -32,15 +23,14 @@ setOptions({
 // addDecorator(withNotes);
 
 // Add theme to storybook
-addDecorator((story) => {
-  return {
-    template: '<application><story /></application>'
-  };
-});
+addDecorator(story => ({
+  components: { Application },
+  template: '<application><story /></application>'
+}));
 
 // Load stories
-const stories = require.context('../src/stories', true, /.js$/);
 const loadStories = () => {
+  const stories = require.context('../src/stories', true, /.js$/);
   stories.keys().forEach((filename) => stories(filename));
 };
 
