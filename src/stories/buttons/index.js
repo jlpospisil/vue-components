@@ -1,3 +1,4 @@
+import { path } from 'path';
 import { storiesOf } from '@storybook/vue';
 import { ButtonItem } from '../../components';
 import { action } from '@storybook/addon-actions';
@@ -11,7 +12,10 @@ const notes = {
 const components = {
   default: () => ({
     components: { ButtonItem },
-    template: '<button-item text="Primary"></button-item>'
+    template: '<button-item text="Primary"></button-item>',
+    notes: {
+      text: 'here is a note inside the story'
+    }
   }),
   withIcon: () => ({
     components: { ButtonItem },
@@ -29,5 +33,5 @@ const components = {
 };
 
 storiesOf('General|Buttons/Primary', module)
-.add('Default', withNotes(notes.default)(components.default))
-.add('With Icon', withNotes(notes.withIcon)(components.withIcon));
+.add('Default', components.default)
+.add('With Icon', components.withIcon);
