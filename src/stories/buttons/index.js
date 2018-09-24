@@ -32,6 +32,6 @@ const components = {
   })
 };
 
-storiesOf('General|Buttons/Primary', module)
+storiesOf('General|Buttons', module)
 .add('Default', components.default)
 .add('With Icon', components.withIcon);
