@@ -1,7 +1,7 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
-import { withInfo } from '@storybook/addon-info';
 import { withNotes } from '@storybook/addon-notes';
+import VueInfoAddon from 'storybook-addon-vue-info'
 
 // Import your custom components
 import { Application } from '../src/components';
@@ -20,16 +20,14 @@ addDecorator((getStory, context) => {
   return withNotes(story.notes || {})(getStory)(context);
 });
 
-// Add info
-addDecorator((getStory, context) => {
-  return withNotes('how do we get the note here?')(getStory)(context);
-});
-
 // Add theme to storybook
 addDecorator(story => ({
   components: { Application },
   template: '<application><story /></application>'
 }));
+
+//
+addDecorator(VueInfoAddon);
 
 // Load stories
 const loadStories = () => {
