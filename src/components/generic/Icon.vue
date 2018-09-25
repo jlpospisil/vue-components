@@ -27,7 +27,7 @@ export default {
   computed: {
     iconName () {
       const { name } = this;
-      const parts = name.replace(/^fa-/i, '').split('-');
+      const parts = name.replace(/^fa-?/i, '').split('-');
       return `fa${parts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('')}`;
     },
     icon () {

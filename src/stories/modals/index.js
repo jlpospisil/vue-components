@@ -1,5 +1,4 @@
 import { storiesOf } from '@storybook/vue';
-import { withInfo } from 'storybook-addon-vue-info'
 import { Modal, ButtonItem } from '../../components';
 
 storiesOf('General|Modals', module)
@@ -18,12 +17,12 @@ storiesOf('General|Modals', module)
                     Additional information would go here
                   </div>
                   
-                  <div slot="body" class="p-2 py-3">
+                  <div slot="body" class="p-3">
                     The important information would be here
                   </div>
                   
                   <div slot="additional-buttons">
-                    <button-item text="Save" icon_type="solid" icon="Save"></button-item>
+                    <button-item text="Save" icon_type="solid" icon="save"></button-item>
                   </div>
                 </modal>
               </div>`,
