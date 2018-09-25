@@ -1,6 +1,7 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
+import { setDefaults } from 'storybook-addon-vue-info'
 import VueInfoAddon from 'storybook-addon-vue-info'
 
 // Import your custom components
@@ -12,6 +13,11 @@ setOptions({
   hierarchySeparator: /\//,
   hierarchyRootSeparator: /\|/,
   sortStoriesByKind: true
+});
+
+// Info addon options
+setDefaults({
+  source: false
 });
 
 // Add notes
