@@ -1,9 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { Icon } from '../../components';
 
-const templates = {
-  regular: ''
-}
 storiesOf('General|Icons', module)
 .add('Regular', () => ({
   components: { Icon },
