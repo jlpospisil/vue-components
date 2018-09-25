@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue';
 import { Icon } from '../../components';
 
 storiesOf('General|Icons', module)
-.add('Default', () => ({
+.add('Regular', () => ({
   components: { Icon },
   template: '<icon name="grin-tears"></icon>'
 }))

@@ -20,14 +20,14 @@ addDecorator((getStory, context) => {
   return withNotes(story.notes || {})(getStory)(context);
 });
 
+// Add info
+addDecorator(VueInfoAddon);
+
 // Add theme to storybook
 addDecorator(story => ({
   components: { Application },
   template: '<application><story /></application>'
 }));
-
-//
-addDecorator(VueInfoAddon);
 
 // Load stories
 const loadStories = () => {

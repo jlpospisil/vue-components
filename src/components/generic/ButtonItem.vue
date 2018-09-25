@@ -15,7 +15,7 @@ export default {
   props: {
     type: { type: String, required: false, default: 'primary' },
     text: { type: String, required: false },
-    icon_type: { type: String, required: false },
+    icon_type: { type: String, required: false, default: 'regular' },
     icon: { type: String, required: false }
   },
   computed: {

@@ -3,16 +3,24 @@ import { storiesOf } from '@storybook/vue';
 import { ButtonItem } from '../../components';
 import { action } from '@storybook/addon-actions';
 
+const common = {
+  components: { ButtonItem },
+  propsDescription: {
+    type: 'primary | secondary | info | warning | danger',
+    icon_type: 'regular | solid'
+  }
+};
+
 const components = {
   default: () => ({
-    components: { ButtonItem },
+    ...common,
     template: '<button-item text="Primary"></button-item>',
     notes: {
       text: 'here is a note inside the story'
     }
   }),
   withIcon: () => ({
-    components: { ButtonItem },
+    ...common,
     template: '<button-item text="Primary" icon_type="solid" icon="Save" @click="click"></button-item>',
     methods: {
       click () {
@@ -27,5 +35,5 @@ const components = {
 };
 
 storiesOf('General|Buttons', module)
-.add('Default', components.default)
+.add('Without Icon', components.default)
 .add('With Icon', components.withIcon);
