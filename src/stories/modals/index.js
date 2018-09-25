@@ -12,7 +12,7 @@ storiesOf('General|Modals', module)
                     Additional information would go here
                   </div>
                   
-                  <div slot="body">
+                  <div slot="body" class="p-2 py-3">
                     The important information would be here
                   </div>
                   

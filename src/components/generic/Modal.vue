@@ -33,7 +33,7 @@
 .modal {
     .modal-content {
         .modal-info {
-            background-color: lighten($secondary-color, 55%);
+            background-color: lighten($secondary-color, 25%);
         }
 
         .modal-body {
