@@ -10,14 +10,9 @@ const common = {
     icon_type: 'regular | solid'
   },
   methods: {
-    click () {
-      console.log('click here', { action });
-      action('button clicked');
+    click (btn_name) {
+      action(`${btn_name} button clicked`)();
     }
-  },
-  mounted () {
-    console.log('mounted');
-    action('mounted');
   }
 };
 
@@ -25,21 +20,21 @@ const components = {
   default: () => ({
     ...common,
     template: `<div>
-            <button-item text="Primary"></button-item>
-            <button-item text="Secondary" type="secondary"></button-item>
-            <button-item text="Info" type="info"></button-item>
-            <button-item text="Warning" type="warning"></button-item>
-            <button-item text="Danger" type="danger"></button-item>
+            <button-item text="Primary" @click="click('Primary')"></button-item>
+            <button-item text="Secondary" type="secondary" @click="click('Secondary')"></button-item>
+            <button-item text="Info" type="info" @click="click('Info')"></button-item>
+            <button-item text="Warning" type="warning" @click="click('Warning')"></button-item>
+            <button-item text="Danger" type="danger" @click="click('Danger')"></button-item>
         </div>`
   }),
   withIcon: () => ({
     ...common,
     template: `<div>
-            <button-item text="Primary" icon_type="solid" icon="Save" @click="click"></button-item>
-            <button-item text="Secondary" type="secondary" icon_type="solid" icon="Save" @click="click"></button-item>
-            <button-item text="Info" type="info" icon_type="solid" icon="Save" @click="click"></button-item>
-            <button-item text="Warning" type="warning" icon_type="solid" icon="Save" @click="click"></button-item>
-            <button-item text="Danger" type="danger" icon_type="solid" icon="Save" @click="click"></button-item>
+            <button-item text="Primary" icon_type="solid" icon="Save" @click="click('Primary')"></button-item>
+            <button-item text="Secondary" type="secondary" icon_type="solid" icon="Save" @click="click('Secondary')"></button-item>
+            <button-item text="Info" type="info" icon_type="solid" icon="Save" @click="click('Info')"></button-item>
+            <button-item text="Warning" type="warning" icon_type="solid" icon="Save" @click="click('Warning')"></button-item>
+            <button-item text="Danger" type="danger" icon_type="solid" icon="Save" @click="click('Danger')"></button-item>
         </div>`
   })
 };
