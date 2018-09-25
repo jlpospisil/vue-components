@@ -2,7 +2,7 @@ import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
 import { setDefaults } from 'storybook-addon-vue-info'
-import VueInfoAddon from 'storybook-addon-vue-info'
+import { withInfo } from 'storybook-addon-vue-info'
 
 // Import your custom components
 import { Application } from '../src/components';
@@ -23,11 +23,16 @@ setDefaults({
 // Add notes
 addDecorator((getStory, context) => {
   const story = getStory(context);
-  return withNotes(story.notes || {})(getStory)(context);
+  const addons = story.addons || {};
+  return withNotes(addons.notes || {})(getStory)(context);
 });
 
 // Add info
-addDecorator(VueInfoAddon);
+addDecorator((getStory, context) => {
+  const story = getStory(context);
+  const addons = story.addons || {};
+  return withInfo(addons.info || {})(getStory)(context);
+});
 
 // Add theme to storybook
 addDecorator(story => ({

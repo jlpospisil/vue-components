@@ -4,7 +4,9 @@ import * as regular from '@fortawesome/free-regular-svg-icons';
 
 const common = {
   components: { Icon },
-  notes: { text: Object.keys(regular).filter(key => key.startsWith('fa') && key !== 'far').join(' | ') },
+  addons: {
+    notes: { text: Object.keys(regular).filter(key => key.startsWith('fa') && key !== 'far').join(' | ') }
+  },
   propsDescription: {
     type: 'regular | solid',
     name: 'see notes below'

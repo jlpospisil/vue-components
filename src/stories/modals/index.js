@@ -1,9 +1,15 @@
 import { storiesOf } from '@storybook/vue';
+import { withInfo } from 'storybook-addon-vue-info'
 import { Modal, ButtonItem } from '../../components';
 
 storiesOf('General|Modals', module)
 .add('Default', () => ({
   components: { Modal, ButtonItem },
+  addons: {
+    info: {
+      propTables: ['modal']
+    }
+  },
   template: `<div>
                 <button-item text="Show Modal" @click="showModal"></button-item>
 
