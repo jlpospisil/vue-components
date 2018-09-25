@@ -6,7 +6,7 @@
                     <h5 class="modal-title font-weight-bold">
                         {{ title }}
                     </h5>
-                    <icon name="fa-times" class="cursor-pointer" :size=1.25 data-dismiss="modal" aria-label="Close" />
+                    <icon name="fa-window-close" class="cursor-pointer" :size=1.25 data-dismiss="modal" aria-label="Close" />
                 </div>
 
                 <div class="modal-info p-3" v-if="$slots.info">
@@ -19,7 +19,7 @@
 
                 <div class="modal-footer">
                     <slot name="additional-buttons"></slot>
-                    <button-item type="btn-secondary" icon="fa-close" text="CLOSE" data-dismiss="modal"></button-item>
+                    <button-item type="secondary" icon="fa-window-close" text="CLOSE" data-dismiss="modal"></button-item>
                 </div>
             </div>
         </div>
@@ -45,9 +45,11 @@
 </style>
 
 <script>
-/* global $ */
+import jQuery from 'jquery';
 import ButtonItem from './ButtonItem.vue';
 import Icon from './Icon.vue';
+
+const $ = jQuery;
 
 export default {
   components: {
