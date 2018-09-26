@@ -19,7 +19,7 @@
 
                 <div class="modal-footer">
                     <slot name="additional-buttons"></slot>
-                    <button-item type="secondary" icon="fa-window-close" text="CLOSE" data-dismiss="modal"></button-item>
+                    <button-item type="secondary" icon="fa-window-close" text="Close" data-dismiss="modal"></button-item>
                 </div>
             </div>
         </div>
