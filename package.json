@@ -1,7 +1,7 @@
 {
-  "name": "vue-storybook",
+  "name": "@cdpjs/vue-components",
   "version": "0.0.1",
-  "description": "Vue UI components",
+  "description": "Reusable Vue.js components",
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
