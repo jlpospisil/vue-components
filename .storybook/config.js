@@ -1,8 +1,8 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
-import { setDefaults } from 'storybook-addon-vue-info'
-import { withInfo } from 'storybook-addon-vue-info'
+import { setDefaults } from 'storybook-addon-vue-info';
+import { withInfo } from 'storybook-addon-vue-info';
 
 // Import your custom components
 import { Application } from '../src/components';
@@ -12,12 +12,12 @@ setOptions({
   name: 'Vue Components',
   hierarchySeparator: /\//,
   hierarchyRootSeparator: /\|/,
-  sortStoriesByKind: true
+  sortStoriesByKind: true,
 });
 
 // Info addon options
 setDefaults({
-  source: false
+  source: false,
 });
 
 // Add notes
@@ -37,13 +37,13 @@ addDecorator((getStory, context) => {
 // Add theme to storybook
 addDecorator(story => ({
   components: { Application },
-  template: '<application><story /></application>'
+  template: '<application><story /></application>',
 }));
 
 // Load stories
 const loadStories = () => {
   const stories = require.context('../src/stories', true, /.js$/);
-  stories.keys().forEach((filename) => stories(filename));
+  stories.keys().forEach(filename => stories(filename));
 };
 
 // Create storybook

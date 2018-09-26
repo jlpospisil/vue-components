@@ -1,19 +1,19 @@
 import { path } from 'path';
 import { storiesOf } from '@storybook/vue';
-import { ButtonItem } from '../../components';
 import { action } from '@storybook/addon-actions';
+import { ButtonItem } from '../../components';
 
 const common = {
   components: { ButtonItem },
   propsDescription: {
     type: 'primary | secondary | info | warning | danger',
-    icon_type: 'regular | solid'
+    icon_type: 'regular | solid',
   },
   methods: {
-    click (btn_name) {
+    click(btn_name) {
       action(`${btn_name} button clicked`)();
-    }
-  }
+    },
+  },
 };
 
 const components = {
@@ -25,7 +25,7 @@ const components = {
             <button-item text="Info" type="info" @click="click('Info')"></button-item>
             <button-item text="Warning" type="warning" @click="click('Warning')"></button-item>
             <button-item text="Danger" type="danger" @click="click('Danger')"></button-item>
-        </div>`
+        </div>`,
   }),
   withIcon: () => ({
     ...common,
@@ -35,10 +35,10 @@ const components = {
             <button-item text="Info" type="info" icon_type="solid" icon="Save" @click="click('Info')"></button-item>
             <button-item text="Warning" type="warning" icon_type="solid" icon="Save" @click="click('Warning')"></button-item>
             <button-item text="Danger" type="danger" icon_type="solid" icon="Save" @click="click('Danger')"></button-item>
-        </div>`
-  })
+        </div>`,
+  }),
 };
 
 storiesOf('General|Buttons', module)
-.add('Without Icon', components.default)
-.add('With Icon', components.withIcon);
+  .add('Without Icon', components.default)
+  .add('With Icon', components.withIcon);

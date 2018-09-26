@@ -4,7 +4,9 @@
   "description": "Vue UI components",
   "main": "index.js",
   "scripts": {
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "eslint": "./node_modules/.bin/eslint src/. .storybook/.",
+    "eslint-fix": "./node_modules/.bin/eslint src/. .storybook/. --fix"
   },
   "author": "Josh Pospisil",
   "license": "MIT",
@@ -13,6 +15,11 @@
     "@storybook/addon-notes": "^3.4.11",
     "@storybook/vue": "^3.4.11",
     "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-vue": "^4.7.1",
     "vue-loader": "^14.2.3",
     "vue-template-compiler": "^2.5.17"
   },

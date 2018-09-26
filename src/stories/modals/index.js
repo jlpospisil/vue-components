@@ -2,14 +2,14 @@ import { storiesOf } from '@storybook/vue';
 import { Modal, ButtonItem } from '../../components';
 
 storiesOf('General|Modals', module)
-.add('Default', () => ({
-  components: { Modal, ButtonItem },
-  addons: {
-    info: {
-      propTables: ['modal']
-    }
-  },
-  template: `<div>
+  .add('Default', () => ({
+    components: { Modal, ButtonItem },
+    addons: {
+      info: {
+        propTables: ['modal'],
+      },
+    },
+    template: `<div>
                 <button-item text="Show Modal" @click="showModal"></button-item>
 
                 <modal title="Example Modal" ref="modal">
@@ -26,10 +26,10 @@ storiesOf('General|Modals', module)
                   </div>
                 </modal>
               </div>`,
-  methods: {
-    showModal () {
-      const { modal } = this.$refs;
-      modal.show();
-    }
-  }
-}));
+    methods: {
+      showModal() {
+        const { modal } = this.$refs;
+        modal.show();
+      },
+    },
+  }));

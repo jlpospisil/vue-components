@@ -3,9 +3,9 @@ const path = require('path');
 module.exports = {
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js',
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.vue', '.json'],
   },
   module: {
     rules: [
@@ -18,12 +18,12 @@ module.exports = {
             loader: require.resolve('@storybook/addon-storysource/loader'),
             options: {
               prettierConfig: {
-                parser: "babylon"
-              }
-            }
-          }
-        ]
-      }
-    ]
-  }
+                parser: 'babylon',
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
