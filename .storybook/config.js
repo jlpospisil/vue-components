@@ -1,8 +1,7 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
-import { setDefaults } from 'storybook-addon-vue-info';
-import { withInfo } from 'storybook-addon-vue-info';
+import { setDefaults, withInfo } from 'storybook-addon-vue-info';
 
 // Import your custom components
 import { Application } from '../src/components';
@@ -35,6 +34,7 @@ addDecorator((getStory, context) => {
 });
 
 // Add theme to storybook
+// eslint-disable-next-line no-unused-vars
 addDecorator(story => ({
   components: { Application },
   template: '<application><story /></application>',

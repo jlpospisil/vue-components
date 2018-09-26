@@ -1,4 +1,3 @@
-import { path } from 'path';
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { ButtonItem } from '../../components';

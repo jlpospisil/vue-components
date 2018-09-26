@@ -13,6 +13,8 @@
     ],
     "rules": {
         "no-plusplus": "off",
-        "indent": ["error", 2, {"SwitchCase": 2}]
+        "indent": ["error", 2, {"SwitchCase": 2}],
+        "import/prefer-default-export": "off",
+        "camelcase": 0
     }
 }
