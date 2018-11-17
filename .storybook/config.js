@@ -23,7 +23,11 @@ setDefaults({
 addDecorator((getStory, context) => {
   const story = getStory(context);
   const addons = story.addons || {};
-  return withNotes(addons.notes || {})(getStory)(context);
+  const notes = addons.notes || {};
+  if (notes.text || notes.markdown) {
+    return withNotes(notes)(getStory)(context);
+  }
+  return getStory(context);
 });
 
 // Add info
