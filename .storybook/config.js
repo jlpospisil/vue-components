@@ -2,6 +2,7 @@ import { addDecorator, configure } from '@storybook/vue';
 import { setOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
 import { setDefaults, withInfo } from 'storybook-addon-vue-info';
+import createTheme from './create-theme';
 
 // Import your custom components
 import { Application } from '../src/components';
@@ -12,6 +13,12 @@ setOptions({
   hierarchySeparator: /\//,
   hierarchyRootSeparator: /\|/,
   sortStoriesByKind: true,
+  addonPanelInRight: true,
+  // selectedAddonPanel: 'storybooks/storybook-addon-knobs',
+  theme: createTheme({
+    mainBackground: '#e0e0e0',
+    inputFill: '#eeeeee',
+  }),
 });
 
 // Info addon options
