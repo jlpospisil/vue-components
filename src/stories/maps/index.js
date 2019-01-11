@@ -36,14 +36,15 @@ story.add('With polygon', () => ({
       ],
     };
   },
-  template: `<google-map style="width: 400px; height: 400px;">
-    <template slot-scope="scopeProps">
+  template: `
+  <google-map style="width: 400px; height: 400px;">
+    <template slot-scope="{ google, map }">
         <map-polygon
           v-for="polygon in polygons"
           :key="polygon.id"
           :paths="polygon.paths"
-          :google="scopeProps.google"
-          :map="scopeProps.map"
+          :google="google"
+          :map="map"
           :options="{
            strokeColor: polygon.color,
            fillColor: polygon.color,
@@ -63,14 +64,15 @@ story.add('With clickable polygon', () => ({
       ],
     };
   },
-  template: `<google-map style="width: 400px; height: 400px;">
-    <template slot-scope="scopeProps">
+  template: `
+  <google-map style="width: 400px; height: 400px;">
+    <template slot-scope="{ google, map }">
         <map-polygon
           v-for="polygon in polygons"
           :key="polygon.id"
           :paths="polygon.paths"
-          :google="scopeProps.google"
-          :map="scopeProps.map"
+          :google="google"
+          :map="map"
           :options="{
            strokeColor: polygon.color,
            fillColor: polygon.color,
@@ -78,11 +80,15 @@ story.add('With clickable polygon', () => ({
         />
         
         <info-window
-          :google="scopeProps.google"
-          :map="scopeProps.map"
+          :google="google"
+          :map="map"
           :visible="true"
+          :position="position"
         >
-            <div>hello there</div>
+          <div slot="title">Info Window</div>
+          <div>
+            Content here
+          </div>
         </info-window>
     </template>
   </google-map>`,
