@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { GoogleMap, MapPolygon } from '@csgactuarial/style-guide';
+import { GoogleMap, InfoWindow, MapPolygon } from '@csgactuarial/style-guide';
 
 const wyomingPolygon = [
   { lat: 41.0037, lng: -104.0556 },
@@ -49,6 +49,41 @@ story.add('With polygon', () => ({
            fillColor: polygon.color,
           }"
         />
+    </template>
+  </google-map>`,
+}));
+
+story.add('With clickable polygon', () => ({
+  components: { GoogleMap, InfoWindow, MapPolygon },
+  data() {
+    return {
+      polygons: [
+        { id: 'wy', paths: wyomingPolygon, color: randomHexColor() },
+        { id: 'co', paths: coloradoPolygon, color: randomHexColor() },
+      ],
+    };
+  },
+  template: `<google-map style="width: 400px; height: 400px;">
+    <template slot-scope="scopeProps">
+        <map-polygon
+          v-for="polygon in polygons"
+          :key="polygon.id"
+          :paths="polygon.paths"
+          :google="scopeProps.google"
+          :map="scopeProps.map"
+          :options="{
+           strokeColor: polygon.color,
+           fillColor: polygon.color,
+          }"
+        />
+        
+        <info-window
+          :google="scopeProps.google"
+          :map="scopeProps.map"
+          :visible="true"
+        >
+            <div>hello there</div>
+        </info-window>
     </template>
   </google-map>`,
 }));
