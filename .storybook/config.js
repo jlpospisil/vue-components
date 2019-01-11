@@ -10,7 +10,7 @@ import createTheme from './create-theme';
 
 // Storybook options
 addDecorator(withOptions({
-  name: 'CSG Style Guide',
+  name: 'Style Guide',
   hierarchySeparator: /\//,
   hierarchyRootSeparator: /\|/,
   sortStoriesByKind: true,
