@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
-import { ButtonItem } from '../../components';
+import { ButtonItem } from '@csgactuarial/style-guide';
 
 const common = {
   components: { ButtonItem },
@@ -29,11 +29,11 @@ const components = {
   withIcon: () => ({
     ...common,
     template: `<div>
-            <button-item text="Primary" icon_type="solid" icon="Save" @click="click('Primary')"></button-item>
-            <button-item text="Secondary" type="secondary" icon_type="solid" icon="Save" @click="click('Secondary')"></button-item>
-            <button-item text="Info" type="info" icon_type="solid" icon="Save" @click="click('Info')"></button-item>
-            <button-item text="Warning" type="warning" icon_type="solid" icon="Save" @click="click('Warning')"></button-item>
-            <button-item text="Danger" type="danger" icon_type="solid" icon="Save" @click="click('Danger')"></button-item>
+            <button-item text="Primary" icon_type="solid" icon="fa-save" @click="click('Primary')"></button-item>
+            <button-item text="Secondary" type="secondary" icon_type="solid" icon="fa-save" @click="click('Secondary')"></button-item>
+            <button-item text="Info" type="info" icon_type="solid" icon="fa-save" @click="click('Info')"></button-item>
+            <button-item text="Warning" type="warning" icon_type="solid" icon="fa-save" @click="click('Warning')"></button-item>
+            <button-item text="Danger" type="danger" icon_type="solid" icon="fa-save" @click="click('Danger')"></button-item>
         </div>`,
   }),
 };

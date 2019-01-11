@@ -8,17 +8,17 @@
   .dropdown-menu.bg-primary {
     .dropdown-item {
       &:hover, &:focus {
-        background-color: $dark-primary;
+        background-color: $primary-dark;
       }
     }
   }
 
   a {
-    color: $info-color;
+    color: map-get($theme-colors, info);
 
     &:hover {
       text-decoration: none;
-      color: darken($info-color, 10%);
+      color: darken(map-get($theme-colors, info), 10%);
     }
   }
 

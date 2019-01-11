@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { Modal, ButtonItem } from '../../components';
+import { Modal, ButtonItem } from '@csgactuarial/style-guide';
 
 storiesOf('General|Modals', module)
   .add('Default', () => ({
@@ -22,7 +22,7 @@ storiesOf('General|Modals', module)
                   </div>
                   
                   <div slot="additional-buttons">
-                    <button-item text="Save" icon_type="solid" icon="save"></button-item>
+                    <button-item text="Save" icon_type="solid" icon="fa-save"></button-item>
                   </div>
                 </modal>
               </div>`,

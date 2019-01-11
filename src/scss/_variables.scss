@@ -1,17 +1,16 @@
-// Customize bootstrap
-$font-family: "Lato", sans-serif;
-$primary-color: #003552;
-$secondary-color: #9e9e9e;
-$info-color: #26a2d9;
-$dark-primary: darken($primary-color, 8%);
-$bg-primary-text-color: #ffffff;
-
-// Bootstrap overrides
+// Customize bootstrap (defaults included)
 $theme-colors: (
-  "primary": $primary-color,
-  "secondary": $secondary-color,
-  "info": $info-color
+  "primary": #007bff,
+  "secondary": #6c757d,
+  "success": #28a745,
+  "danger": #dc3545,
+  "warning": #ffc107,
+  "info": #17a2b8
 );
+
+// Appearance
+$font-family: "Lato", sans-serif;
+$primary-dark: darken(map-get($theme-colors, primary), 10%);
 
 // UI variables
 $top-nav-height: 56px;

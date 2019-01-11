@@ -1,12 +1,12 @@
 <template>
     <span class="text-info" @click="$emit('click')">
-        <icon :color="color" name="fa-check-square" :size="size" v-if="checked"></icon>
-        <icon :color="color" name="fa-square" :size="size" v-else></icon>
+        <icon :color="color" type="regular" name="fa-check-square" :size="size" v-if="checked"></icon>
+        <icon :color="color" type="regular" name="fa-square" :size="size" v-else></icon>
     </span>
 </template>
 
 <script>
-import Icon from './Icon.vue';
+import Icon from '../generic/Icon.vue';
 
 export default {
   components: {

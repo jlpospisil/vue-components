@@ -1,46 +1,55 @@
 <template>
-    <font-awesome-icon
-        :icon="icon"
-        :style="{ fontSize: `${size}em`, color }"
-        :color="color"
-        @click="$emit('click')"
-        fixed-width
-    ></font-awesome-icon>
+  <i
+    :class="iconClass"
+    :style="{ fontSize: `${size}em`, color }"
+    @click="$emit('click')"
+  />
 </template>
 
-<script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import * as regular from '@fortawesome/free-regular-svg-icons';
-import * as solid from '@fortawesome/free-solid-svg-icons';
+<style lang="scss">
+ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+</style>
 
+<script>
 export default {
-  components: {
-    FontAwesomeIcon
-  },
   props: {
-    type: { type: String, default: 'regular' },
+    type: { type: String, required: false, default: 'free' },
     name: { type: String, required: true },
-    color: { type: String, required: false },
+    color: { type: String, required: false, default: null },
     size: { type: Number, required: false, default: 1 },
-    color: { type: String, default: null }
   },
   computed: {
-    iconName () {
-      const { name } = this;
-      const parts = name.replace(/^fa-?/i, '').split('-');
-      return `fa${parts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('')}`;
-    },
-    icon () {
-      const { type, iconName } = this;
-
+    iconType() {
+      const { type } = this;
       switch (type.toLowerCase()) {
-        case 'solid':
-          return solid[iconName];
+          case 'regular':
+          case 'far':
+            return 'far';
 
-        default:
-          return regular[iconName];
+          case 'solid':
+          case 'fas':
+            return 'fas';
+
+          case 'light':
+          case 'fal':
+            return 'fal';
+
+          case 'brand':
+          case 'fab':
+            return 'fab';
+
+          default:
+            return 'fa';
       }
-    }
-  }
-}
+    },
+    iconClass() {
+      const { name, iconType } = this;
+      return `${iconType} fa-fw ${name}`;
+    },
+  },
+};
 </script>

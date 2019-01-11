@@ -1,7 +1,7 @@
 <template>
-    <div class="application">
-        <slot></slot>
-    </div>
+  <div class="application">
+    <slot/>
+  </div>
 </template>
 
 <style lang="scss">
@@ -10,7 +10,8 @@
 
 <script>
 import bootstrap from 'bootstrap';
+
 export default {
 
-}
+};
 </script>

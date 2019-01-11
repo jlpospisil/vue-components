@@ -1,34 +1,17 @@
 import { storiesOf } from '@storybook/vue';
-import { action } from '@storybook/addon-actions';
-import { CheckBox } from '../../components';
+import { boolean, number, text } from '@storybook/addon-knobs';
+import { CheckBox } from '@csgactuarial/style-guide';
 
-storiesOf('General|CheckBoxes', module)
+// TODO: get knobs working with storybook-addon-vue-info
+
+storiesOf('Forms|CheckBoxes', module)
   .add('Default', () => ({
     components: { CheckBox },
-    data() {
-      return {
-        cb1: false,
-        cb2: true,
-        cb3: false,
-      };
+    props: {
+      isChecked: { type: Boolean, default: boolean('checked', true) },
+      color: { type: String, default: text('color', '#e64a19') },
+      size: { type: Number, default: number('size', 1.25) },
+      className: { type: String, default: text('class', '') },
     },
-    watch: {
-      cb1() {
-        const { cb1 } = this;
-        action('Checkbox 1 changed')(cb1);
-      },
-      cb2() {
-        const { cb2 } = this;
-        action('Checkbox 2 changed')(cb2);
-      },
-      cb3() {
-        const { cb3 } = this;
-        action('Checkbox 3 changed')(cb3);
-      },
-    },
-    template: `<div>
-                <check-box :checked="cb1" @click="cb1 = !cb1" color="#e64a19"></check-box>
-                <check-box :checked="cb2" @click="cb2 = !cb2" :size=1.5 class="ml-3" color="#5e35b1"></check-box>
-                <check-box :checked="cb3" @click="cb3 = !cb3" :size=2 class="ml-3" color="#607d8b"></check-box>
-              </div>`,
+    template: `<check-box :class="className" :checked="isChecked" :color="color" :size="size"></check-box>`,
   }));
