@@ -3,11 +3,11 @@ import color from 'color-converter';
 const createTheme = ({ mainBackground, mainTextColor, ...overrides } = {}) => {
   const mainBackgroundColor = mainBackground || '#cdcdcd';
   const mainFontColor = mainTextColor || '#000000';
-  const lightBackground = color.fromCSS(mainBackground).lighten(10).css();
-  const darkBackground = color.fromCSS(mainBackground).darken(10).css();
-  const dimmedTextColor = color.fromCSS(mainTextColor).fade(-60).css();
-  const mainBorderColor = color.fromCSS(mainBackground).darken(25).css();
-  const inputFill = color.fromCSS(mainBackground).lighten(18).css();
+  const lightBackground = color.fromCSS(mainBackgroundColor).lighten(10).css();
+  const darkBackground = color.fromCSS(mainBackgroundColor).darken(10).css();
+  const dimmedTextColor = color.fromCSS(mainFontColor).fade(-60).css();
+  const mainBorderColor = color.fromCSS(mainBackgroundColor).darken(25).css();
+  const inputFill = color.fromCSS(mainBackgroundColor).lighten(18).css();
 
   return {
     mainBackground: mainBackgroundColor,
