@@ -35,21 +35,19 @@ import GoogleMapsApiLoader from 'google-maps-api-loader';
 export default {
   props: {
     libraries: { type: Array, default: () => [] },
-    options: {
-      type: Object,
-      default: () => ({
-        center: {
-          lat: 38,
-          lng: -99,
-        },
-        zoom: 4,
-      }),
-    },
+    options: { type: Object, default: () => {} },
   },
   data() {
     return {
       google: null,
       map: null,
+      defaultOptions: {
+        center: {
+          lat: 38,
+          lng: -99,
+        },
+        zoom: 4,
+      },
     };
   },
   mounted() {
@@ -65,9 +63,12 @@ export default {
   },
   methods: {
     initializeMap() {
-      const { google, options, $refs } = this;
+      const { defaultOptions, google, options, $refs } = this;
       const { Map } = google.maps;
-      this.map = new Map($refs.map, options);
+      this.map = new Map($refs.map, {
+        ...defaultOptions,
+        ...options,
+      });
     },
   },
 };
