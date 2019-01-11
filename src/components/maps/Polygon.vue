@@ -37,7 +37,16 @@ export default {
       ...options,
     });
 
-    this.polygon.setMap(map);
+    // Add polygon to map and attach event listeners
+    const { polygon, polygonClicked } = this;
+
+    polygon.setMap(map);
+    google.maps.event.addListener(polygon, 'click', polygonClicked);
+  },
+  methods: {
+    polygonClicked(event) {
+      this.$emit('click', event);
+    },
   },
 };
 </script>

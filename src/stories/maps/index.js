@@ -62,6 +62,14 @@ story.add('With clickable polygon', () => ({
         { id: 'wy', paths: wyomingPolygon, color: randomHexColor() },
         { id: 'co', paths: coloradoPolygon, color: randomHexColor() },
       ],
+      selectedPolygon: null,
+      infoWindow: {
+        position: {
+          lat: 38,
+          lng: -99,
+        },
+        visible: false,
+      },
     };
   },
   template: `
@@ -77,19 +85,33 @@ story.add('With clickable polygon', () => ({
            strokeColor: polygon.color,
            fillColor: polygon.color,
           }"
+          @click="showInfoWindow(polygon)"
         />
         
         <info-window
           :google="google"
           :map="map"
-          :visible="true"
-          :position="position"
+          :visible="infoWindow.visible"
+          :position="infoWindow.position"
+          @closed="infoWindowClosed"
         >
-          <div slot="title">Info Window</div>
-          <div>
-            Content here
-          </div>
+          <template v-if="selectedPolygon">
+            <div slot="title">{{ selectedPolygon.id.toUpperCase() }}</div>
+            <div>
+              You clicked on the {{ selectedPolygon.id.toUpperCase() }} polygon
+            </div>
+          </template>
         </info-window>
     </template>
   </google-map>`,
+  methods: {
+    infoWindowClosed() {
+      this.selectedPolygon = null;
+      this.infoWindow.visible = false;
+    },
+    showInfoWindow(polygon) {
+      this.selectedPolygon = polygon;
+      this.infoWindow.visible = true;
+    },
+  },
 }));

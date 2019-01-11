@@ -51,10 +51,10 @@ export default {
       },
     },
     visible() {
-      const { infoWindow, visible } = this;
+      const { infoWindow, map, visible } = this;
       if (infoWindow) {
         if (visible) {
-          infoWindow.open();
+          infoWindow.open(map);
         } else {
           infoWindow.close();
         }
@@ -80,7 +80,11 @@ export default {
         position,
       });
 
-      this.infoWindow.setMap(map);
+      // Add the info window to the map and add event listeners
+      const { infoWindow, infoWindowClosed } = this;
+
+      infoWindow.setMap(map);
+      google.maps.event.addListener(infoWindow, 'closeclick', infoWindowClosed);
     },
     createOrUpdateInfoWindow() {
       const { infoWindow, createInfoWindow, updateInfoWindow } = this;
@@ -89,6 +93,9 @@ export default {
       } else {
         createInfoWindow();
       }
+    },
+    infoWindowClosed(event) {
+      this.$emit('closed', event);
     },
     maybeCreateOrUpdateInfoWindow() {
       const { visible, createOrUpdateInfoWindow } = this;
