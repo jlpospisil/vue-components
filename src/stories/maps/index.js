@@ -82,10 +82,11 @@ story.add('With clickable polygon', () => ({
           :google="google"
           :map="map"
           :options="{
+           id: polygon.id,
            strokeColor: polygon.color,
            fillColor: polygon.color,
           }"
-          @click="showInfoWindow(polygon)"
+          @click="showInfoWindow"
         />
         
         <info-window
@@ -110,7 +111,9 @@ story.add('With clickable polygon', () => ({
       this.infoWindow.visible = false;
     },
     showInfoWindow(polygon) {
-      this.selectedPolygon = polygon;
+      const { id, center } = polygon;
+      this.selectedPolygon = { id };
+      this.infoWindow.position = center;
       this.infoWindow.visible = true;
     },
   },

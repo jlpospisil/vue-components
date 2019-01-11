@@ -47,7 +47,9 @@ export default {
       deep: true,
       handler() {
         const { infoWindow, position } = this;
-        infoWindow.setPosition(position);
+        if (infoWindow) {
+          infoWindow.setPosition(position);
+        }
       },
     },
     visible() {
@@ -94,8 +96,8 @@ export default {
         createInfoWindow();
       }
     },
-    infoWindowClosed(event) {
-      this.$emit('closed', event);
+    infoWindowClosed() {
+      this.$emit('closed');
     },
     maybeCreateOrUpdateInfoWindow() {
       const { visible, createOrUpdateInfoWindow } = this;

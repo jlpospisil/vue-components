@@ -28,22 +28,39 @@ export default {
   },
   mounted() {
     const {
-      defaultOptions, google, map, options, paths,
+      defaultOptions, google, map, options, paths, getCenter,
     } = this;
 
     this.polygon = new google.maps.Polygon({
       paths,
       ...defaultOptions,
       ...options,
+      center: getCenter(),
     });
 
     // Add polygon to map and attach event listeners
     const { polygon, polygonClicked } = this;
 
     polygon.setMap(map);
-    google.maps.event.addListener(polygon, 'click', polygonClicked);
+    google.maps.event.addListener(polygon, 'click', function() {
+      polygonClicked(this);
+    });
   },
   methods: {
+    getCenter() {
+      const { paths } = this;
+      const lats = paths.map(path => path.lat);
+      const lngs = paths.map(path => path.lng);
+      const latMin = Math.min(...lats);
+      const latMax = Math.max(...lats);
+      const lngMin = Math.min(...lngs);
+      const lngMax = Math.max(...lngs);
+
+      return {
+        lat: latMin + ((latMax - latMin) / 2),
+        lng: lngMin + ((lngMax - lngMin) / 2),
+      };
+    },
     polygonClicked(event) {
       this.$emit('click', event);
     },
