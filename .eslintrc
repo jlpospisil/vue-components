@@ -14,6 +14,7 @@
     "rules": {
         "no-plusplus": "off",
         "indent": ["error", 2, {"SwitchCase": 2}],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "import/prefer-default-export": "off",
         "camelcase": 0
     }

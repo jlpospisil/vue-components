@@ -1,9 +1,8 @@
 import color from 'color-converter';
 
 const createTheme = ({ mainBackground, mainTextColor, ...overrides } = {}) => {
-  mainBackground = mainBackground || '#cdcdcd';
-  mainTextColor = mainTextColor || '#000000';
-
+  const mainBackgroundColor = mainBackground || '#cdcdcd';
+  const mainFontColor = mainTextColor || '#000000';
   const lightBackground = color.fromCSS(mainBackground).lighten(10).css();
   const darkBackground = color.fromCSS(mainBackground).darken(10).css();
   const dimmedTextColor = color.fromCSS(mainTextColor).fade(-60).css();
@@ -11,7 +10,7 @@ const createTheme = ({ mainBackground, mainTextColor, ...overrides } = {}) => {
   const inputFill = color.fromCSS(mainBackground).lighten(18).css();
 
   return {
-    mainBackground,
+    mainBackground: mainBackgroundColor,
     mainBorder: '1px solid rgba(0,0,0,0.1)',
     mainBorderColor,
     mainBorderRadius: 4,
@@ -19,7 +18,7 @@ const createTheme = ({ mainBackground, mainTextColor, ...overrides } = {}) => {
     barFill: darkBackground,
     inputFill,
     mainTextFace: null,
-    mainTextColor,
+    mainTextColor: mainFontColor,
     mainTextSize: 13,
     dimmedTextColor,
     highlightColor: '#9fdaff',
@@ -30,13 +29,13 @@ const createTheme = ({ mainBackground, mainTextColor, ...overrides } = {}) => {
     layoutMargin: 10,
     overlayBackground: 'rgba(0,0,0,0.5)',
     brand: {
-      background: darkBackground
+      background: darkBackground,
     },
     addonActionsTheme: {
       BASE_BACKGROUND_COLOR: 'transparent',
     },
-    ...overrides
-  }
+    ...overrides,
+  };
 };
 
 export default createTheme;

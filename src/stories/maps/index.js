@@ -1,4 +1,5 @@
 import { storiesOf } from '@storybook/vue';
+/* eslint-disable-next-line import/no-unresolved */
 import { GoogleMap, InfoWindow, MapPolygon } from '@csgactuarial/style-guide';
 
 const wyomingPolygon = [
@@ -23,7 +24,9 @@ const story = storiesOf('Maps|Map', module);
 
 story.add('Default', () => ({
   components: { GoogleMap },
-  template: `<google-map style="width: 400px; height: 400px;"></google-map>`,
+  template: `
+    <google-map style="width: 400px; height: 400px;"></google-map>
+  `,
 }));
 
 story.add('With polygon', () => ({

@@ -30,8 +30,6 @@
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader';
 
-// Using https://github.com/cnt000/stores-map-vue for a reference
-
 export default {
   props: {
     libraries: { type: Array, default: () => [] },
