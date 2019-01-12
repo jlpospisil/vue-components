@@ -1,8 +1,5 @@
 <template>
-  <span
-    class="text-info"
-    @click="$emit('click')"
-  >
+  <span @click="$emit('click')">
     <label v-if="labelText && labelPosition === 'left'">
       {{ labelText }}
     </label>
