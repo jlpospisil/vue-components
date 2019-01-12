@@ -1,12 +1,9 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { withOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
-import VueInfoAddon from 'storybook-addon-vue-info';
+import VueInfoAddon, { setDefaults as setVueInfoOptions } from 'storybook-addon-vue-info';
 import { withKnobs } from '@storybook/addon-knobs';
 import createTheme from './create-theme';
-
-// Import your custom components
-// import { Application } from '../src/components';
 
 // Storybook options
 addDecorator(withOptions({
@@ -27,7 +24,12 @@ addDecorator(withOptions({
 // https://github.com/storybooks/storybook/issues/5129
 
 // Add info
+setVueInfoOptions({
+  propTablesExclude: ['storybook-container']
+});
+
 addDecorator(VueInfoAddon);
+
 
 // Add knobs
 addDecorator(withKnobs);
@@ -42,13 +44,6 @@ addDecorator((getStory, context) => {
   }
   return story;
 });
-
-// TODO: remove this if it is not needed
-// Add theme to storybook
-// addDecorator(story => ({
-//   components: { Application, story },
-//   template: '<application><story /></application>',
-// }));
 
 // Load stories
 const loadStories = () => {

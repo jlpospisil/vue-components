@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { Icon } from '@csgactuarial/style-guide';
+import { Icon } from '@cdpjs/vue-components';
 
 // Elements common to all stories
 const common = {

@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { Modal, ButtonItem } from '@csgactuarial/style-guide';
+import { Modal, ButtonItem } from '@cdpjs/vue-components';
 
 storiesOf('General|Modals', module)
   .add('Default', () => ({

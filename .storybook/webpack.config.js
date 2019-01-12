@@ -4,7 +4,7 @@ module.exports = {
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      '@csgactuarial/style-guide': path.join(__dirname, '../src'),
+      '@cdpjs/vue-components': path.join(__dirname, '../src/components'),
     },
     extensions: ['*', '.js', '.vue', '.json'],
   },

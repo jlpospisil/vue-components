@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { Application } from '../../src/components/layout';
+import { Application } from '../../src/components/ui';
 
 describe('Application.test.js', () => {
   const component = mount(Application, {

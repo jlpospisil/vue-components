@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { GoogleMap, InfoWindow, MapPolygon } from '@csgactuarial/style-guide';
+import { GoogleMap, InfoWindow, MapPolygon } from '@cdpjs/vue-components';
 
 const wyomingPolygon = [
   { lat: 41.0037, lng: -104.0556 },

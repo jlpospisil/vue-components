@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue';
 import { boolean, number, text, select } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
-import { Radio } from '@csgactuarial/style-guide';
+import { Radio } from '@cdpjs/vue-components';
 
 storiesOf('Forms|Radio', module)
   .add('Default', () => ({

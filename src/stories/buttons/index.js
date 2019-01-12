@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 /* eslint-disable-next-line import/no-unresolved */
-import { ButtonItem } from '@csgactuarial/style-guide';
+import { ButtonItem } from '@cdpjs/vue-components';
 
 const common = {
   components: { ButtonItem },
