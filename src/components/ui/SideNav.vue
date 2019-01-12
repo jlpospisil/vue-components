@@ -51,6 +51,7 @@
   z-index: 899;
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
+  overflow-x: hidden;
 
   &.is-open {
     width: $side-nav-width;

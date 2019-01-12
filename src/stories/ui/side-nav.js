@@ -8,6 +8,7 @@ storiesOf('UI|SideNav', module)
     components: { StorybookContainer, SideNav },
     data() {
       return {
+        sideNavOpen: true,
         navGroups: [
           {
             header: 'Group 1',
@@ -47,7 +48,16 @@ storiesOf('UI|SideNav', module)
     },
     template: `
       <storybook-container>
-        <side-nav :navGroups="navGroups" />
+        <side-nav :navGroups="navGroups" :open="sideNavOpen" />
       </storybook-container>
     `,
+    mounted() {
+      const { toggleSideNav } = this;
+      setInterval(toggleSideNav, 5000);
+    },
+    methods: {
+      toggleSideNav() {
+        this.sideNavOpen = !this.sideNavOpen;
+      },
+    },
   }));

@@ -11,6 +11,8 @@
   padding: 5px 15px;
   color: darken($side-nav-font-color, 20%);
   font-weight: bold;
+  white-space: nowrap;
+  width: $side-nav-width;
 }
 </style>
 
