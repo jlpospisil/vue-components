@@ -51,16 +51,29 @@
   z-index: 899;
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
-  overflow-x: hidden;
+
+  /* TODO: find a way to hide the x overflow without losing the box shadow
+  &:not(.is-open) {
+    .side-nav-header, .side-nav-link {
+      width: 0 !important;
+      overflow-x: hidden;
+    }
+  }
+  */
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transition: left $side-nav-transition-duration $side-nav-transition-function;
+  }
 
   &.is-open {
     width: $side-nav-width;
 
     &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
       left: $side-nav-width;
       width: 15px;
       box-shadow: 15px 0 15px -15px $box-shadow-color inset;
