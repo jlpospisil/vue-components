@@ -27,6 +27,7 @@
 import Icon from '../generic/Icon.vue';
 
 export default {
+  name: 'Radio',
   components: {
     Icon,
   },

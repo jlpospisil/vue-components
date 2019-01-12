@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name: 'Icon',
   props: {
     type: { type: String, required: false, default: 'free' },
     name: { type: String, required: true },

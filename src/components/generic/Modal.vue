@@ -69,6 +69,7 @@ import Icon from './Icon.vue';
 const $ = jQuery;
 
 export default {
+  name: 'Modal',
   components: {
     ButtonItem,
     Icon,

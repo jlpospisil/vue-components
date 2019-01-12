@@ -12,6 +12,6 @@
 import bootstrap from 'bootstrap';
 
 export default {
-
+  name: 'Application',
 };
 </script>

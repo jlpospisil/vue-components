@@ -16,6 +16,7 @@
 import Icon from './Icon.vue';
 
 export default {
+  name: 'ButtonItem',
   components: {
     Icon,
   },
