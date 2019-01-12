@@ -8,7 +8,7 @@ storiesOf('Forms|CheckBox', module)
     components: { CheckBox },
     props: {
       isChecked: { type: Boolean, default: boolean('checked', true) },
-      color: { type: String, default: text('color', null) },
+      color: { type: String, default: text('color', '') },
       size: { type: Number, default: number('size', 1.25) },
       className: { type: String, default: text('class', '') },
     },

@@ -6,7 +6,7 @@
     <icon
       v-if="checked"
       :color="color"
-      type="regular"
+      type="solid"
       name="fa-check-circle"
       :size="size"
     />
