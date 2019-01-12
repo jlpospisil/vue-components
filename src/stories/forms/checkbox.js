@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, number, text } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
 import { CheckBox } from '@csgactuarial/style-guide';
 
@@ -11,8 +11,21 @@ storiesOf('Forms|CheckBox', module)
       color: { type: String, default: text('color', '') },
       size: { type: Number, default: number('size', 1.25) },
       className: { type: String, default: text('class', '') },
+      label: {
+        type: Object,
+        default: () => ({
+          text: text('label text', 'Check box label'),
+          position: select('label position', ['left', 'right'], 'right'),
+        }),
+      },
     },
     template: `
-      <check-box :class="className" :checked="isChecked" :color="color" :size="size"></check-box>
+      <check-box 
+        :class="className" 
+        :checked="isChecked" 
+        :color="color" 
+        :size="size"
+        :label="label"
+      />
     `,
   }));

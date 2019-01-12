@@ -3,6 +3,9 @@
     class="text-info"
     @click="$emit('click')"
   >
+    <label v-if="labelText && labelPosition === 'left'">
+      {{ labelText }}
+    </label>
     <icon
       v-if="checked"
       :color="color"
@@ -17,6 +20,9 @@
       name="fa-square"
       :size="size"
     />
+    <label v-if="labelText && labelPosition === 'right'">
+      {{ labelText }}
+    </label>
   </span>
 </template>
 
@@ -30,7 +36,29 @@ export default {
   props: {
     checked: { type: Boolean, required: true },
     size: { type: Number, required: false, default: 1.25 },
-    color: { type: String, required: false },
+    color: { type: String, required: false, default: null },
+    label: { type: [String, Object], required: false, default: null },
+  },
+  computed: {
+    labelText() {
+      const { label } = this;
+
+      if (label && typeof label === 'object') {
+        return label.text;
+      }
+
+      return label;
+    },
+    labelPosition() {
+      const { label } = this;
+
+      if (typeof label === 'object') {
+        const { position } = label;
+        return position && position.toLowerCase() === 'left' ? 'left' : 'right';
+      }
+
+      return 'right';
+    },
   },
 };
 </script>
