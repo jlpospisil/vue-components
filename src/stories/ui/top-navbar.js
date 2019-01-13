@@ -49,10 +49,10 @@ stories.add('Custom content', () => ({
         <top-navbar>
           <div slot="brand">Logo</div>
           
-          <!-- template slot="leftLinks">
+          <template slot="leftLinks">
             <top-navbar-link :active="true">Link 1</top-navbar-link>
             <top-navbar-link>Link 2</top-navbar-link>
-          </template -->
+          </template>
           
           <div class="nav-item dropdown ml-auto">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">

@@ -10,40 +10,38 @@
       <slot name="brand" />
     </a>
 
-    <template v-if="$slots.leftLinks || $slots.rightLinks">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".top-navbar-links"
-        aria-controls="top-navbar-links"
-        aria-expanded="false"
-        aria-label="Toggle navigation links"
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target=".top-navbar-links"
+      aria-controls="top-navbar-links"
+      aria-expanded="false"
+      aria-label="Toggle navigation links"
+    >
+      <icon
+        type="solid"
+        name="fa-bars"
+      />
+    </button>
+
+    <div class="collapse navbar-collapse top-navbar-links">
+      <ul
+        v-if="$slots.leftLinks"
+        class="navbar-nav mr-auto"
       >
-        <icon
-          type="solid"
-          name="fa-bars"
-        />
-      </button>
+        <slot name="leftLinks" />
+      </ul>
 
-      <div class="collapse navbar-collapse top-navbar-links">
-        <ul
-          v-if="$slots.leftLinks"
-          class="navbar-nav mr-auto"
-        >
-          <slot name="leftLinks" />
-        </ul>
+      <ul
+        v-if="$slots.rightLinks"
+        class="navbar-nav ml-auto"
+      >
+        <slot name="rightLinks" />
+      </ul>
 
-        <ul
-          v-if="$slots.rightLinks"
-          class="navbar-nav ml-auto"
-        >
-          <slot name="rightLinks" />
-        </ul>
-      </div>
-    </template>
-
-    <slot />
+      <slot />
+    </div>
   </nav>
 </template>
 

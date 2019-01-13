@@ -1,5 +1,5 @@
 <template>
-  <div class="side-nav-link">
+  <div class="side-nav-link" @click="$emit('click')">
     <a :href="to">
       <slot />
       <icon

@@ -1,5 +1,5 @@
 <template>
-  <li class="nav-item" :class="{ active }">
+  <li class="nav-item" :class="{ active }" @click="$emit('click')">
     <a class="nav-link" :href="to">
       <slot />
     </a>
