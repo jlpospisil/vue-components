@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-light bg-light"
+    class="navbar"
     :class="expandClass"
   >
     <a
