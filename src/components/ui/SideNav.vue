@@ -13,23 +13,6 @@
       <slot />
     </div>
 
-    <div
-      v-for="(navGroup, groupIndex) in navGroups"
-      :key="navGroup.key || `nav-item-${groupIndex}`"
-      class="side-nav-group"
-    >
-      <side-nav-group-header v-if="navGroup.header">
-        {{ navGroup.header }}
-      </side-nav-group-header>
-
-      <side-nav-link
-        v-for="(navItem, itemIndex) in navGroup.items"
-        :key="navItem.key || `nav-item-${itemIndex}`"
-        :icon="navItem.icon"
-        :label="navItem.label"
-      />
-    </div>
-
     <div style="flex: 1" />
 
     <div class="side-nav-footer">
@@ -54,20 +37,21 @@
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
-  &:not(.is-open) {
-    .side-nav-group-header, .side-nav-link {
-      width: 0 !important;
-      overflow-x: hidden;
-    }
-  }
-
   .side-nav-header {
-    height: 100px;
+    min-height: 75px;
+    box-shadow: 0 8px 10px -10px lighten($side-nav-bg-color, 25%);
   }
 
-  .side-nav-group {
-    .side-nav-group-header, .side-nav-link {
-      transition: width $side-nav-transition-duration $side-nav-transition-function;
+  .side-nav-header, .side-nav-content, .side-nav-footer {
+    width: $side-nav-width;
+    transition: width $side-nav-transition-duration $side-nav-transition-function;
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
+
+  &:not(.is-open) {
+    .side-nav-header, .side-nav-content, .side-nav-footer {
+      width: 0 !important;
       overflow-x: hidden;
     }
   }
@@ -94,18 +78,10 @@
 </style>
 
 <script>
-import SideNavGroupHeader from './SideNavGroupHeader.vue';
-import SideNavLink from './SideNavLink.vue';
-
 export default {
   name: 'SideNav',
-  components: {
-    SideNavGroupHeader,
-    SideNavLink,
-  },
   props: {
     open: { type: Boolean, default: true },
-    navGroups: { type: Array, default: () => [] },
   },
 };
 </script>

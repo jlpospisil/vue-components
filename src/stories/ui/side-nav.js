@@ -1,6 +1,8 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { SideNav } from '@cdpjs/vue-components';
+import {
+  SideNav, SideNavGroup, SideNavGroupHeader, SideNavLink,
+} from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
 
 const navGroups = [
@@ -41,7 +43,13 @@ const navGroups = [
 
 storiesOf('UI|SideNav', module)
   .add('Default', () => ({
-    components: { StorybookContainer, SideNav },
+    components: {
+      StorybookContainer,
+      SideNav,
+      SideNavGroup,
+      SideNavGroupHeader,
+      SideNavLink,
+    },
     data() {
       return {
         sideNavOpen: true,
@@ -50,7 +58,33 @@ storiesOf('UI|SideNav', module)
     },
     template: `
       <storybook-container>
-        <side-nav :navGroups="navGroups" :open="sideNavOpen" />
+        <side-nav :navGroups="navGroups" :open="sideNavOpen">
+          <div slot="header">
+            Header Here
+          </div>
+          
+          <div slot="content">
+            <side-nav-group
+              v-for="(navGroup, groupIndex) in navGroups"
+              :key="navGroup.key"
+            >
+              <side-nav-group-header v-if="navGroup.header">
+                {{ navGroup.header }}
+              </side-nav-group-header>
+        
+              <side-nav-link
+                v-for="(navItem, itemIndex) in navGroup.items"
+                :key="navItem.key"
+                :icon="navItem.icon"
+                :label="navItem.label"
+              />
+            </side-nav-group>
+          </div>
+          
+          <div slot="footer">
+            Footer Here
+          </div>
+        </side-nav>
       </storybook-container>
     `,
     mounted() {

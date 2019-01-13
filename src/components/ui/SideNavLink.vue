@@ -17,15 +17,18 @@
 @import '../../scss/variables';
 
 .side-nav-link {
-  width: $side-nav-width;
   white-space: nowrap;
   color: $side-nav-font-color;
   position: relative;
 
   a {
-    padding: 5px 15px;
+    padding: 5px 15px 5px 25px;
     display: block;
     color: $side-nav-font-color;
+
+    i {
+      margin-right: 10px;
+    }
 
     &:hover, &:focus {
       text-decoration: none;
