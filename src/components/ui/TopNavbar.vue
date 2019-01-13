@@ -58,6 +58,7 @@ $hover-font-color: darken($top-nav-font-color, 15%);
 
   .navbar-brand {
     color: $top-nav-font-color;
+    border-bottom: 5px solid transparent;
 
     &:hover, &:focus {
       color: $hover-font-color;
@@ -67,6 +68,7 @@ $hover-font-color: darken($top-nav-font-color, 15%);
   .nav-item {
     .nav-link {
       color: $top-nav-font-color;
+      border-bottom: 5px solid transparent;
 
       &:hover, &:focus {
         color: $hover-font-color;
@@ -76,7 +78,7 @@ $hover-font-color: darken($top-nav-font-color, 15%);
     &.active {
       .nav-link {
         color: $top-nav-active-font-color;
-        border-bottom: 5px solid darken($top-nav-active-font-color, 10%);
+        border-bottom-color: darken($top-nav-active-font-color, 10%);
       }
     }
   }
