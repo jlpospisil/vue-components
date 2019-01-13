@@ -12,7 +12,7 @@ const components = {
 
 const addons = {
   info: {
-    propTablesExclude: ['storybook-container', 'icon'],
+    propTablesExclude: ['storybook-container', 'icon', 'body-content'],
   },
   notes: {
     markdown: '* The empty navType tag is only being used to avoid fixed positioning in the stories.',
@@ -34,8 +34,6 @@ stories.add('Left links', () => ({
             <top-navbar-link>Link 2</top-navbar-link>
           </template>
         </top-navbar>
-        
-        <div style="padding: 25px;">Body content would be here.</div>
     </storybook-container>`,
 }));
 
@@ -52,8 +50,6 @@ stories.add('Right links', () => ({
             <top-navbar-link>Link 2</top-navbar-link>
           </template>
         </top-navbar>
-        
-        <div style="padding: 25px;">Body content would be here.</div>
     </storybook-container>`,
 }));
 
@@ -87,7 +83,5 @@ stories.add('Custom content', () => ({
             </div>
           </div>
         </top-navbar>
-        
-        <div style="padding: 25px;">Body content would be here.</div>
     </storybook-container>`,
 }));
