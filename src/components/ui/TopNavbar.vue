@@ -46,8 +46,42 @@
   </nav>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '../../scss/variables';
 
+$hover-font-color: darken($top-nav-font-color, 15%);
+
+.navbar {
+  background-color: $top-nav-bg-color;
+  height: $top-nav-height;
+  box-shadow: 0 8px 10px -10px $box-shadow-color;
+  border-top: 5px solid darken($top-nav-font-color, 5%);
+
+  .navbar-brand {
+    color: $top-nav-font-color;
+
+    &:hover, &:focus {
+      color: $hover-font-color;
+    }
+  }
+
+  .nav-item {
+    .nav-link {
+      color: $top-nav-font-color;
+
+      &:hover, &:focus {
+        color: $hover-font-color;
+      }
+    }
+
+    &.active {
+      .nav-link {
+        color: $top-nav-active-font-color;
+        border-bottom: 5px solid darken($top-nav-active-font-color, 10%);
+      }
+    }
+  }
+}
 </style>
 
 <script>
