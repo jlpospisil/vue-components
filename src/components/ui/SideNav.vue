@@ -3,20 +3,24 @@
     class="side-nav"
     :class="{ 'is-open': open }"
   >
-    <slot name="header" />
+    <div class="side-nav-header">
+      <slot name="header" />
+    </div>
 
-    <slot name="content" />
+    <div class="side-nav-content">
+      <slot name="content" />
 
-    <slot />
+      <slot />
+    </div>
 
     <div
       v-for="(navGroup, groupIndex) in navGroups"
       :key="navGroup.key || `nav-item-${groupIndex}`"
       class="side-nav-group"
     >
-      <side-nav-header v-if="navGroup.header">
+      <side-nav-group-header v-if="navGroup.header">
         {{ navGroup.header }}
-      </side-nav-header>
+      </side-nav-group-header>
 
       <side-nav-link
         v-for="(navItem, itemIndex) in navGroup.items"
@@ -31,7 +35,6 @@
     <div class="side-nav-footer">
       <slot name="footer" />
     </div>
-    <slot name="footer" />
   </nav>
 </template>
 
@@ -45,7 +48,6 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  padding: $top-nav-height 0 0 0;
   font-size: $side-nav-font-size;
   background-color: $side-nav-bg-color;
   z-index: 899;
@@ -53,15 +55,21 @@
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
   &:not(.is-open) {
-    .side-nav-header, .side-nav-link {
+    .side-nav-group-header, .side-nav-link {
       width: 0 !important;
       overflow-x: hidden;
     }
   }
 
-  .side-nav-header, .side-nav-link {
-    transition: width $side-nav-transition-duration $side-nav-transition-function;
-    overflow-x: hidden;
+  .side-nav-header {
+    height: 100px;
+  }
+
+  .side-nav-group {
+    .side-nav-group-header, .side-nav-link {
+      transition: width $side-nav-transition-duration $side-nav-transition-function;
+      overflow-x: hidden;
+    }
   }
 
   &:after {
@@ -86,13 +94,13 @@
 </style>
 
 <script>
-import SideNavHeader from './SideNavHeader.vue';
+import SideNavGroupHeader from './SideNavGroupHeader.vue';
 import SideNavLink from './SideNavLink.vue';
 
 export default {
   name: 'SideNav',
   components: {
-    SideNavHeader,
+    SideNavGroupHeader,
     SideNavLink,
   },
   props: {

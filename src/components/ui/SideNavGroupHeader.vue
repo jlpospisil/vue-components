@@ -1,5 +1,5 @@
 <template>
-  <div class="side-nav-header">
+  <div class="side-nav-group-header">
     <div>
       <slot />
     </div>
@@ -9,7 +9,8 @@
 <style lang="scss" scoped>
 @import '../../scss/variables';
 
-.side-nav-header {
+.side-nav-group-header {
+  width: $side-nav-width;
   color: darken($side-nav-font-color, 20%);
   font-weight: bold;
   white-space: nowrap;
