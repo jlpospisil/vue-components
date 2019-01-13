@@ -1,7 +1,7 @@
 <template>
   <nav
     class="navbar"
-    :class="expandClass"
+    :class="`${expandClass} ${navType}`"
   >
     <a
       v-if="$slots.brand"
@@ -60,6 +60,7 @@ export default {
   },
   props: {
     collapseAt: { type: String, default: 'sm' },
+    navType: { type: String, default: 'fixed-top' },
   },
   computed: {
     expandClass() {

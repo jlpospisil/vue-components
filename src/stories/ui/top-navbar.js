@@ -10,13 +10,23 @@ const components = {
   TopNavbarLink,
 };
 
+const addons = {
+  info: {
+    propTablesExclude: ['storybook-container', 'icon'],
+  },
+  notes: {
+    markdown: '* The empty navType tag is only to avoid fixed positioning in the stories.',
+  },
+};
+
 const stories = storiesOf('UI|TopNavbar', module);
 
 stories.add('Left links', () => ({
+  addons,
   components,
   template: `
     <storybook-container>
-        <top-navbar>
+        <top-navbar navType="">
           <div slot="brand">Logo</div>
           
           <template slot="leftLinks">
@@ -24,14 +34,17 @@ stories.add('Left links', () => ({
             <top-navbar-link>Link 2</top-navbar-link>
           </template>
         </top-navbar>
+        
+        <div style="padding: 25px;">Body content would be here.</div>
     </storybook-container>`,
 }));
 
 stories.add('Right links', () => ({
+  addons,
   components,
   template: `
     <storybook-container>
-        <top-navbar>
+        <top-navbar navType="">
           <div slot="brand">Logo</div>
           
           <template slot="rightLinks">
@@ -39,14 +52,17 @@ stories.add('Right links', () => ({
             <top-navbar-link>Link 2</top-navbar-link>
           </template>
         </top-navbar>
+        
+        <div style="padding: 25px;">Body content would be here.</div>
     </storybook-container>`,
 }));
 
 stories.add('Custom content', () => ({
+  addons,
   components,
   template: `
     <storybook-container>
-        <top-navbar>
+        <top-navbar navType="">
           <div slot="brand">Logo</div>
           
           <template slot="leftLinks">
@@ -71,5 +87,7 @@ stories.add('Custom content', () => ({
             </div>
           </div>
         </top-navbar>
+        
+        <div style="padding: 25px;">Body content would be here.</div>
     </storybook-container>`,
 }));
