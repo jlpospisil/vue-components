@@ -20,7 +20,7 @@ addDecorator((getStory, context) => {
 addDecorator((getStory, context) => {
   const story = getStory(context);
   const addons = story.addons || {};
-  const info = addons || {};
+  const info = addons.info || {};
   return withInfo({
     propTablesExclude: ['storybook-container'],
     ...info,
