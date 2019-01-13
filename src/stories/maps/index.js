@@ -2,6 +2,12 @@ import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
 import { GoogleMap, InfoWindow, MapPolygon } from '@cdpjs/vue-components';
 
+const addons = {
+  notes: {
+    markdown: '* Add your API key to your projects appropriate env file using the VUE_APP_GOOGLE_MAPS_API_KEY variable.',
+  },
+};
+
 const wyomingPolygon = [
   { lat: 41.0037, lng: -104.0556 },
   { lat: 44.9949, lng: -104.0584 },
@@ -23,6 +29,7 @@ const randomHexColor = () => `#${Math.floor(Math.random() * 16777215).toString(1
 const story = storiesOf('Maps|Map', module);
 
 story.add('Default', () => ({
+  addons,
   components: { GoogleMap },
   template: `
     <google-map style="width: 400px; height: 400px;"></google-map>
@@ -30,6 +37,7 @@ story.add('Default', () => ({
 }));
 
 story.add('With polygon', () => ({
+  addons,
   components: { GoogleMap, MapPolygon },
   data() {
     return {
@@ -58,6 +66,7 @@ story.add('With polygon', () => ({
 }));
 
 story.add('With clickable polygon', () => ({
+  addons,
   components: { GoogleMap, InfoWindow, MapPolygon },
   data() {
     return {
