@@ -15,7 +15,7 @@ const addons = {
     propTablesExclude: ['storybook-container', 'icon'],
   },
   notes: {
-    markdown: '* The empty navType tag is only to avoid fixed positioning in the stories.',
+    markdown: '* The empty navType tag is only being used to avoid fixed positioning in the stories.',
   },
 };
 

@@ -37,7 +37,8 @@ addDecorator(withOptions({
   hierarchyRootSeparator: /\|/,
   sortStoriesByKind: true,
   addonPanelInRight: true,
-  selectedAddonPanel: 'storybooks/storybook-addon-knobs',
+  // selectedAddonPanel: 'storybooks/storybook-addon-knobs',
+  selectedAddonPanel: 'storybook/notes/panel',
   theme: createTheme({
     mainBackground: '#e0e0e0',
     inputFill: '#eeeeee',
