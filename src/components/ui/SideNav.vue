@@ -52,14 +52,17 @@
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
-  /* TODO: find a way to hide the x overflow without losing the box shadow
   &:not(.is-open) {
     .side-nav-header, .side-nav-link {
       width: 0 !important;
       overflow-x: hidden;
     }
   }
-  */
+
+  .side-nav-header, .side-nav-link {
+    transition: width $side-nav-transition-duration $side-nav-transition-function;
+    overflow-x: hidden;
+  }
 
   &:after {
     content: "";

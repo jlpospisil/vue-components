@@ -1,6 +1,8 @@
 <template>
   <div class="side-nav-header">
-    <slot />
+    <div>
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -8,11 +10,14 @@
 @import '../../scss/variables';
 
 .side-nav-header {
-  padding: 5px 15px;
   color: darken($side-nav-font-color, 20%);
   font-weight: bold;
   white-space: nowrap;
-  width: $side-nav-width;
+  position: relative;
+
+  > div {
+    padding: 5px 15px;
+  }
 }
 </style>
 
