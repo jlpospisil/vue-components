@@ -1,6 +1,7 @@
 <template>
   <nav
-    class="navbar navbar-expand-md navbar-light bg-light"
+    class="navbar navbar-light bg-light"
+    :class="expandClass"
   >
     <a
       v-if="$slots.brand"
@@ -58,7 +59,13 @@ export default {
     Icon,
   },
   props: {
-    collapsible: { type: Boolean, default: true },
+    collapseAt: { type: String, default: 'sm' },
+  },
+  computed: {
+    expandClass() {
+      const { collapseAt } = this;
+      return `navbar-expand-${collapseAt.toLowerCase()}`;
+    },
   },
 };
 </script>

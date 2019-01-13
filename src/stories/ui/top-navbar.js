@@ -58,7 +58,7 @@ stories.add('Custom content', () => ({
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
               User Name
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu">
               <a class="dropdown-item" href="#">
                 <icon type="solid" name="fa-cog" />
                 Settings
