@@ -29,15 +29,13 @@ const randomHexColor = () => `#${Math.floor(Math.random() * 16777215).toString(1
 const story = storiesOf('Maps|Map', module);
 
 story.add('Default', () => ({
-  addons,
   components: { GoogleMap },
   template: `
     <google-map style="width: 400px; height: 400px;"></google-map>
   `,
-}));
+}), addons);
 
 story.add('With polygon', () => ({
-  addons,
   components: { GoogleMap, MapPolygon },
   data() {
     return {
@@ -63,10 +61,9 @@ story.add('With polygon', () => ({
         />
     </template>
   </google-map>`,
-}));
+}), addons);
 
 story.add('With clickable polygon', () => ({
-  addons,
   components: { GoogleMap, InfoWindow, MapPolygon },
   data() {
     return {
@@ -129,4 +126,4 @@ story.add('With clickable polygon', () => ({
       this.infoWindow.visible = true;
     },
   },
-}));
+}), addons);

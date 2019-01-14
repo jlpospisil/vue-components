@@ -1,34 +1,9 @@
 import { addDecorator, configure } from '@storybook/vue';
 import { withOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
-import { withInfo } from 'storybook-addon-vue-info';
+import VueInfoAddon, { withInfo } from 'storybook-addon-vue-info';
 import { withKnobs } from '@storybook/addon-knobs';
 import createTheme from './create-theme';
-
-// Add notes
-addDecorator((getStory, context) => {
-  const story = getStory(context);
-  const addons = story.addons || {};
-  const notes = addons.notes || {};
-  if (notes.text || notes.markdown) {
-    return withNotes(notes)(getStory)(context);
-  }
-  return story;
-});
-
-// Add info
-addDecorator((getStory, context) => {
-  const story = getStory(context);
-  const addons = story.addons || {};
-  const info = addons.info || {};
-  return withInfo({
-    propTablesExclude: ['storybook-container'],
-    ...info,
-  })(getStory)(context);
-});
-
-// Add knobs
-addDecorator(withKnobs);
 
 // Storybook options
 addDecorator(withOptions({
@@ -44,6 +19,24 @@ addDecorator(withOptions({
     inputFill: '#eeeeee',
   }),
 }));
+
+// Add notes
+addDecorator(withNotes);
+
+// Add info
+// addDecorator(VueInfoAddon);
+addDecorator((getStory, context) => {
+  const story = getStory(context);
+  const addons = story.addons || {};
+  const info = addons.info || {};
+  return withInfo({
+    propTablesExclude: ['storybook-container'],
+    ...info,
+  })(getStory)(context);
+});
+
+// Add knobs
+addDecorator(withKnobs);
 
 // Load stories
 const loadStories = () => {
