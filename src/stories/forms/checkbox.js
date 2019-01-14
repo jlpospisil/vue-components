@@ -3,8 +3,8 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
 import { CheckBox } from '@cdpjs/vue-components';
 
-storiesOf('Forms|CheckBox', module)
-  .add('Default', () => ({
+storiesOf('Forms|CheckBoxes', module)
+  .add('Single', () => ({
     components: { CheckBox },
     props: {
       isChecked: { type: Boolean, default: boolean('checked', true) },

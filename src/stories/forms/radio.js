@@ -3,8 +3,8 @@ import { boolean, number, text, select } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
 import { Radio } from '@cdpjs/vue-components';
 
-storiesOf('Forms|Radio', module)
-  .add('Default', () => ({
+storiesOf('Forms|Radios', module)
+  .add('Single', () => ({
     components: { Radio },
     props: {
       isChecked: { type: Boolean, default: boolean('checked', true) },
