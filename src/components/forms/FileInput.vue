@@ -1,46 +1,45 @@
 <template>
-  <span class="file-input">
+  <div class="file-input">
     <input
       type="file"
       :name="name"
+      :value="value"
       @input="$emit('input', $event.target.value)"
-      v-show="false"
-      :value="value"
       ref="input"
+      v-show="false"
     />
-    <input
-      class="form-control file-input-value"
-      :value="value"
-      readonly="true"
-    />
-    <button-item
-      class="file-input-button"
-      text="Select File"
-      icon="fa-file-upload"
-      icon_type="solid"
-      @click="openFileSelector"
-    />
-  </span>
+
+    <div class="input-group">
+      <input
+        class="form-control file-input-value"
+        :value="value"
+        readonly="true"
+        @focus="openFileSelector"
+      />
+
+      <div class="input-group-append" @click="openFileSelector">
+        <span class="input-group-text text-primary">
+          <icon type="solid" name="fa-file-upload" />
+          <span class="ml-2">Select File</span>
+        </span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.file-input {
-  display: flex;
-
-  .file-input-button {
-    margin-left: 1rem;
-    white-space: nowrap;
-  }
+.input-group-text {
+  cursor: default;
 }
 </style>
 
 <script>
-import { ButtonItem } from '../generic';
+import { Icon } from '../generic';
 
 export default {
   name: 'FileInput',
   components: {
-    ButtonItem,
+    Icon,
   },
   props: {
     name: { type: String, default: null },
