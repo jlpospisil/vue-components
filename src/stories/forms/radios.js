@@ -18,8 +18,8 @@ const common = {
   },
 };
 
-storiesOf('Forms|Radios', module)
-  .add('Group', () => ({
+storiesOf('Forms|Inputs', module)
+  .add('Radios inline', () => ({
     ...common,
     template: `
       <radio-group
@@ -28,7 +28,7 @@ storiesOf('Forms|Radios', module)
       />
     `,
   }))
-  .add('Stacked Group', () => ({
+  .add('Radios stacked', () => ({
     ...common,
     template: `
       <radio-group

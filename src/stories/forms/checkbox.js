@@ -3,8 +3,8 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
 import { CheckBox } from '@cdpjs/vue-components';
 
-storiesOf('Forms|CheckBoxes', module)
-  .add('Single', () => ({
+storiesOf('Forms|Inputs', module)
+  .add('Checkbox', () => ({
     components: { CheckBox },
     data() {
       return {

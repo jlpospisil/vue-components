@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/vue';
 import { FileInput } from '@cdpjs/vue-components';
 
 storiesOf('Forms|Inputs', module)
-  .add('File', () => ({
+  .add('File input', () => ({
     components: { FileInput },
     data() {
       return {
