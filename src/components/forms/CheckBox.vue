@@ -1,5 +1,5 @@
 <template>
-  <span @click="$emit('click')">
+  <span class="checkbox" @click="$emit('click')">
     <label v-if="labelText && labelPosition === 'left'">
       {{ labelText }}
     </label>
@@ -23,6 +23,11 @@
   </span>
 </template>
 
+<style lang="scss" scoped>
+.checkbox {
+  cursor: default;
+}
+</style>
 <script>
 import Icon from '../generic/Icon.vue';
 

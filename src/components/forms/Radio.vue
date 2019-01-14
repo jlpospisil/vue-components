@@ -1,5 +1,5 @@
 <template>
-  <span @click="$emit('click')">
+  <span class="radio" @click="$emit('click')">
     <label v-if="labelText && labelPosition === 'left'">
       {{ labelText }}
     </label>
@@ -22,6 +22,12 @@
     </label>
   </span>
 </template>
+
+<style lang="scss" scoped>
+.radio {
+  cursor: default;
+}
+</style>
 
 <script>
 import Icon from '../generic/Icon.vue';

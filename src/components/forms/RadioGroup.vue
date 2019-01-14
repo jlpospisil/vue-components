@@ -8,7 +8,9 @@
       :key="`r${optionIndex}`"
       :label="option"
       :checked="selected === option"
-      class="radio"
+      :size="size"
+      :color="color"
+      @click="radioClicked(option)"
     />
   </div>
 </template>
@@ -41,6 +43,17 @@ export default {
     options: { type: Array, default: () => [] },
     selected: { type: String, default: null },
     stacked: { type: Boolean, default: false },
+    size: { type: Number, default: null },
+    color: { type: String, default: null },
+  },
+  methods: {
+    radioClicked(option) {
+      const { selected } = this;
+
+      if (option !== selected) {
+        this.$emit('change', option);
+      }
+    },
   },
 };
 </script>

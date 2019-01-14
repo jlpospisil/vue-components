@@ -5,9 +5,16 @@ import { RadioGroup } from '@cdpjs/vue-components';
 
 const common = {
   components: { RadioGroup },
-  props: {
-    options: { type: Array, default: () => ['Option 1', 'Option 2', 'Option 3'] },
-    selected: { type: String, default: 'Option 2' },
+  data() {
+    return {
+      options: ['Option 1', 'Option 2', 'Option 3'],
+      selected: 'Option 2',
+    };
+  },
+  methods: {
+    radioUpdated(newVal) {
+      this.selected = newVal;
+    },
   },
 };
 
@@ -17,7 +24,8 @@ storiesOf('Forms|Radios', module)
     template: `
       <radio-group
         :options="options"
-        selected="Option 2"
+        :selected="selected"
+        @change="radioUpdated"
       />
     `,
   }))
@@ -27,7 +35,8 @@ storiesOf('Forms|Radios', module)
       <radio-group
         :stacked="true"
         :options="options"
-        selected="Option 2"
+        :selected="selected"
+        @change="radioUpdated"
       />
     `,
   }));

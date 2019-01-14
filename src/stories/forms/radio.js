@@ -6,8 +6,12 @@ import { Radio } from '@cdpjs/vue-components';
 storiesOf('Forms|Radios', module)
   .add('Single', () => ({
     components: { Radio },
+    data() {
+      return {
+        isChecked: true,
+      };
+    },
     props: {
-      isChecked: { type: Boolean, default: boolean('checked', true) },
       color: { type: String, default: text('color', '') },
       size: { type: Number, default: number('size', 1.25) },
       className: { type: String, default: text('class', '') },
@@ -26,6 +30,7 @@ storiesOf('Forms|Radios', module)
         :color="color" 
         :size="size" 
         :label="label"
+        @click="isChecked = !isChecked"
       />
     `,
   }));
