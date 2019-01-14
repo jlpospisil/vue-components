@@ -13,8 +13,6 @@
       <slot />
     </div>
 
-    <div style="flex: 1" />
-
     <div class="side-nav-footer">
       <slot name="footer" />
     </div>
@@ -38,6 +36,13 @@
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
+  .side-nav-header, .side-nav-content, .side-nav-footer {
+    width: $side-nav-width;
+    transition: width $side-nav-transition-duration $side-nav-transition-function;
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
+
   .side-nav-header {
     display: flex;
     justify-content: center;
@@ -46,11 +51,13 @@
     box-shadow: 0 8px 10px -10px lighten($side-nav-bg-color, 25%);
   }
 
-  .side-nav-header, .side-nav-content, .side-nav-footer {
-    width: $side-nav-width;
-    transition: width $side-nav-transition-duration $side-nav-transition-function;
-    white-space: nowrap;
-    overflow-x: hidden;
+  .side-nav-content {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .side-nav-footer {
+    padding: 10px 5px 5px;
   }
 
   &:not(.is-open) {
