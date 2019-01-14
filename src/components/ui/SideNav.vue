@@ -33,11 +33,15 @@
   flex-direction: column;
   font-size: $side-nav-font-size;
   background-color: $side-nav-bg-color;
+  color: $side-nav-font-color;
   z-index: 899;
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
   .side-nav-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 75px;
     box-shadow: 0 8px 10px -10px lighten($side-nav-bg-color, 25%);
   }
