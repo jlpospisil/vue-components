@@ -1,21 +1,42 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { Icon, TopNavbar, TopNavbarLink } from '@cdpjs/vue-components';
+import { Icon, TopNavbar as TopNavbarOriginal, TopNavbarLink } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
+
+// "Extend" TopNavbar to add style/props for storybook
+const TopNavbar = {
+  props: TopNavbarOriginal.props,
+  components: {
+    TopNavbarOriginal,
+  },
+  template: `
+  <top-navbar-original navType="" style="position: absolute; top: 0; width: 100%;">
+    <slot />
+    <slot name="brand" slot="brand" />
+    <slot name="leftLinks" slot="leftLinks" />
+    <slot name="rightLinks" slot="rightLinks" />
+  </top-navbar-original>
+  `,
+};
+
+// Example body content
+const BodyContent = {
+  template: `
+  <div style="padding: 85px 25px;">Body content would go here.</div>
+  `,
+}
 
 const components = {
   StorybookContainer,
   Icon,
   TopNavbar,
   TopNavbarLink,
+  BodyContent,
 };
 
 const addons = {
   info: {
     propTablesExclude: ['storybook-container', 'icon', 'body-content'],
-  },
-  notes: {
-    markdown: '* The empty navType tag is only being used to avoid fixed positioning in the stories.',
   },
 };
 
@@ -26,7 +47,7 @@ stories.add('Left links', () => ({
   components,
   template: `
     <storybook-container>
-        <top-navbar navType="">
+        <top-navbar>
           <div slot="brand">Logo</div>
           
           <template slot="leftLinks">
@@ -34,6 +55,8 @@ stories.add('Left links', () => ({
             <top-navbar-link>Link 2</top-navbar-link>
           </template>
         </top-navbar>
+        
+        <body-content />
     </storybook-container>`,
 }));
 
@@ -42,7 +65,7 @@ stories.add('Right links', () => ({
   components,
   template: `
     <storybook-container>
-        <top-navbar navType="">
+        <top-navbar>
           <div slot="brand">Logo</div>
           
           <template slot="rightLinks">
@@ -50,6 +73,8 @@ stories.add('Right links', () => ({
             <top-navbar-link>Link 2</top-navbar-link>
           </template>
         </top-navbar>
+        
+        <body-content />
     </storybook-container>`,
 }));
 
@@ -58,7 +83,7 @@ stories.add('Custom content', () => ({
   components,
   template: `
     <storybook-container>
-        <top-navbar navType="">
+        <top-navbar>
           <div slot="brand">Logo</div>
           
           <template slot="leftLinks">
@@ -83,5 +108,7 @@ stories.add('Custom content', () => ({
             </div>
           </div>
         </top-navbar>
+        
+        <body-content />
     </storybook-container>`,
 }));
