@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, number, select, text } from '@storybook/addon-knobs';
+import { number, select, text } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
 import { CheckBox } from '@cdpjs/vue-components';
 
