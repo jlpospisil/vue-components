@@ -24,8 +24,7 @@ storiesOf('Forms|Radios', module)
     template: `
       <radio-group
         :options="options"
-        :selected="selected"
-        @change="radioUpdated"
+        v-model="selected"
       />
     `,
   }))
@@ -35,8 +34,7 @@ storiesOf('Forms|Radios', module)
       <radio-group
         :stacked="true"
         :options="options"
-        :selected="selected"
-        @change="radioUpdated"
+        v-model="selected"
       />
     `,
   }));

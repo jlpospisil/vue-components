@@ -3,11 +3,18 @@
     class="radio-group"
     :class="{ 'stacked-radio-group': stacked }"
   >
+    <input
+      type="hidden"
+      :name="name"
+      :value="value"
+      v-if="name"
+    />
+
     <radio
       v-for="(option, optionIndex) in options"
       :key="`r${optionIndex}`"
       :label="option"
-      :checked="selected === option"
+      :checked="value === option"
       :size="size"
       :color="color"
       @click="radioClicked(option)"
@@ -41,17 +48,18 @@ export default {
   },
   props: {
     options: { type: Array, default: () => [] },
-    selected: { type: String, default: null },
     stacked: { type: Boolean, default: false },
     size: { type: Number, default: null },
     color: { type: String, default: null },
+    value: { type: String, default: null },
+    name: { type: String, default: null },
   },
   methods: {
     radioClicked(option) {
-      const { selected } = this;
+      const { value } = this;
 
-      if (option !== selected) {
-        this.$emit('change', option);
+      if (option !== value) {
+        this.$emit('input', option);
       }
     },
   },
