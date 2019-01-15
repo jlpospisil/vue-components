@@ -11,15 +11,6 @@ storiesOf('Forms|Inputs', module)
       };
     },
     template: `
-      <file-input
-        v-model="file"
-        @input="fileChanged"
-      />
+      <file-input v-model="file" />
     `,
-    methods: {
-      fileChanged(event) {
-        const { file } = this;
-        console.log({ event, file });
-      },
-    },
   }));
