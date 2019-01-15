@@ -58,7 +58,7 @@ storiesOf('UI|SideNav', module)
     },
     template: `
       <storybook-container>
-        <side-nav>
+        <side-nav :open="sideNavOpen">
           <div slot="header">
             Header Here
           </div>
