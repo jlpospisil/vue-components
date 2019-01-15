@@ -10,6 +10,7 @@
     height: 400px;
     position: relative;
     border: 1px solid #cccccc;
+    overflow-y: auto;
   }
 </style>
 

@@ -1,28 +1,12 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { Icon, TopNavbar as TopNavbarOriginal, TopNavbarLink } from '@cdpjs/vue-components';
+import { Icon, TopNavbar, TopNavbarLink } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
-
-// "Extend" TopNavbar to add style/props for storybook
-const TopNavbar = {
-  props: TopNavbarOriginal.props,
-  components: {
-    TopNavbarOriginal,
-  },
-  template: `
-  <top-navbar-original navType="" style="position: absolute; top: 0; width: 100%;">
-    <slot />
-    <slot name="brand" slot="brand" />
-    <slot name="leftLinks" slot="leftLinks" />
-    <slot name="rightLinks" slot="rightLinks" />
-  </top-navbar-original>
-  `,
-};
 
 // Example body content
 const BodyContent = {
   template: `
-  <div style="padding: 85px 25px;">Body content would go here.</div>
+  <div style="padding: 25px; height: 1000px;">Body content would go here.  Header should remain fixed when scrolling.</div>
   `,
 }
 
@@ -40,6 +24,14 @@ const addons = {
   },
 };
 
+const notes = {
+  markdown: `
+  * navType="sticky-top" is being used to mimic the default fixed-top because the nav is in a container with relative positioning.
+  
+  * This could be used similarly to place a "fixed" navbar inside a container in an app, but keep in mind that position: sticky is not supported in all browsers
+  `,
+};
+
 const stories = storiesOf('UI|TopNavbar', module);
 
 stories.add('Left links', () => ({
@@ -47,7 +39,7 @@ stories.add('Left links', () => ({
   components,
   template: `
     <storybook-container>
-        <top-navbar>
+        <top-navbar navType="sticky-top">
           <div slot="brand">Logo</div>
           
           <template slot="leftLinks">
@@ -58,14 +50,14 @@ stories.add('Left links', () => ({
         
         <body-content />
     </storybook-container>`,
-}));
+}), { notes });
 
 stories.add('Right links', () => ({
   addons,
   components,
   template: `
     <storybook-container>
-        <top-navbar>
+        <top-navbar navType="sticky-top">
           <div slot="brand">Logo</div>
           
           <template slot="rightLinks">
@@ -76,14 +68,14 @@ stories.add('Right links', () => ({
         
         <body-content />
     </storybook-container>`,
-}));
+}), { notes });
 
 stories.add('Custom content', () => ({
   addons,
   components,
   template: `
     <storybook-container>
-        <top-navbar>
+        <top-navbar navType="sticky-top">
           <div slot="brand">Logo</div>
           
           <template slot="leftLinks">
@@ -111,4 +103,4 @@ stories.add('Custom content', () => ({
         
         <body-content />
     </storybook-container>`,
-}));
+}), { notes });
