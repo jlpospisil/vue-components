@@ -10,7 +10,7 @@
     />
 
     <div class="input-group">
-      <base-input
+      <text-input
         class="file-input-value"
         :value="value"
         readonly="true"
@@ -34,13 +34,13 @@
 </style>
 
 <script>
-import BaseInput from './BaseInput.vue';
+import TextInput from './TextInput.vue';
 import { Icon } from '../generic';
 
 export default {
   name: 'FileInput',
   components: {
-    BaseInput,
+    TextInput,
     Icon,
   },
   props: {
