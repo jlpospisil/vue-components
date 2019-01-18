@@ -9,6 +9,10 @@
       v-show="false"
     />
 
+    <input-label v-if="label">
+      {{ label }}
+    </input-label>
+
     <div class="input-group">
       <text-input
         class="file-input-value"
@@ -44,15 +48,18 @@
 
 <script>
 import TextInput from './TextInputInput.vue';
+import InputLabel from './InputLabel.vue';
 import { Icon } from '../generic';
 
 export default {
   name: 'FileInput',
   components: {
+    InputLabel,
     TextInput,
     Icon,
   },
   props: {
+    label: { type: String, default: null },
     name: { type: String, default: null },
     value: { type: String, default: null },
   },
