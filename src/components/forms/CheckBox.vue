@@ -1,15 +1,25 @@
 <template>
-  <span class="checkbox" @click="$emit('click')">
+  <span class="checkbox" @click="checkboxClicked">
     <label v-if="labelText && labelPosition === 'left'">
       {{ labelText }}
     </label>
+
+    <input
+      type="checkbox"
+      :name="name"
+      :checked="isChecked"
+      v-show="false"
+      v-if="name"
+    />
+
     <icon
-      v-if="checked"
+      v-if="isChecked"
       :color="color"
       type="solid"
       name="fa-check-square"
       :size="size"
     />
+
     <icon
       v-else
       :color="color"
@@ -17,6 +27,7 @@
       name="fa-square"
       :size="size"
     />
+
     <label v-if="labelText && labelPosition === 'right'">
       {{ labelText }}
     </label>
@@ -37,12 +48,18 @@ export default {
     Icon,
   },
   props: {
-    checked: { type: Boolean, required: true },
-    size: { type: Number, required: false, default: 1.25 },
-    color: { type: String, required: false, default: null },
-    label: { type: [String, Object], required: false, default: null },
+    checked: { type: Boolean, default: null },
+    color: { type: String, default: null },
+    label: { type: [String, Object], default: null },
+    name: { type: String, default: null },
+    size: { type: Number, default: 1.25 },
+    value: { type: Boolean, default: null },
   },
   computed: {
+    isChecked() {
+      const { checked, value } = this;
+      return typeof value === 'boolean' ? value : checked;
+    },
     labelText() {
       const { label } = this;
 
@@ -61,6 +78,13 @@ export default {
       }
 
       return 'right';
+    },
+  },
+  methods: {
+    checkboxClicked() {
+      const { isChecked } = this;
+      this.$emit('click');
+      this.$emit('input', !isChecked);
     },
   },
 };

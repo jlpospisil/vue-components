@@ -14,7 +14,6 @@ storiesOf('Forms|Inputs', module)
     props: {
       color: { type: String, default: text('color', '') },
       size: { type: Number, default: number('size', 1.25) },
-      className: { type: String, default: text('class', '') },
       label: {
         type: Object,
         default: () => ({
@@ -24,13 +23,12 @@ storiesOf('Forms|Inputs', module)
       },
     },
     template: `
-      <check-box 
-        :class="className" 
-        :checked="isChecked" 
+      <check-box
+        name="checkboxInputName"
         :color="color" 
         :size="size"
         :label="label"
-        @click="isChecked = !isChecked"
+        v-model="isChecked"
       />
     `,
   }));
