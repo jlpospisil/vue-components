@@ -25,6 +25,7 @@ story.add('SelectList single', () => ({
   ...common,
   template: `
     <select-list 
+      label="Select List Label"
       :options="options"
       v-model="selected"
     />
@@ -35,6 +36,7 @@ story.add('SelectList multiple', () => ({
   ...common,
   template: `
     <select-list 
+      label="Select List Label"
       :options="options"
       :multiple="true"
       :close-on-select="false"
