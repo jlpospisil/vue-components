@@ -3,6 +3,8 @@
     :type="type"
     class="form-control"
     @input="$emit('input', $event.target.value)"
+    @focus="$emit('focus', $event)"
+    @blur="$emit('blur', $event)"
   />
 </template>
 
