@@ -21,6 +21,10 @@
   color: $side-nav-font-color;
   position: relative;
 
+  &:hover, &:focus {
+    background-color: $side-nav-hover-bg-color;
+  }
+
   a {
     padding: 5px 15px 5px 25px;
     display: block;

@@ -2,7 +2,6 @@
   <nav
     class="navbar"
     :class="{
-      navbar: true,
       [expandClass]: true,
       [navType]: true,
       'left-side-nav-open': leftSideNavOpen,
