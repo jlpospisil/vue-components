@@ -10,8 +10,8 @@
     />
 
     <div class="input-group">
-      <input
-        class="form-control file-input-value"
+      <base-input
+        class="file-input-value"
         :value="value"
         readonly="true"
         @focus="openFileSelector"
@@ -34,11 +34,13 @@
 </style>
 
 <script>
+import BaseInput from './BaseInput.vue';
 import { Icon } from '../generic';
 
 export default {
   name: 'FileInput',
   components: {
+    BaseInput,
     Icon,
   },
   props: {
