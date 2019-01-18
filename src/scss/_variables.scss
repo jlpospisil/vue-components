@@ -21,7 +21,7 @@ $top-nav-active-font-color: #ff8a65;
 
 // UI variables (Side Nav)
 $side-nav-width: 250px;
-$side-nav-bg-color: lighten($top-nav-font-color, 5%);
+$side-nav-bg-color: darken($top-nav-font-color, 10%);
 $side-nav-hover-bg-color: darken($side-nav-bg-color, 8%);
 $side-nav-transition-duration: 0.5s;
 $side-nav-transition-function: ease-in-out;
