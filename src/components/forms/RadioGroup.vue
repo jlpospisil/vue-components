@@ -10,15 +10,21 @@
       v-if="name"
     />
 
-    <radio
-      v-for="(option, optionIndex) in options"
-      :key="`r${optionIndex}`"
-      :label="option"
-      :checked="value === option"
-      :size="size"
-      :color="color"
-      @click="radioClicked(option)"
-    />
+    <input-label v-if="label">
+      {{ label }}
+    </input-label>
+
+    <div class="radio-group-radios">
+      <radio
+        v-for="(option, optionIndex) in options"
+        :key="`r${optionIndex}`"
+        :label="option"
+        :checked="value === option"
+        :size="size"
+        :color="color"
+        @click="radioClicked(option)"
+      />
+    </div>
   </div>
 </template>
 
@@ -40,19 +46,22 @@
 
 <script>
 import Radio from './Radio.vue';
+import InputLabel from './InputLabel.vue';
 
 export default {
   name: 'RadioGroup',
   components: {
+    InputLabel,
     Radio,
   },
   props: {
-    options: { type: Array, default: () => [] },
-    stacked: { type: Boolean, default: false },
-    size: { type: Number, default: null },
     color: { type: String, default: null },
-    value: { type: String, default: null },
+    label: { type: String, default: null },
     name: { type: String, default: null },
+    options: { type: Array, default: () => [] },
+    size: { type: Number, default: null },
+    stacked: { type: Boolean, default: false },
+    value: { type: String, default: null },
   },
   methods: {
     radioClicked(option) {

@@ -23,6 +23,7 @@ storiesOf('Forms|Inputs', module)
     ...common,
     template: `
       <radio-group
+        label="Inline Radio Group Label"
         :options="options"
         v-model="selected"
       />
@@ -32,6 +33,7 @@ storiesOf('Forms|Inputs', module)
     ...common,
     template: `
       <radio-group
+        label="Stacked Radio Group Label"
         :stacked="true"
         :options="options"
         v-model="selected"
