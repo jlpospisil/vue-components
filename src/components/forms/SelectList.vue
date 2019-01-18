@@ -19,7 +19,7 @@ $multiselect-tag-text-color: #ffffff;
         background-color: darken($multiselect-highlight-color, 15%);
 
         &:after {
-          color: darken($multiselect-tag-text-color, 25%);
+          color: $multiselect-tag-text-color;
         }
       }
     }
