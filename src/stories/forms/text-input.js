@@ -15,6 +15,7 @@ storiesOf('Forms|Inputs', module)
       <text-input
         name="inputName"
         v-model="inputValue"
+        label="Input Label Here"
       />
     `,
     watch: {

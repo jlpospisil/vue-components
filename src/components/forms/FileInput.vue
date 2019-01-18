@@ -15,6 +15,7 @@
         :value="value"
         readonly="true"
         @focus="openFileSelector"
+        inputStyle="background-color: transparent;"
       />
 
       <div class="input-group-append" @click="openFileSelector">
@@ -27,14 +28,22 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-.input-group-text {
-  cursor: default;
+<style lang="scss">
+.file-input {
+  cursor: pointer;
+
+  .form-control[readonly] {
+    background-color: #ffffff;
+  }
+
+  .input-group-text {
+    background-color: #ffffff;
+  }
 }
 </style>
 
 <script>
-import TextInput from './TextInput.vue';
+import TextInput from './TextInputInput.vue';
 import { Icon } from '../generic';
 
 export default {
