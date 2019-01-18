@@ -11,6 +11,9 @@ storiesOf('Forms|Inputs', module)
       };
     },
     template: `
-      <file-input label="File Input Label" v-model="file" />
+      <file-input 
+        label="File Input Label" 
+        v-model="file" 
+      />
     `,
   }));
