@@ -1,7 +1,13 @@
 <template>
   <nav
     class="navbar"
-    :class="`${expandClass} ${navType}`"
+    :class="{
+      navbar: true,
+      [expandClass]: true,
+      [navType]: true,
+      'left-side-nav-open': leftSideNavOpen,
+      'right-side-nav-open': rightSideNavOpen,
+    }"
   >
     <a
       v-if="$slots.brand"
@@ -53,6 +59,16 @@
   background-color: $top-nav-bg-color;
   box-shadow: 0 8px 10px -10px $box-shadow-color;
   border-top: 5px solid darken($top-nav-font-color, 5%);
+  transition: left $side-nav-transition-duration $side-nav-transition-function,
+              right $side-nav-transition-duration $side-nav-transition-function;
+
+  &.left-side-nav-open {
+    left: $side-nav-width;
+  }
+
+  &.right-side-nav-open {
+    right: $side-nav-width;
+  }
 
   .navbar-brand {
     color: $top-nav-font-color;
@@ -72,6 +88,8 @@ export default {
   props: {
     collapseAt: { type: String, default: 'sm' },
     navType: { type: String, default: 'fixed-top' },
+    leftSideNavOpen: { type: Boolean, default: false },
+    rightSideNavOpen: { type: Boolean, default: false },
   },
   computed: {
     expandClass() {

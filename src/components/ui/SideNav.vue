@@ -32,7 +32,7 @@
   font-size: $side-nav-font-size;
   background-color: $side-nav-bg-color;
   color: $side-nav-font-color;
-  z-index: 899;
+  z-index: 1050;    // Make sure it covers top navbar
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
