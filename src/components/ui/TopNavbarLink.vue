@@ -5,7 +5,7 @@
     @click="$emit('click')"
   >
     <component
-      :is="tag"
+      :is="linkType"
       class="nav-link"
       v-bind="linkProps"
     >
@@ -41,19 +41,19 @@ export default {
   name: 'TopNavbarLink',
   props: {
     active: { type: Boolean, default: false },
-    tag: { type: [Object, String], default: 'a' },
+    routerLink: { type: Boolean, default: false },
     to: { type: String, default: '#' },
   },
   computed: {
+    linkType() {
+      const { routerLink } = this;
+      return routerLink ? 'router-link' : 'a';
+    },
     linkProps() {
-      const { tag, to } = this;
-      const linkTag = tag.toLowerCase();
-
-      if (linkTag === 'router-link') {
-        return { to };
-      }
-
-      return { href: to };
+      const { routerLink, to } = this;
+      return {
+        [routerLink ? 'to' : 'href']: to,
+      };
     },
   },
 };
