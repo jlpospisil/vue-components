@@ -14,6 +14,9 @@ $primary-dark: darken(map-get($theme-colors, primary), 10%);
 $font-color: #5e5e5e;
 $box-shadow-color: rgba(0,0,0,0.65);
 
+// UI variables (Content)
+$app-content-padding: 25px;
+
 // UI variables (Top Nav)
 $top-nav-bg-color: #fcfcfc;
 $top-nav-font-color: #607d8b;
