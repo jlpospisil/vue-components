@@ -55,6 +55,7 @@
 @import '../../scss/variables';
 
 .navbar {
+  height: $top-nav-height;
   background-color: $top-nav-bg-color;
   box-shadow: 0 8px 10px -10px $box-shadow-color;
   border-top: 5px solid darken($top-nav-font-color, 5%);
