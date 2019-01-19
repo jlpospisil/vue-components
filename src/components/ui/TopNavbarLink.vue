@@ -1,8 +1,16 @@
 <template>
-  <li class="nav-item" :class="{ active }" @click="$emit('click')">
-    <a class="nav-link" :href="to">
+  <li
+    class="nav-item"
+    :class="{ active }"
+    @click="$emit('click')"
+  >
+    <component
+      :is="tag"
+      class="nav-link"
+      v-bind="linkProps"
+    >
       <slot />
-    </a>
+    </component>
   </li>
 </template>
 
@@ -32,8 +40,21 @@
 export default {
   name: 'TopNavbarLink',
   props: {
-    to: { type: String, default: '#' },
     active: { type: Boolean, default: false },
+    tag: { type: [Object, String], default: 'a' },
+    to: { type: String, default: '#' },
+  },
+  computed: {
+    linkProps() {
+      const { tag, to } = this;
+      const linkTag = tag.toLowerCase();
+
+      if (linkTag === 'router-link') {
+        return { to };
+      }
+
+      return { href: to };
+    },
   },
 };
 </script>
