@@ -1,12 +1,31 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
-import { ApplicationContent } from '@cdpjs/vue-components';
+import { ApplicationContent as ApplicationContentOriginal, TopNavbar, SideNav } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
+
+const { props } = ApplicationContentOriginal;
+
+const ApplicationContent = {
+  components: {
+    ApplicationContentOriginal,
+  },
+  props,
+  template: `
+    <application-content-original
+      style="position: absolute; top: 0; left: 0; right: 0; min-height: unset;"
+      v-bind="$props"
+    >
+      <slot />
+    </application-content-original>
+  `,
+};
 
 const common = {
   components: {
     ApplicationContent,
     StorybookContainer,
+    TopNavbar,
+    SideNav,
   },
   props: {
     topNav: { type: Boolean, default: false },
@@ -15,6 +34,12 @@ const common = {
   },
   template: `
     <storybook-container>
+      <top-navbar navType="sticky-top" v-if="topNav" />
+      
+      <side-nav style="position: absolute;" v-if="leftSideNavOpen" />
+      
+      <side-nav :right="true" style="position: absolute;" v-if="rightSideNavOpen" />
+      
       <application-content
         :topNav="topNav"
         :leftSideNavOpen="leftSideNavOpen"

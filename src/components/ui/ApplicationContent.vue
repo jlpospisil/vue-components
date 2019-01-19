@@ -23,6 +23,8 @@
     transition: padding-left $side-nav-transition-duration $side-nav-transition-function,
     padding-right $side-nav-transition-duration $side-nav-transition-function;
 
+    // TODO: add css for smaller screens to make side nav overlay content
+
     &.has-top-nav {
       padding-top: $top-nav-height + $app-content-padding;
     }

@@ -1,7 +1,10 @@
 <template>
   <nav
     class="side-nav"
-    :class="{ 'is-open': open }"
+    :class="{
+      'is-open': open,
+      'right': right,
+    }"
   >
     <div class="side-nav-header">
       <slot name="header" />
@@ -23,10 +26,9 @@
 @import '../../scss/variables';
 
 .side-nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
   font-size: $side-nav-font-size;
@@ -35,6 +37,14 @@
   z-index: 1050;    // Make sure it covers top navbar
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
+
+  &:not(.right) {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
 
   .side-nav-header, .side-nav-content, .side-nav-footer {
     width: $side-nav-width;
@@ -93,6 +103,7 @@ export default {
   name: 'SideNav',
   props: {
     open: { type: Boolean, default: true },
+    right: { type: Boolean, default: false },
   },
 };
 </script>
