@@ -15,7 +15,7 @@ $font-color: #5e5e5e;
 $box-shadow-color: rgba(0,0,0,0.65);
 
 // UI variables (Loading)
-$loading-overlay-bg-color: rgba(map-get($theme-colors, secondary), 0.2);
+$loading-overlay-bg-color: rgba(map-get($theme-colors, secondary), 0.05);
 
 // UI variables (Content)
 $app-content-padding: 25px;
