@@ -50,6 +50,7 @@
     "toastr": "^2.1.4",
     "vue": "^2.5.22",
     "vue-loader": "^15.5.1",
+    "vue-loading-spinner": "^1.0.11",
     "vue-multiselect": "^2.1.3",
     "vue-template-compiler": "^2.5.22"
   },
