@@ -1,39 +1,41 @@
-// Customize bootstrap (defaults included)
-$theme-colors: theme('colors');
+// Import theme
+$theme: theme();
 
-// TODO: delete this if the webpack sass-loader function works
-//$theme-colors: (
-//  "primary": theme('colors.primary'),
-//  "secondary": #6c757d,
-//  "success": #28a745,
-//  "danger": #dc3545,
-//  "warning": #ffc107,
-//  "info": #17a2b8
-//);
+// Override bootstrap theme
+$theme-colors: map-get($theme, colors);
 
-// Appearance
+// Font
+$theme-font: map-get($theme, font);
 $font-family: "Lato", sans-serif;
-$primary-dark: darken(map-get($theme-colors, primary), 10%);
-$font-color: #5e5e5e;
-$box-shadow-color: rgba(0,0,0,0.65);
+$font-color: map-get($theme-font, color);
+
+// General appearance
+$primary-dark: darken(map-get($theme-colors, primary), 10%);                    // TODO: move this to theme.js
+$box-shadow-color: rgba(0,0,0,0.65);                                            // TODO: move this to theme.js
 
 // UI variables (Loading)
-$loading-overlay-bg-color: rgba(map-get($theme-colors, secondary), 0.05);
+$loading-overlay-bg-color: rgba(map-get($theme-colors, secondary), 0.05);       // TODO: move this to theme.js
 
 // UI variables (Content)
-$app-content-padding: 25px;
+$theme-content: map-get($theme, content);
+$app-content-padding: map-get($theme-content, padding);
 
 // UI variables (Top Nav)
-$top-nav-height: 58px;
-$top-nav-bg-color: #fcfcfc;
-$top-nav-font-color: #607d8b;
-$top-nav-active-font-color: #ff8a65;
+$top-nav: map-get($theme, topNav);
+$top-nav-height: map-get($top-nav, height);
+$top-nav-bg-color: map-get($top-nav, backgroundColor);
+$top-nav-font: map-get($top-nav, font);
+$top-nav-font-color: map-get($top-nav-font, color);
+$top-nav-active-font-color: map-get($top-nav-font, activeColor);
 
 // UI variables (Side Nav)
-$side-nav-width: 250px;
-$side-nav-bg-color: darken($top-nav-font-color, 10%);
-$side-nav-hover-bg-color: darken($side-nav-bg-color, 8%);
-$side-nav-transition-duration: 0.5s;
-$side-nav-transition-function: ease-in-out;
-$side-nav-font-color: #ffffff;
-$side-nav-font-size: 15px;
+$side-nav: map-get($theme, sideNav);
+$side-nav-width: map-get($side-nav, width);
+$side-nav-bg-color: darken($top-nav-font-color, 10%);                           // TODO: move this to theme.js
+$side-nav-hover-bg-color: darken($side-nav-bg-color, 8%);                       // TODO: move this to theme.js
+$side-nav-transition: map-get($side-nav, transition);
+$side-nav-transition-duration: map-get($side-nav-transition, duration);
+$side-nav-transition-function: map-get($side-nav-transition, method);
+$side-nav-font: map-get($side-nav, font);
+$side-nav-font-color: map-get($side-nav-font, color);
+$side-nav-font-size: map-get($side-nav-font, size);

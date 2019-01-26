@@ -1,5 +1,5 @@
 const path = require('path');
-const getThemeItem = require('../src/theme-webpack-functions')
+const themeSassLoader = require('../src/theme-sass-loader')
 
 module.exports = {
   resolve: {
@@ -35,10 +35,11 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               functions: {
-                'theme($keys)': getThemeItem,
-              }
-            }
-          }
+                'theme()': themeSassLoader.getTheme,
+                'theme-item($keys)': themeSassLoader.getThemeItem,
+              },
+            },
+          },
         ],
       },
       {

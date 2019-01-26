@@ -7,13 +7,13 @@ const hexToRGBA = (hex) => {
     return null;
   }
 
-  let c = hex.substring(1).split('');
+  let hexColor = hex.substring(1).split('');
 
-  if (c.length === 3) {
-    c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+  if (hexColor.length === 3) {
+    hexColor = [hexColor[0], hexColor[0], hexColor[1], hexColor[1], hexColor[2], hexColor[2]];
   }
 
-  return Number(`0xff${c.join('')}`);
+  return Number(`0xff${hexColor.join('')}`);
 };
 
 const convertStringToSassDimension = (result) => {
@@ -42,22 +42,35 @@ const convertStringToSassDimension = (result) => {
   return result;
 };
 
+// sass-loader function to return specific theme item
 const getThemeItem = (keys) => {
-  const themeItemValue = keys.getValue().split('.').reduce((object, item) => object[item] || {}, theme);
-  let returnValue = null;
+  const themeItemValue = keys
+    ? keys.getValue().split('.').reduce((object, item) => object[item] || {}, theme)
+    : theme;
+  let returnValue;
 
   if (themeItemValue) {
     if (typeof themeItemValue === 'string') {
       returnValue = convertStringToSassDimension(themeItemValue);
     } else if (typeof themeItemValue === 'object') {
-      returnValue = Object.keys(themeItemValue).reduce((object, item) => ({
-        ...object,
-        [item]: convertStringToSassDimension(themeItemValue[item]),
-      }), {});
+      returnValue = Object.keys(themeItemValue).reduce((object, item) => {
+        let itemKeys = `${keys ? `${sassUtils.castToJs(keys)}.` : ''}${item}`;
+        itemKeys = sassUtils.castToSass(itemKeys);
+        return {
+          ...object,
+          [item]: getThemeItem(itemKeys),
+        };
+      }, {});
     }
   }
 
   return sassUtils.castToSass(returnValue);
 };
 
-module.exports = getThemeItem;
+// sass-loader function to return the entire theme
+const getTheme = () => getThemeItem();
+
+module.exports = {
+  getTheme,
+  getThemeItem,
+};
