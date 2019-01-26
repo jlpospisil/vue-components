@@ -7,7 +7,7 @@
       'right-side-nav-open': rightSideNavOpen,
     }"
   >
-    <stretch />
+    <stretch :background="color" />
   </div>
 </template>
 
@@ -46,6 +46,7 @@
 
 <script>
 import { Stretch } from 'vue-loading-spinner';
+import theme from '../../theme';
 
 export default {
   components: {
@@ -55,6 +56,11 @@ export default {
     loading: { type: Boolean, default: false },
     leftSideNavOpen: { type: Boolean, default: false },
     rightSideNavOpen: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      color: theme.colors.primary,
+    };
   },
 };
 </script>

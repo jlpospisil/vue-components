@@ -1,12 +1,15 @@
 // Customize bootstrap (defaults included)
-$theme-colors: (
-  "primary": #007bff,
-  "secondary": #6c757d,
-  "success": #28a745,
-  "danger": #dc3545,
-  "warning": #ffc107,
-  "info": #17a2b8
-);
+$theme-colors: theme('colors');
+
+// TODO: delete this if the webpack sass-loader function works
+//$theme-colors: (
+//  "primary": theme('colors.primary'),
+//  "secondary": #6c757d,
+//  "success": #28a745,
+//  "danger": #dc3545,
+//  "warning": #ffc107,
+//  "info": #17a2b8
+//);
 
 // Appearance
 $font-family: "Lato", sans-serif;

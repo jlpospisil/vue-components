@@ -1,4 +1,5 @@
 const path = require('path');
+const getThemeItem = require('../src/theme-webpack-functions')
 
 module.exports = {
   resolve: {
@@ -30,7 +31,14 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              functions: {
+                'theme($keys)': getThemeItem,
+              }
+            }
+          }
         ],
       },
       {
