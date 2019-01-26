@@ -7,7 +7,7 @@
       'right-side-nav-open': rightSideNavOpen,
     }"
   >
-    <stretch :background="color" />
+    <stretch :background="spinnerColor" />
   </div>
 </template>
 
@@ -56,11 +56,7 @@ export default {
     loading: { type: Boolean, default: false },
     leftSideNavOpen: { type: Boolean, default: false },
     rightSideNavOpen: { type: Boolean, default: false },
-  },
-  data() {
-    return {
-      color: theme.colors.primary,
-    };
+    spinnerColor: { type: String, default: theme.colors.primary },
   },
 };
 </script>
