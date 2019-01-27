@@ -1,0 +1,45 @@
+$theme: (
+  colors: (
+    primary: #007bff,
+    primaryDark: #ff0000,
+    secondary: #6c757d,
+    success: #28a745,
+    danger: #dc3545,
+    warning: #ffc107,
+    info: #17a2b8,
+  ),
+
+  // Application base font
+  font: (
+    color: #5e5e5e,
+  ),
+
+  // Application content
+  content: (
+    padding: 25px,
+  ),
+
+  // Application top navigation
+  topNav: (
+    height: 58px,
+    backgroundColor: #fcfcfc,
+    font: (
+      color: #607d8b,
+      activeColor: #ff8a65,
+    ),
+  ),
+
+  // Application side navigation
+  sideNav: (
+    width: 250px,
+    backgroundColor: #000000,
+    font: (
+      color: #ffffff,
+      size: 15px,
+    ),
+    transition: (
+      duration: 0.5s,
+      method: ease-in-out,
+    ),
+  ),
+);

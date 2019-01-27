@@ -7,11 +7,14 @@
       'right-side-nav-open': rightSideNavOpen,
     }"
   >
-    <stretch :background="spinnerColor" />
+    <stretch
+      class="app-loading-spinner"
+      :background="spinnerColor"
+    />
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../scss/variables';
 @import '~bootstrap/scss/bootstrap';
 .app-loading-overlay {
@@ -30,6 +33,12 @@
     padding: 0;
     transition: padding-left $side-nav-transition-duration $side-nav-transition-function,
     padding-right $side-nav-transition-duration $side-nav-transition-function;
+
+  .app-loading-spinner {
+    .rect {
+      background-color: map-get($theme-colors, primary);
+    }
+  }
 }
 @include media-breakpoint-up(sm) {
     .app-loading-overlay {
@@ -46,7 +55,7 @@
 
 <script>
 import { Stretch } from 'vue-loading-spinner';
-import theme from '../../theme';
+// import theme from '../../theme';
 
 export default {
   components: {
@@ -56,7 +65,7 @@ export default {
     loading: { type: Boolean, default: false },
     leftSideNavOpen: { type: Boolean, default: false },
     rightSideNavOpen: { type: Boolean, default: false },
-    spinnerColor: { type: String, default: theme.colors.primary },
+    spinnerColor: { type: String, default: null },
   },
 };
 </script>

@@ -31,15 +31,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              functions: {
-                'theme()': themeSassLoader.getTheme,
-                'theme-item($keys)': themeSassLoader.getThemeItem,
-              },
-            },
-          },
+          'sass-loader',
         ],
       },
       {

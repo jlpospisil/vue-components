@@ -1,5 +1,5 @@
 // Import theme
-$theme: theme();
+@import "theme";
 
 // Override bootstrap theme
 $theme-colors: map-get($theme, colors);
@@ -10,11 +10,11 @@ $font-family: "Lato", sans-serif;
 $font-color: map-get($theme-font, color);
 
 // General appearance
-$primary-dark: darken(map-get($theme-colors, primary), 10%);                    // TODO: move this to theme.js
-$box-shadow-color: rgba(0,0,0,0.65);                                            // TODO: move this to theme.js
+$primary-dark: darken(map-get($theme-colors, primary), 10%);
+$box-shadow-color: rgba(0,0,0,0.65);
 
 // UI variables (Loading)
-$loading-overlay-bg-color: rgba(map-get($theme-colors, secondary), 0.05);       // TODO: move this to theme.js
+$loading-overlay-bg-color: rgba(map-get($theme-colors, secondary), 0.05);
 
 // UI variables (Content)
 $theme-content: map-get($theme, content);
@@ -31,8 +31,8 @@ $top-nav-active-font-color: map-get($top-nav-font, activeColor);
 // UI variables (Side Nav)
 $side-nav: map-get($theme, sideNav);
 $side-nav-width: map-get($side-nav, width);
-$side-nav-bg-color: darken($top-nav-font-color, 10%);                           // TODO: move this to theme.js
-$side-nav-hover-bg-color: darken($side-nav-bg-color, 8%);                       // TODO: move this to theme.js
+$side-nav-bg-color: darken($top-nav-font-color, 10%);
+$side-nav-hover-bg-color: darken($side-nav-bg-color, 8%);
 $side-nav-transition: map-get($side-nav, transition);
 $side-nav-transition-duration: map-get($side-nav-transition, duration);
 $side-nav-transition-function: map-get($side-nav-transition, method);
