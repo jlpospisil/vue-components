@@ -1,5 +1,5 @@
 const path = require('path');
-const themeSassLoader = require('../src/theme-sass-loader')
+const themeSassLoader = require('../src/theme-sass-loader');
 
 module.exports = {
   resolve: {
