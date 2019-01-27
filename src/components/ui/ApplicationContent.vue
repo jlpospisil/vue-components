@@ -1,7 +1,7 @@
 <template>
   <div
-          class="application-content"
-          :class="{
+    class="application-content"
+    :class="{
       'left-side-nav-open': leftSideNavOpen,
       'right-side-nav-open': rightSideNavOpen,
       'has-top-nav': topNav,
@@ -24,8 +24,8 @@
   transition: padding-left $side-nav-transition-duration $side-nav-transition-function,
   padding-right $side-nav-transition-duration $side-nav-transition-function;
 
-  &.right-side-nav-open {
-    padding-right: $side-nav-width + $app-content-padding;
+  &.has-top-nav {
+    padding-top: $top-nav-height + $app-content-padding;
   }
 }
 @include media-breakpoint-up(sm) {
