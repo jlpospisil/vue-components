@@ -1,9 +1,23 @@
 import { storiesOf } from '@storybook/vue';
 /* eslint-disable-next-line import/no-unresolved */
 import {
-  SideNav, SideNavGroup, SideNavGroupHeader, SideNavLink,
+  SideNav as SideNavOriginal, SideNavGroup, SideNavGroupHeader, SideNavLink,
 } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
+
+const SideNav = {
+  components: {
+    SideNavOriginal,
+  },
+  props: SideNavOriginal.props,
+  template: `
+    <side-nav-original v-bind="$props" style="position: absolute;">
+      <slot name="header" slot="header" />
+      <slot name="content" slot="content" />
+      <slot name="footer" slot="footer" />
+    </side-nav-original>  
+  `,
+};
 
 const navGroups = [
   {
