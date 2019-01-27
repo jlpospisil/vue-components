@@ -1,6 +1,6 @@
 {
   "name": "@cdpjs/vue-components",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Reusable Vue.js components",
   "main": "./dist/@cdpjs/vue-components.common.js",
   "scripts": {
