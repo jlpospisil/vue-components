@@ -66,7 +66,7 @@ export default {
     Stretch,
   },
   props: {
-    loading: { type: Boolean, default: false },
+    loading: { type: Boolean, default: true },
     leftSideNavOpen: { type: Boolean, default: false },
     rightSideNavOpen: { type: Boolean, default: false },
     spinnerColor: { type: String, default: null },
