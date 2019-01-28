@@ -16,8 +16,8 @@
 
 <style lang="scss" scoped>
 .map-container {
-  height: 500px;
-  width: 500px;
+  min-height: 100px;
+  min-width: 100px;
   border: 1px solid #cdcdcd;
 
   .map {
