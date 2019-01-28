@@ -5,8 +5,9 @@
   "main": "src/components/index.js",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "lint": "./node_modules/.bin/eslint src/. .storybook/.",
-    "lint:fix": "./node_modules/.bin/eslint src/. .storybook/. --fix",
+    "lint": "npm run lint:js & npm run lint:style",
+    "lint:js": "./node_modules/.bin/eslint src/. .storybook/.",
+    "lint:js:fix": "./node_modules/.bin/eslint src/. .storybook/. --fix",
     "lint:style": "stylelint src/**/*.vue",
     "test:unit": "./node_modules/.bin/jest"
   },
