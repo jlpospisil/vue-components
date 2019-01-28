@@ -8,7 +8,7 @@ const BodyContent = {
   template: `
   <div style="padding: 25px; height: 1000px;">Body content would go here.  Header should remain fixed when scrolling.</div>
   `,
-}
+};
 
 const components = {
   StorybookContainer,

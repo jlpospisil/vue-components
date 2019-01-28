@@ -1,8 +1,7 @@
 import { storiesOf } from '@storybook/vue';
-/* eslint-disable-next-line import/no-unresolved */
 import {
   SideNav as SideNavOriginal, SideNavGroup, SideNavGroupHeader, SideNavLink,
-} from '@cdpjs/vue-components';
+} from '@cdpjs/vue-components'; /* eslint-disable-line import/no-unresolved */
 import StorybookContainer from '../../StorybookContainer.vue';
 
 const SideNav = {

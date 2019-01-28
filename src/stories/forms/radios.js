@@ -1,5 +1,4 @@
 import { storiesOf } from '@storybook/vue';
-import { boolean, number, text, select } from '@storybook/addon-knobs';
 /* eslint-disable-next-line import/no-unresolved */
 import { RadioGroup } from '@cdpjs/vue-components';
 
