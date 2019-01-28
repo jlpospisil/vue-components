@@ -39,6 +39,7 @@
   .app-loading-spinner {
     .rect {
       background-color: map-get($theme-colors, primary);
+      margin: 0 1px;
     }
   }
 }
