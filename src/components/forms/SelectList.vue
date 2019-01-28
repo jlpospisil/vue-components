@@ -1,23 +1,23 @@
 <template>
-    <div
-        class="select-list"
-        :class="{ 'allow-multiple': multiple }"
-    >
-        <input-label v-if="label">
-            {{ label }}
-        </input-label>
+  <div
+    class="select-list"
+    :class="{ 'allow-multiple': multiple }"
+  >
+    <input-label v-if="label">
+      {{ label }}
+    </input-label>
 
-        <multiselect
-            v-bind="multiselectProps"
-            @input="$emit('input', $event)"
-            @select="$emit('select', $event)"
-            @remove="$emit('remove', $event)"
-            @search-change="$emit('search-change', $event)"
-            @tag="$emit('tag', $event)"
-            @open="$emit('open', $event)"
-            @close="$emit('close', $event)"
-        />
-    </div>
+    <multiselect
+      v-bind="multiselectProps"
+      @input="$emit('input', $event)"
+      @select="$emit('select', $event)"
+      @remove="$emit('remove', $event)"
+      @search-change="$emit('search-change', $event)"
+      @tag="$emit('tag', $event)"
+      @open="$emit('open', $event)"
+      @close="$emit('close', $event)"
+    />
+  </div>
 </template>
 
 <style lang="scss">
@@ -25,12 +25,12 @@
 @import "~vue-multiselect/dist/vue-multiselect.min.css";
 
 $multiselect-highlight-color: map-get($theme-colors, primary);
-$multiselect-tag-text-color: #ffffff;
+$multiselect-tag-text-color: #fff;
 
 .select-list {
   &.allow-multiple {
     .multiselect__single {
-        display: none;
+      display: none;
     }
   }
 
@@ -45,14 +45,14 @@ $multiselect-tag-text-color: #ffffff;
     color: $multiselect-tag-text-color;
 
     .multiselect__tag-icon {
-      &:after {
+      &::after {
         color: darken($multiselect-tag-text-color, 15%);
       }
 
       &:hover {
         background-color: darken($multiselect-highlight-color, 15%);
 
-        &:after {
+        &::after {
           color: $multiselect-tag-text-color;
         }
       }
@@ -63,7 +63,7 @@ $multiselect-tag-text-color: #ffffff;
     background-color: $multiselect-highlight-color;
 
     &.multiselect__option--selected {
-        background-color: $multiselect-highlight-color;
+      background-color: $multiselect-highlight-color;
     }
   }
 }

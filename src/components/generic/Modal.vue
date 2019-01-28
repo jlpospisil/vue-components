@@ -48,16 +48,16 @@
 @import '../../scss/_variables';
 
 .modal {
-    .modal-content {
-        .modal-info {
-            background-color: lighten(map-get($theme-colors, secondary), 25%);
-        }
-
-        .modal-body {
-            max-height: 65vh;
-            overflow-y: auto;
-        }
+  .modal-content {
+    .modal-info {
+      background-color: lighten(map-get($theme-colors, secondary), 25%);
     }
+
+    .modal-body {
+      max-height: 65vh;
+      overflow-y: auto;
+    }
+  }
 }
 </style>
 

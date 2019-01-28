@@ -27,7 +27,8 @@
   color: $side-nav-font-color;
   position: relative;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $side-nav-hover-bg-color;
   }
 
@@ -40,7 +41,8 @@
       margin-right: 10px;
     }
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: none;
       color: darken($side-nav-font-color, 15%);
     }

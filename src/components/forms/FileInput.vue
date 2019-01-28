@@ -37,11 +37,11 @@
   cursor: pointer;
 
   .form-control[readonly] {
-    background-color: #ffffff;
+    background-color: #fff;
   }
 
   .input-group-text {
-    background-color: #ffffff;
+    background-color: #fff;
   }
 }
 </style>

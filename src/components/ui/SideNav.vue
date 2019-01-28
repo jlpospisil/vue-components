@@ -34,7 +34,7 @@
   font-size: $side-nav-font-size;
   background-color: $side-nav-bg-color;
   color: $side-nav-font-color;
-  z-index: 1050;    // Make sure it covers top navbar
+  z-index: 1050;  /* Make sure it covers top navbar */
   width: 0;
   transition: width $side-nav-transition-duration $side-nav-transition-function;
 
@@ -46,7 +46,9 @@
     right: 0;
   }
 
-  .side-nav-header, .side-nav-content, .side-nav-footer {
+  .side-nav-header,
+  .side-nav-content,
+  .side-nav-footer {
     width: $side-nav-width;
     transition: width $side-nav-transition-duration $side-nav-transition-function;
     white-space: nowrap;
@@ -71,13 +73,15 @@
   }
 
   &:not(.is-open) {
-    .side-nav-header, .side-nav-content, .side-nav-footer {
+    .side-nav-header,
+    .side-nav-content,
+    .side-nav-footer {
       width: 0 !important;
       overflow-x: hidden;
     }
   }
 
-  &:after {
+  &::after {
     content: "";
     position: absolute;
     top: 0;
@@ -89,7 +93,7 @@
   &.is-open {
     width: $side-nav-width;
 
-    &:after {
+    &::after {
       left: $side-nav-width;
       width: 15px;
       box-shadow: 15px 0 15px -15px $box-shadow-color inset;

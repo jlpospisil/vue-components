@@ -1,9 +1,5 @@
-<template>
-  <div />
-</template>
-
-<style lang="scss" scoped>
-
+<style lang="scss">
+/* stylelint-disable-next-line no-empty-source error */
 </style>
 
 <script>

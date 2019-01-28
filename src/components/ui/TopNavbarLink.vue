@@ -22,7 +22,8 @@
       color: $top-nav-font-color;
       border-bottom: 5px solid transparent;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         color: darken($top-nav-font-color, 15%);
       }
     }

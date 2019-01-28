@@ -12,6 +12,10 @@
   </button>
 </template>
 
+<style lang="scss">
+/* stylelint-disable-next-line no-empty-source error */
+</style>
+
 <script>
 import Icon from './Icon.vue';
 

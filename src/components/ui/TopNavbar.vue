@@ -59,8 +59,9 @@
   background-color: $top-nav-bg-color;
   box-shadow: 0 8px 10px -10px $box-shadow-color;
   border-top: 5px solid darken($top-nav-font-color, 5%);
-  transition: left $side-nav-transition-duration $side-nav-transition-function,
-              right $side-nav-transition-duration $side-nav-transition-function;
+  transition:
+    left $side-nav-transition-duration $side-nav-transition-function,
+    right $side-nav-transition-duration $side-nav-transition-function;
 
   &.left-side-nav-open {
     left: $side-nav-width;

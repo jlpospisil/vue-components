@@ -9,6 +9,10 @@
   />
 </template>
 
+<style lang="scss">
+/* stylelint-disable-next-line no-empty-source error */
+</style>
+
 <script>
 export default {
   name: 'TextInputInput',

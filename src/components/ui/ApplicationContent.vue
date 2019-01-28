@@ -21,13 +21,16 @@
   flex-direction: column;
   position: relative;
   padding: $app-content-padding;
-  transition: padding-left $side-nav-transition-duration $side-nav-transition-function,
-  padding-right $side-nav-transition-duration $side-nav-transition-function;
+  transition:
+    padding-left $side-nav-transition-duration $side-nav-transition-function,
+    padding-right $side-nav-transition-duration $side-nav-transition-function;
 
   &.has-top-nav {
     padding-top: $top-nav-height + $app-content-padding;
   }
 }
+
+/* stylelint-disable-next-line at-rule-no-unknown */
 @include media-breakpoint-up(sm) {
   .application-content {
     &.left-side-nav-open {

@@ -16,6 +16,10 @@
   </div>
 </template>
 
+<style lang="scss">
+/* stylelint-disable-next-line no-empty-source error */
+</style>
+
 <script>
 import TextInputInput from './TextInputInput.vue';
 import InputLabel from './InputLabel.vue';

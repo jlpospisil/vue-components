@@ -10,6 +10,20 @@ $splitter-handle-length: 15px;
   width: 100%;
   height: 100%;
 
+  .splitpanes__pane {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .splitpanes__splitter {
+    background-color: $split-pane-splitter-color;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &.splitpanes--horizontal {
     flex-direction: column;
 
@@ -19,7 +33,7 @@ $splitter-handle-length: 15px;
       border-top: 5px solid transparent;
       border-bottom: 5px solid transparent;
 
-      &:after {
+      &::after {
         content: '';
         display: block;
         width: $splitter-handle-length;
@@ -35,7 +49,7 @@ $splitter-handle-length: 15px;
       cursor: col-resize;
       width: $split-pane-splitter-thickness;
 
-      &:after {
+      &::after {
         content: '';
         display: block;
         min-width: 4px;
@@ -44,20 +58,6 @@ $splitter-handle-length: 15px;
         border-right: 1px solid $splitter-handle-color;
       }
     }
-  }
-
-  .splitpanes__splitter {
-    background-color: $split-pane-splitter-color;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .splitpanes__pane {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
   }
 }
 </style>

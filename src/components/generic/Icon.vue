@@ -8,6 +8,7 @@
 
 <style lang="scss">
  $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
