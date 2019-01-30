@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { Modal } from '../../src/components/generic';
+import { Modal } from '../../src/components/general';
 
 describe('Modal.test.js', () => {
   const component = mount(Modal, {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { CheckBox } from '../../src/components/generic';
+import { CheckBox } from '../../src/components/general';
 
 describe('CheckBox.test.js', () => {
   const component = mount(CheckBox, {

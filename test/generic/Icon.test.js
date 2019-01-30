@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { Icon } from '../../src/components/generic';
+import { Icon } from '../../src/components/general';
 
 describe('Icon.test.js', () => {
   const component = mount(Icon, {

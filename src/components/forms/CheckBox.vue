@@ -40,7 +40,7 @@
 }
 </style>
 <script>
-import Icon from '../generic/Icon.vue';
+import Icon from '../general/Icon.vue';
 
 export default {
   name: 'CheckBox',

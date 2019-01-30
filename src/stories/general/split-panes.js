@@ -4,7 +4,7 @@ import { SplitPane } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
 
 
-const stories = storiesOf('UI|SplitPanes', module);
+const stories = storiesOf('General|SplitPanes', module);
 
 stories.add('Horizontal', () => ({
   components: {

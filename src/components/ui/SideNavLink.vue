@@ -51,7 +51,7 @@
 </style>
 
 <script>
-import { Icon } from '../generic';
+import { Icon } from '../general';
 
 export default {
   name: 'SideNavLink',

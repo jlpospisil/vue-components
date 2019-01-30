@@ -49,7 +49,7 @@
 <script>
 import TextInput from './TextInputInput.vue';
 import InputLabel from './InputLabel.vue';
-import { Icon } from '../generic';
+import { Icon } from '../general';
 
 export default {
   name: 'FileInput',
