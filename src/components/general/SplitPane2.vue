@@ -14,6 +14,9 @@ $splitter-handle-length: 15px;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    z-index: 1;
+    box-sizing: border-box;
+    flex: 1 1 auto;
   }
 
   > .split-pane-splitter {
@@ -22,6 +25,17 @@ $splitter-handle-length: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 3;
+    }
   }
 
   &.horizontal {
@@ -29,9 +43,11 @@ $splitter-handle-length: 15px;
 
     > .split-pane-splitter {
       cursor: row-resize;
-      height: $split-pane-splitter-thickness;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
+      min-height: $split-pane-splitter-thickness;
+
+      &::before {
+        margin: -1 * $split-pane-splitter-cushion 0;
+      }
 
       &::after {
         content: '';
@@ -47,7 +63,11 @@ $splitter-handle-length: 15px;
   &.vertical {
     > .split-pane-splitter {
       cursor: col-resize;
-      width: $split-pane-splitter-thickness;
+      min-width: $split-pane-splitter-thickness;
+
+      &::before {
+        margin: 0 -1 * $split-pane-splitter-cushion;
+      }
 
       &::after {
         content: '';
@@ -68,11 +88,141 @@ export default {
   props: {
     horizontal: { type: Boolean, default: false },
   },
+  data() {
+    return {
+      selectedSplitter: null,
+    };
+  },
+  computed: {
+    paneToAdjust() {
+      const { selectedSplitter } = this;
+      return selectedSplitter ? selectedSplitter.previousSibling : null;
+    },
+    wrapperPosition() {
+      let { wrapper: element } = this.$refs;
+      const position = { top: 0, left: 0 };
+
+      do {
+        position.top += element.offsetTop || 0;
+        position.left += element.offsetLeft || 0;
+        element = element.offsetParent;
+      } while (element);
+
+
+      return position;
+    },
+    wrapperSize() {
+      const { wrapper } = this.$refs;
+      return {
+        height: wrapper.offsetHeight,
+        width: wrapper.offsetWidth,
+      };
+    },
+    selectedSplitterSize() {
+      const { selectedSplitter } = this;
+      let size = { height: 0, width: 0 };
+
+      if (selectedSplitter) {
+        size = {
+          height: selectedSplitter.offsetHeight,
+          width: selectedSplitter.offsetWidth,
+        };
+      }
+
+      return size;
+    },
+  },
+  mounted() {
+    const { bindEvents } = this;
+    bindEvents();
+  },
+  beforeDestroy() {
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
+    document.removeEventListener('touchmove', this.onMouseMove);
+    document.removeEventListener('touchend', this.onMouseUp);
+  },
+  methods: {
+    bindEvents() {
+      const { onMouseMove, onMouseUp } = this;
+
+      // Add mouse event listeners
+      // Passive: false to prevent scrolling while touch dragging.
+      document.addEventListener('mousemove', onMouseMove, { passive: false });
+      document.addEventListener('mouseup', onMouseUp);
+
+      // Add touch event listeners if needed
+      if ('touchstart' in window) {
+        document.addEventListener('touchmove', onMouseMove, { passive: false });
+        document.addEventListener('touchend', onMouseUp);
+      }
+    },
+    onMouseDown(event) {
+      this.selectedSplitter = event.target;
+    },
+    onMouseUp() {
+      this.selectedSplitter = null;
+    },
+    onMouseMove(event) {
+      const { selectedSplitter, updatePreviousPaneSize } = this;
+
+      if (!selectedSplitter) {
+        return;
+      }
+
+      // Prevent scrolling
+      event.preventDefault();
+
+      // Adjust child sizes appropriately
+      updatePreviousPaneSize(event);
+    },
+    updatePreviousPaneSize(event) {
+      const {
+        horizontal, wrapperPosition, wrapperSize, selectedSplitterSize, paneToAdjust,
+      } = this;
+
+      if (paneToAdjust) {
+        const maxSize = {
+          height: wrapperSize.height - selectedSplitterSize.height,
+          width: wrapperSize.width = selectedSplitterSize.width,
+        };
+
+        if (horizontal) {
+          // Get y-coordinate of pointer relative to container and adjust height accordingly
+          const pointerRelativeYpos = event.clientY - wrapperPosition.top;
+          const height = Math.min(Math.max(pointerRelativeYpos, 0), maxSize.height);
+
+          // Not sure why, but only worked with both set
+          paneToAdjust.style.height = `${height}px`;
+          paneToAdjust.style.minHeight = `${height}px`;
+        } else {
+          // Get x-coordinate of pointer relative to container and adjust width accordingly
+          const pointerRelativeXpos = event.clientX - wrapperPosition.left;
+          const width = Math.min(Math.max(pointerRelativeXpos, 0), maxSize.width);
+
+          // Not sure why, but only worked with both set
+          paneToAdjust.style.width = `${width}px`;
+          paneToAdjust.style.minWidth = `${width}px`;
+        }
+
+        // Remove flexGrow property so new height/width is respected
+        paneToAdjust.flexGrow = 0;
+      }
+    },
+  },
   render(h) {
-    const { horizontal, $slots } = this;
+    const { horizontal, $slots, onMouseDown } = this;
     const slots = $slots.default.filter(slot => slot.tag || slot.text.replace(' ', '') !== '');
-    const splitter = h('div', { class: 'split-pane-splitter' });
     const paneAttributes = { class: 'split-pane-pane' };
+    const splitterEventListeners = { mousedown: onMouseDown };
+
+    // Add touch event listeners if needed
+    if ('touchstart' in window) {
+      splitterEventListeners.touchstart = onMouseDown;
+    }
+
+    // Create splitter vnode
+    const splitter = h('div', { class: 'split-pane-splitter', on: splitterEventListeners });
 
     // Add splitter after each child
     const children = slots.reduce((c, slot) => c.concat(h('div', paneAttributes, [slot]), splitter), []);
@@ -81,7 +231,7 @@ export default {
     children.pop();
 
     // Render the SplitPane component
-    return h('div', { class: `split-pane-wrapper ${horizontal ? 'horizontal' : 'vertical'}` }, children);
+    return h('div', { class: `split-pane-wrapper ${horizontal ? 'horizontal' : 'vertical'}`, ref: 'wrapper' }, children);
   },
 };
 </script>
