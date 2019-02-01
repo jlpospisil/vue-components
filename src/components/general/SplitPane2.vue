@@ -101,9 +101,13 @@ export default {
     };
   },
   computed: {
-    paneToAdjust() {
+    previousPane() {
       const { selectedSplitter } = this;
       return selectedSplitter ? selectedSplitter.previousSibling : null;
+    },
+    nextPane() {
+      const { selectedSplitter } = this;
+      return selectedSplitter ? selectedSplitter.nextSibling : null;
     },
     wrapperPosition() {
       const { wrapper } = this.$refs;
@@ -162,6 +166,8 @@ export default {
     onMouseDown(event) {
       this.selectedSplitter = event.target;
 
+      // TODO: remove the rest of this method once updatePaneSize adjusts previous and next panes
+
       const { horizontal } = this;
 
       // Adjust pane before previous splitter so it doesn't flex when this one is resized
@@ -169,22 +175,22 @@ export default {
         const splitter = this[`${direction}Splitter`];
 
         if (splitter) {
-          const paneToAdjust = htmlElements.getClosestSibling(splitter, splitPanePaneClass, direction);
+          const pane = htmlElements.getClosestSibling(splitter, splitPanePaneClass, direction);
 
-          if (paneToAdjust) {
-            const paneToAdjustSize = htmlElements.getSize(paneToAdjust);
+          if (pane) {
+            const paneSize = htmlElements.getSize(pane);
 
-            if (paneToAdjustSize) {
+            if (paneSize) {
               if (horizontal) {
-                paneToAdjust.style.height = `${paneToAdjustSize.height}px`;
-                paneToAdjust.style.minHeight = `${paneToAdjustSize.height}px`;
+                pane.style.height = `${paneSize.height}px`;
+                pane.style.minHeight = `${paneSize.height}px`;
               } else {
-                paneToAdjust.style.width = `${paneToAdjustSize.width}px`;
-                paneToAdjust.style.minWidth = `${paneToAdjustSize.width}px`;
+                pane.style.width = `${paneSize.width}px`;
+                pane.style.minWidth = `${paneSize.width}px`;
               }
 
               // Remove flexGrow property so new height/width is respected
-              paneToAdjust.flexGrow = 0;
+              pane.flexGrow = 0;
             }
           }
         }
@@ -194,7 +200,7 @@ export default {
       this.selectedSplitter = null;
     },
     onMouseMove(event) {
-      const { selectedSplitter, updatePreviousPaneSize } = this;
+      const { selectedSplitter, updatePaneSize } = this;
 
       if (!selectedSplitter) {
         return;
@@ -204,15 +210,17 @@ export default {
       event.preventDefault();
 
       // Adjust child sizes appropriately
-      updatePreviousPaneSize(event);
+      updatePaneSize(event);
     },
-    updatePreviousPaneSize(event) {
+    updatePaneSize(event) {
+      // TODO: resize previousPan as well as nextPane to avoid pushing element out of container
+
       const {
-        horizontal, wrapperPosition, wrapperSize, selectedSplitterSize, paneToAdjust,
+        horizontal, wrapperPosition, wrapperSize, selectedSplitterSize, previousPane, nextPane,
         previousSplitter, previousSplitterPosition,
       } = this;
 
-      if (paneToAdjust) {
+      if (previousPane) {
         const referenceElementPosition = previousSplitter
           ? previousSplitterPosition
           : wrapperPosition;
@@ -227,20 +235,20 @@ export default {
           const height = Math.min(Math.max(pointerRelativeYpos, 0), maxSize.height);
 
           // Not sure why, but only worked with both set
-          paneToAdjust.style.height = `${height}px`;
-          paneToAdjust.style.minHeight = `${height}px`;
+          previousPane.style.height = `${height}px`;
+          previousPane.style.minHeight = `${height}px`;
         } else {
           // Get x-coordinate of pointer relative to container and adjust width accordingly
           const pointerRelativeXpos = event.clientX - referenceElementPosition.left;
           const width = Math.min(Math.max(pointerRelativeXpos, 0), maxSize.width);
 
           // Not sure why, but only worked with both set
-          paneToAdjust.style.width = `${width}px`;
-          paneToAdjust.style.minWidth = `${width}px`;
+          previousPane.style.width = `${width}px`;
+          previousPane.style.minWidth = `${width}px`;
         }
 
         // Remove flexGrow property so new height/width is respected
-        paneToAdjust.flexGrow = 0;
+        previousPane.flexGrow = 0;
       }
     },
   },
