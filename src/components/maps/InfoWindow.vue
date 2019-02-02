@@ -13,6 +13,8 @@
 
 <style lang="scss">
 .info-window {
+  padding: 0 0.2rem 0.2rem;
+
   .info-window-title {
     font-weight: bold;
     padding-bottom: 0.5rem;
