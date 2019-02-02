@@ -26,6 +26,10 @@ export default {
       },
     };
   },
+  beforeDestroy() {
+    const { polygon } = this;
+    polygon.setMap(null);
+  },
   mounted() {
     const {
       defaultOptions, google, map, options, paths, getCenter,
