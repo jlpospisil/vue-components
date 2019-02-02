@@ -17,13 +17,9 @@ const getClosestSibling = (element, classSelector = '', direction = '') => {
   return sibling;
 };
 
-export const getPreviousSibling = (element, classSelector) => {
-  return getClosestSibling(element, classSelector, 'previous');
-};
+export const getPreviousSibling = (element, classSelector) => getClosestSibling(element, classSelector, 'previous');
 
-export const getNextSibling = (element, classSelector) => {
-  return getClosestSibling(element, classSelector);
-};
+export const getNextSibling = (element, classSelector) => getClosestSibling(element, classSelector);
 
 export const getPosition = (el) => {
   let element = el;
