@@ -67,6 +67,8 @@ export default {
         ...defaultOptions,
         ...options,
       });
+
+      this.$emit('ready', google);
     },
   },
 };
