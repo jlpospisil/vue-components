@@ -9,6 +9,7 @@ $splitter-handle-length: 15px;
   display: flex;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   > .split-pane-pane {
     width: 100%;
@@ -98,6 +99,7 @@ export default {
   data() {
     return {
       selectedSplitter: null,
+      previousMousePosition: null,
     };
   },
   computed: {
@@ -139,68 +141,72 @@ export default {
     },
   },
   mounted() {
-    const { bindEvents } = this;
+    const { bindEvents, initializePanes } = this;
     bindEvents();
+    initializePanes();
   },
   beforeDestroy() {
-    document.removeEventListener('mousemove', this.onMouseMove);
+    const { wrapper } = this.$refs;
+    wrapper.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
-    document.removeEventListener('touchmove', this.onMouseMove);
+    wrapper.removeEventListener('touchmove', this.onMouseMove);
     document.removeEventListener('touchend', this.onMouseUp);
   },
   methods: {
     bindEvents() {
       const { onMouseMove, onMouseUp } = this;
+      const { wrapper } = this.$refs;
 
       // Add mouse event listeners
       // Passive: false to prevent scrolling while touch dragging.
-      document.addEventListener('mousemove', onMouseMove, { passive: false });
+      wrapper.addEventListener('mousemove', onMouseMove, { passive: false });
       document.addEventListener('mouseup', onMouseUp);
 
       // Add touch event listeners if needed
       if ('touchstart' in window) {
-        document.addEventListener('touchmove', onMouseMove, { passive: false });
+        wrapper.addEventListener('touchmove', onMouseMove, { passive: false });
         document.addEventListener('touchend', onMouseUp);
       }
     },
-    onMouseDown(event) {
-      this.selectedSplitter = event.target;
-
-      // TODO: remove the rest of this method once updatePaneSize adjusts previous and next panes
-
+    initializePanes() {
+      const { panes } = this.$refs;
       const { horizontal } = this;
 
-      // Adjust pane before previous splitter so it doesn't flex when this one is resized
-      ['previous', 'next'].forEach((direction) => {
-        const splitter = this[`${direction}Splitter`];
+      panes.forEach((paneEl) => {
+        const pane = paneEl;
+        const paneSize = htmlElements.getSize(pane);
 
-        if (splitter) {
-          const pane = htmlElements.getClosestSibling(splitter, splitPanePaneClass, direction);
-
-          if (pane) {
-            const paneSize = htmlElements.getSize(pane);
-
-            if (paneSize) {
-              if (horizontal) {
-                pane.style.height = `${paneSize.height}px`;
-                pane.style.minHeight = `${paneSize.height}px`;
-              } else {
-                pane.style.width = `${paneSize.width}px`;
-                pane.style.minWidth = `${paneSize.width}px`;
-              }
-
-              // Remove flexGrow property so new height/width is respected
-              pane.flexGrow = 0;
-            }
+        if (paneSize) {
+          if (horizontal) {
+            pane.style.height = `${paneSize.height}px`;
+            pane.style.minHeight = `${paneSize.height}px`;
+          } else {
+            pane.style.width = `${paneSize.width}px`;
+            pane.style.minWidth = `${paneSize.width}px`;
           }
+
+          // Remove flexGrow property so new height/width is respected
+          // pane.style.backgroundColor = 'red';
+          pane.flexGrow = 0;
         }
       });
+    },
+    updateMousePosition(event) {
+      this.previousMousePosition = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+    },
+    onMouseDown(event) {
+      const { updateMousePosition } = this;
+      this.selectedSplitter = event.target;
+      updateMousePosition(event);
     },
     onMouseUp() {
       this.selectedSplitter = null;
     },
     onMouseMove(event) {
-      const { selectedSplitter, updatePaneSize } = this;
+      const { selectedSplitter, updatePaneSize, updateMousePosition } = this;
 
       if (!selectedSplitter) {
         return;
@@ -211,32 +217,74 @@ export default {
 
       // Adjust child sizes appropriately
       updatePaneSize(event);
+
+      // Adjust previous mouse position
+      updateMousePosition(event);
     },
     updatePaneSize(event) {
       // TODO: resize previousPan as well as nextPane to avoid pushing element out of container
 
       const {
         horizontal, wrapperPosition, wrapperSize, selectedSplitterSize, previousPane, nextPane,
-        previousSplitter, previousSplitterPosition,
+        previousSplitter, previousSplitterPosition, previousMousePosition
       } = this;
 
+      const currentMousePosition = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+
+      const referenceElementPosition = previousSplitter
+        ? previousSplitterPosition
+        : wrapperPosition;
+      const maxSize = {
+        height: wrapperSize.height - selectedSplitterSize.height,
+        width: wrapperSize.width - selectedSplitterSize.width,
+      };
+
+      if (horizontal) {
+        const difference = currentMousePosition.y - previousMousePosition.y;
+
+        const previousPaneHeight = previousPane.offsetHeight;
+        const newPreviousPaneHeight = Math.min(previousPaneHeight + difference, maxSize.height);
+        previousPane.style.height = `${newPreviousPaneHeight}px`;
+        previousPane.style.minHeight = `${newPreviousPaneHeight}px`;
+
+        const nextPaneHeight = nextPane.offsetHeight;
+        const newNextPaneHeight = Math.min(nextPaneHeight - difference, maxSize.height);
+        nextPane.style.height = `${newNextPaneHeight}px`;
+        nextPane.style.minHeight = `${newNextPaneHeight}px`;
+      } else {
+        const difference = currentMousePosition.x - previousMousePosition.x;
+
+        const previousPaneWidth = previousPane.offsetWidth;
+        const newPreviousPaneHeight = Math.min(previousPaneWidth + difference, maxSize.width);
+        previousPane.style.width = `${newPreviousPaneHeight}px`;
+        previousPane.style.minWidth = `${newPreviousPaneHeight}px`;
+
+        const nextPaneWidth = nextPane.offsetWidth;
+        const newNextPaneWidth = Math.min(nextPaneWidth - difference, maxSize.width);
+        nextPane.style.width = `${newNextPaneWidth}px`;
+        nextPane.style.minWidth = `${newNextPaneWidth}px`;
+      }
+
       if (previousPane) {
-        const referenceElementPosition = previousSplitter
-          ? previousSplitterPosition
-          : wrapperPosition;
-        const maxSize = {
-          height: wrapperSize.height - selectedSplitterSize.height,
-          width: wrapperSize.width - selectedSplitterSize.width,
-        };
+        // const referenceElementPosition = previousSplitter
+        //   ? previousSplitterPosition
+        //   : wrapperPosition;
+        // const maxSize = {
+        //   height: wrapperSize.height - selectedSplitterSize.height,
+        //   width: wrapperSize.width - selectedSplitterSize.width,
+        // };
 
         if (horizontal) {
           // Get y-coordinate of pointer relative to container and adjust height accordingly
-          const pointerRelativeYpos = event.clientY - referenceElementPosition.top;
-          const height = Math.min(Math.max(pointerRelativeYpos, 0), maxSize.height);
-
-          // Not sure why, but only worked with both set
-          previousPane.style.height = `${height}px`;
-          previousPane.style.minHeight = `${height}px`;
+          // const pointerRelativeYpos = event.clientY - referenceElementPosition.top;
+          // const height = Math.min(Math.max(pointerRelativeYpos, 0), maxSize.height);
+          //
+          // // Not sure why, but only worked with both set
+          // previousPane.style.height = `${height}px`;
+          // previousPane.style.minHeight = `${height}px`;
         } else {
           // Get x-coordinate of pointer relative to container and adjust width accordingly
           const pointerRelativeXpos = event.clientX - referenceElementPosition.left;
@@ -255,7 +303,7 @@ export default {
   render(h) {
     const { horizontal, $slots, onMouseDown } = this;
     const slots = $slots.default.filter(slot => slot.tag || slot.text.replace(' ', '') !== '');
-    const paneAttributes = { class: splitPanePaneClass };
+    const paneAttributes = { class: splitPanePaneClass, ref: 'panes', refInFor: true };
     const splitterEventListeners = { mousedown: onMouseDown };
 
     // Add touch event listeners if needed
