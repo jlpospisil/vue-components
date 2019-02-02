@@ -9,19 +9,35 @@ $splitter-handle-length: 15px;
   display: flex;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
-  .splitpanes__pane {
+  > .splitpanes__pane {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    z-index: 1;
+    box-sizing: border-box;
+    flex: 1 1 auto;
   }
 
-  .splitpanes__splitter {
+  > .splitpanes__splitter {
     background-color: $split-pane-splitter-color;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
+    outline: 1px solid darken($split-pane-splitter-color, 5%);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 3;
+    }
   }
 
   &.splitpanes--horizontal {
@@ -29,9 +45,11 @@ $splitter-handle-length: 15px;
 
     > .splitpanes__splitter {
       cursor: row-resize;
-      height: $split-pane-splitter-thickness;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
+      min-height: $split-pane-splitter-thickness;
+
+      &::before {
+        margin: -1 * $split-pane-splitter-cushion 0;
+      }
 
       &::after {
         content: '';
@@ -47,7 +65,11 @@ $splitter-handle-length: 15px;
   &.splitpanes--vertical {
     > .splitpanes__splitter {
       cursor: col-resize;
-      width: $split-pane-splitter-thickness;
+      min-width: $split-pane-splitter-thickness;
+
+      &::before {
+        margin: 0 -1 * $split-pane-splitter-cushion;
+      }
 
       &::after {
         content: '';
