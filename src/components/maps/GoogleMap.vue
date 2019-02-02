@@ -67,8 +67,9 @@ export default {
         ...defaultOptions,
         ...options,
       });
+      const { map } = this;
 
-      this.$emit('ready', google);
+      this.$emit('ready', { google, map });
     },
   },
 };
