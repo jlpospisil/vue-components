@@ -1261,6 +1261,7 @@ export const locations = allCountries.map(country => ({
 export const getLocationDataFromIp = () => axios.get('https://json.geoiplookup.io')
   .then((response) => {
     if (response.data) {
+      console.warn('TODO: find a faster service to get geodata');
       const {
         ip, city, region, district, postal_code: postalCode, latitude, longitude,
         country_name: countryName, country_code: countryCode, timezone_name: timezone,

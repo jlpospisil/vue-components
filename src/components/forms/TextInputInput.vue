@@ -6,6 +6,7 @@
     @blur="$emit('blur', $event)"
     @select="$emit('select', $event)"
     @click="$emit('click', $event)"
+    v-bind="$props"
   />
 </template>
 

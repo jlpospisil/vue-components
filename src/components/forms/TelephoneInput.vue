@@ -6,9 +6,8 @@
 
     <div class="input-group">
       <text-input
-        class="file-input-value"
+        type="tel"
         :value="value"
-        readonly="true"
         input-style="background-color: transparent;"
         @input="$emit('input', $event)"
       />
@@ -108,7 +107,7 @@ export default {
   methods: {
     changeSelectedCountry(country) {
       this.selectedCountry = country;
-      console.log('TODO: implement formatting based on selected country: ', { selectedCountry: this.selectedCountry });
+      console.warn('TODO: implement formatting based on selected country: ', { selectedCountry: this.selectedCountry });
     },
     setCountryFromLocationData(locationData) {
       const { countries, changeSelectedCountry } = this;
