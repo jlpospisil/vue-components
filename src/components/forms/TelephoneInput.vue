@@ -1,120 +1,83 @@
 <template>
-  <div class="telephone-input">
+  <div>
     <input-label v-if="label">
       {{ label }}
     </input-label>
 
-    <div class="input-group">
-      <text-input
-        type="tel"
-        :value="value"
-        input-style="background-color: transparent;"
-        @input="$emit('input', $event)"
-      />
-
-      <div
-        v-if="changeCountry"
-        class="input-group-append"
-      >
-        <span
-          class="input-group-text text-primary dropdown-toggle"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <icon
-            type="solid"
-            name="fa-globe"
-          />
-          <span class="mx-2">
-            Country
-          </span>
-        </span>
-        <div class="dropdown-menu dropdown-menu-right">
-          <div class="country-list">
-            <button
-              v-for="country in countries"
-              :key="country.iso2"
-              class="dropdown-item"
-              type="button"
-              @click="changeSelectedCountry(country)"
-            >
-              {{ country.name }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <text-input-input
+      v-bind="inputProps"
+      v-model="inputValue"
+      class="form-control"
+      type="tel"
+      @focus="$emit('focus', $event)"
+      @blur="$emit('blur', $event)"
+      @select="$emit('select', $event)"
+      @click="$emit('click', $event)"
+    />
   </div>
 </template>
 
 <style lang="scss">
-.telephone-input {
-  .input-group-text {
-    background-color: #fff;
-  }
-
-  .dropdown-menu {
-    max-height: 200px;
-    overflow-y: auto;
-  }
-}
+    /* stylelint-disable-next-line no-empty-source error */
 </style>
 
 <script>
-import TextInput from './TextInputInput.vue';
+import Vue from 'vue';
+import TextInputInput from './TextInputInput.vue';
 import InputLabel from './InputLabel.vue';
-import { Icon } from '../general';
-import { locationsHelper } from '../../helpers';
+
+// Destructure to remove unwanted properties
+const {
+  min, minLength, max, maxLength, size, type, pattern, ...textInputProps
+} = TextInputInput.props;
 
 export default {
   name: 'TelephoneInput',
   components: {
     InputLabel,
-    TextInput,
-    Icon,
+    TextInputInput,
   },
   props: {
+    ...textInputProps,
     label: { type: String, default: null },
-    name: { type: String, default: null },
-    value: { type: String, default: null },
-    changeCountry: { type: Boolean, default: true },
-    defaultCountry: { type: String, default: null },
+    value: { type: [String, Number], default: null },
   },
   data() {
     return {
-      countries: locationsHelper.countries,
-      selectedCountry: null,
+      rawValue: null,
     };
   },
   computed: {
+    inputProps() {
+      const { label, value, ...props } = this.$props;
+      return props;
+    },
+    inputValue: {
+      get() {
+        const { rawValue } = this;
 
+        // TODO: format the value
+        console.log({ formattedValue: rawValue });
+
+        // TODO: why doesn't this get relayed to the input value everytime?
+
+        return rawValue;
+      },
+      set(newValue) {
+        const rawValue = newValue.replace(/\D/g, '');
+        this.rawValue = rawValue;
+        this.$emit('input', rawValue);
+        console.log({ newValue, rawValue });
+      },
+    },
   },
-  mounted() {
-    const {
-      countries, defaultCountry, changeSelectedCountry, setCountryFromLocationData,
-    } = this;
+  created() {
+    const { rawValue } = this;
+    const { value } = this.$props;
 
-    if (defaultCountry) {
-      // Set the current country to the country passed in
-      const selectedCountry = countries.find(country => country === defaultCountry);
-      changeSelectedCountry(selectedCountry);
-    } else {
-      // Set the current country based on geolocation
-      locationsHelper.getLocationDataFromIp().then(setCountryFromLocationData);
+    if (value !== rawValue) {
+      Vue.set(this, 'inputValue', value);
     }
-  },
-  methods: {
-    changeSelectedCountry(country) {
-      this.selectedCountry = country;
-      console.warn('TODO: implement formatting based on selected country: ', { selectedCountry: this.selectedCountry });
-    },
-    setCountryFromLocationData(locationData) {
-      const { countries, changeSelectedCountry } = this;
-      const countryCode = locationData.countryCode.toUpperCase();
-      const selectedCountry = countries.find(country => country.iso2 === countryCode);
-      changeSelectedCountry(selectedCountry);
-    },
   },
 };
 </script>

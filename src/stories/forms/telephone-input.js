@@ -6,14 +6,18 @@ import { TelephoneInput } from '@cdpjs/vue-components';
 storiesOf('Forms|Inputs', module)
   .add('Telephone number input', () => ({
     components: { TelephoneInput },
+    data() {
+      return {
+        telephoneNumber: null,
+      };
+    },
+    watch: {
+      telephoneNumber() {
+        const { telephoneNumber } = this;
+        action('telephone number updated')(telephoneNumber);
+      },
+    },
     template: `
-      <telephone-input
-      />
+      <telephone-input v-model="telephoneNumber" />
     `,
-    // watch: {
-    //   inputValue() {
-    //     const { inputValue } = this;
-    //     action('input updated')(inputValue);
-    //   },
-    // },
   }));

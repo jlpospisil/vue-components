@@ -32,6 +32,7 @@ export default {
     required: { type: [Boolean, String], default: false },
     size: { type: Number, default: null },
     type: { type: String, default: 'text' },
+    value: { type: [Number, String], default: null },
   },
 };
 </script>
