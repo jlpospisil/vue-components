@@ -66,7 +66,7 @@ export default {
   computed: {
     formattedValue() {
       const { value } = this;
-      return (value || '').replace(/^.+[\/|\\]/, '');
+      return (value || '').replace(/^.+[/|\\]/, '');
     },
   },
   methods: {
