@@ -39,6 +39,8 @@
 <style lang="scss" scoped>
 .checkbox {
   cursor: default;
+  display: flex;
+  align-items: baseline;
 }
 </style>
 <script>

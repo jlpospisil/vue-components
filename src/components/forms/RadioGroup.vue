@@ -32,7 +32,8 @@
 .radio-group {
   &.stacked-radio-group {
     .radio {
-      display: block;
+      display: flex;
+      align-items: baseline;
     }
   }
 
