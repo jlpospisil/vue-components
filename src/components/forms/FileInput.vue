@@ -16,7 +16,7 @@
     <div class="input-group">
       <text-input
         class="file-input-value"
-        :value="value"
+        :value="formattedValue"
         readonly="true"
         @focus="openFileSelector"
         inputStyle="background-color: transparent;"
@@ -62,6 +62,12 @@ export default {
     label: { type: String, default: null },
     name: { type: String, default: null },
     value: { type: String, default: null },
+  },
+  computed: {
+    formattedValue() {
+      const { value } = this;
+      return (value || '').replace(/^.+[\/|\\]/, '');
+    },
   },
   methods: {
     openFileSelector() {
