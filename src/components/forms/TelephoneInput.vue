@@ -61,13 +61,11 @@ export default {
         let { rawValue: v } = this;
         v = v ? v.replace(/\D/g, '') : '';
 
-        if (v.length > 0 && v.substr(0, 1) !== '1') {
+        if (v.length && v.substr(0, 1) !== '1') {
           v = `1${v}`;
         }
 
         const { length } = v;
-
-        // TODO: allow user to use backspace to delete numbers
 
         switch (true) {
             case (length >= 11):
@@ -82,9 +80,21 @@ export default {
               return v;
         }
       },
-      set(rawValue) {
+      set(value) {
+        let newValue = value;
+
+        // Is the user trying to delete a non-numeric character?  If so, let them.
+        const { inputValue: currentValue } = this;
+        if (currentValue && currentValue.length) {
+          const lastChar = currentValue.substr(-1);
+
+          if (`${newValue}${lastChar}` === currentValue && lastChar.match(/\D/)) {
+            newValue = newValue.replace(/\D$/g, '').slice(0, -1);
+          }
+        }
+
         // Update the value
-        this.rawValue = rawValue;
+        this.rawValue = newValue;
 
         // Force the visible input value to be updated
         this.forceUpdateInputValue = !this.forceUpdateInputValue;
