@@ -4,4 +4,5 @@ export { default as InputLabel } from './InputLabel.vue';
 export { default as Radio } from './Radio.vue';
 export { default as RadioGroup } from './RadioGroup.vue';
 export { default as SelectList } from './SelectList.vue';
+export { default as TelephoneInput } from './TelephoneInput.vue';
 export { default as TextInput } from './TextInput.vue';
