@@ -18,6 +18,9 @@ storiesOf('Forms|Inputs', module)
       },
     },
     template: `
-      <telephone-input label="Telephone Number Label" v-model="telephoneNumber" />
+      <telephone-input
+        label="Telephone Number Label"
+        v-model="telephoneNumber"
+      />
     `,
   }));
