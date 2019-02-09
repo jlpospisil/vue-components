@@ -17,6 +17,7 @@
       :color="color"
       type="solid"
       name="fa-check-square"
+      class="mr-1"
       :size="size"
     />
 
@@ -25,6 +26,7 @@
       :color="color"
       type="regular"
       name="fa-square"
+      class="mr-1"
       :size="size"
     />
 

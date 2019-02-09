@@ -8,6 +8,7 @@
       :color="color"
       type="solid"
       name="fa-check-circle"
+      class="mr-1"
       :size="size"
     />
     <icon
@@ -15,6 +16,7 @@
       :color="color"
       type="regular"
       name="fa-circle"
+      class="mr-1"
       :size="size"
     />
     <label v-if="labelText && labelPosition === 'right'">
