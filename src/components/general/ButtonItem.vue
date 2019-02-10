@@ -7,7 +7,9 @@
     <icon
       v-if="icon"
       :type="icon_type"
-      :name="icon"/>
+      :name="icon"
+      class="mr-2"
+    />
     <span v-if="text">{{ text }}</span>
   </button>
 </template>
