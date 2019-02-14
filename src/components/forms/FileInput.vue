@@ -25,7 +25,6 @@
       <div class="input-group-append" @click="openFileSelector">
         <span class="input-group-text text-primary">
           <icon type="solid" name="fa-file-upload" />
-          <span class="ml-2">Select File</span>
         </span>
       </div>
     </div>
