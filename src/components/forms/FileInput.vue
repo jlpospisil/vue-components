@@ -25,6 +25,7 @@
       <div class="input-group-append" @click="openFileSelector">
         <span class="input-group-text text-primary">
           <icon type="solid" name="fa-file-upload" />
+          <span class="ml-2 d-none d-sm-flex file-input-btn-text">Select File</span>
         </span>
       </div>
     </div>
@@ -41,6 +42,10 @@
 
   .input-group-text {
     background-color: #fff;
+
+    .file-input-btn-text {
+      width: 5.5rem;
+    }
   }
 }
 </style>
