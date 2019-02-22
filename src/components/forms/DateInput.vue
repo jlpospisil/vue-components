@@ -47,10 +47,18 @@ export default {
     label: { type: String, default: null },
     name: { type: String, default: null },
     value: { type: String, default: null },
+    format: { type: String, default: 'YYYY-MM-DD' },
   },
   methods: {
     showCalendar() {
       console.log('TODO: show calendar here');
+    },
+    formatDate() {
+      let { value } = this;
+
+      // TODO: format date here
+
+      this.$emit('input', value);
     },
   },
 };
