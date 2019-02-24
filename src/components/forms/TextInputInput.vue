@@ -7,6 +7,7 @@
     @select="$emit('select', $event)"
     @click="$emit('click', $event)"
     v-bind="$props"
+    ref="input"
   />
 </template>
 
@@ -33,6 +34,16 @@ export default {
     size: { type: Number, default: null },
     type: { type: String, default: 'text' },
     value: { type: [Number, String], default: null },
+  },
+  methods: {
+    focus() {
+      const { input } = this.$refs;
+      input.focus();
+    },
+    select() {
+      const { input } = this.$refs;
+      input.select();
+    },
   },
 };
 </script>

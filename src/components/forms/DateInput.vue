@@ -9,6 +9,7 @@
         v-model="inputValue"
         @blur="inputBlur"
         @click="stopPropagation"
+        ref="input"
       />
 
       <div class="input-group-append">
@@ -378,11 +379,15 @@ export default {
       }
     },
     hideSelector() {
+      const { input } = this.$refs;
       this.selectorVisible = false;
+      input.focus();
     },
     toggleSelector(event) {
       event.stopPropagation();
+      const { input } = this.$refs;
       this.selectorVisible = !this.selectorVisible;
+      // input.focus(); // TODO: why is this causing issues?
     },
     shiftFocus(increment = 1) {
       const { dateParts, focusedItem } = this;
