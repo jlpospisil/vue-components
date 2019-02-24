@@ -6,9 +6,8 @@
 
     <div class="input-group">
       <text-input
-        @focus="showSelector"
-        @blur_xxxx="hideSelector"
-        @blur="formatDate"
+        v-model="inputValue"
+        @blur="inputBlur"
         @click="stopPropagation"
       />
 
@@ -158,6 +157,7 @@ $selector-item-height: 8rem;
 </style>
 
 <script>
+import Vue from 'vue';
 import moment from 'moment';
 import TextInput from './TextInputInput.vue';
 import InputLabel from './InputLabel.vue';
@@ -173,11 +173,11 @@ export default {
   props: {
     label: { type: String, default: null },
     name: { type: String, default: null },
-    value: { type: String, default: null },
     format: { type: String, default: 'YYYY-MM-DD' },
   },
   data() {
     return {
+      inputValue: null,
       selectorVisible: false,
       selectorValues: {
         month: {
@@ -202,15 +202,33 @@ export default {
     const { removeEventListeners } = this;
     removeEventListeners();
   },
+  created() {
+    const { inputValue } = this;
+    const { value } = this.$props;
+
+    if (value !== inputValue) {
+      Vue.set(this, 'inputValue', value);
+    }
+  },
   methods: {
     addEventListeners() {
       const { hideSelector } = this;
       document.addEventListener('click', hideSelector);
     },
-    formatDate(event) {
-      // const { value } = this.???
-      // const formattedDate = moment(value).format('YYYY-MM-DD');
-      console.log('TODO: get value from input');
+    inputBlur() {
+      const { format, hideSelector } = this;
+      let { inputValue } = this;
+
+      hideSelector();
+
+      if (!moment(inputValue).isValid()) {
+        inputValue = null;
+      } else {
+        inputValue = moment(inputValue).format(format);
+      }
+
+      Vue.set(this, 'inputValue', inputValue);
+      this.$emit('input', inputValue);
     },
     hideSelector() {
       this.selectorVisible = false;
