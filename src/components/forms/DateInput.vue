@@ -228,6 +228,8 @@ export default {
 
         if (selectorDate.isValid()) {
           Vue.set(this, 'rawSelectorDate', selectorDate);
+          Vue.set(this, 'inputValue', this.selectorDate.formatted);
+          this.$emit('input', this.selectorDate.formatted);
         }
       },
       get() {
