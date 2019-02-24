@@ -36,7 +36,7 @@
         <div class="date-input-selector-content">
           <div class="row m-0 p-2 flex-wrap">
             <div
-              v-for="item in ['month', 'day', 'year']"
+              v-for="item in dateParts"
               :key="item"
               class="date-input-selector-item col"
               :class="{ focused: focusedItem === item }"
@@ -50,10 +50,10 @@
 
               <div class="date-input-selector-item-value">
                 <div>
-                  {{ selectorValues[item].value || '&nbsp;' }}
+                  {{ selectorDate[item].value || '&nbsp;' }}
                 </div>
                 <div>
-                  {{ selectorValues[item].label || '&nbsp;' }}
+                  {{ selectorDate[item].label || '&nbsp;' }}
                 </div>
               </div>
 
@@ -217,20 +217,43 @@ export default {
       inputValue: null,
       selectorVisible: false,
       focusedItem: 'month',
-      selectorValues: {
-        month: {
-          value: '02',
-          label: 'February',
-        },
-        day: {
-          value: '24',
-          label: 'Tuesday',
-        },
-        year: {
-          value: '2018',
-        },
-      },
+      rawSelectorDate: null,
+      dateParts: ['month', 'date', 'year'],
     };
+  },
+  computed: {
+    selectorDate: {
+      set(newDate) {
+        const selectorDate = moment(newDate);
+
+        if (selectorDate.isValid()) {
+          Vue.set(this, 'rawSelectorDate', selectorDate);
+        }
+      },
+      get() {
+        const { rawSelectorDate, format } = this;
+        const date = moment(rawSelectorDate);
+
+        if (!date.isValid()) {
+          return { month: {}, date: {}, year: {} };
+        }
+
+        return {
+          month: {
+            value: date.format('MM'),
+            label: date.format('MMMM'),
+          },
+          date: {
+            value: date.format('DD'),
+            label: date.format('dddd'),
+          },
+          year: {
+            value: date.format('YYYY'),
+          },
+          formatted: date.format(format),
+        };
+      },
+    },
   },
   mounted() {
     const { addEventListeners } = this;
@@ -247,6 +270,8 @@ export default {
     if (value !== inputValue) {
       Vue.set(this, 'inputValue', value);
     }
+
+    this.selectorDate = value;
   },
   methods: {
     addEventListeners() {
@@ -270,9 +295,50 @@ export default {
       this.$emit('input', inputValue);
     },
     keyDown(event) {
-      const { selectorVisible } = this;
-      if (selectorVisible) {
-        console.log({ keyDown: event });
+      const {
+        selectorVisible, selectorDate, dateParts, focusedItem,
+      } = this;
+      const { keyCode } = event;
+
+      if (selectorVisible && selectorDate.formatted) {
+        let focusedItemIndex = dateParts.indexOf(focusedItem);
+
+        switch (keyCode) {
+            case 37: { // Left
+              focusedItemIndex = Math.max(0, focusedItemIndex - 1);
+              Vue.set(this, 'focusedItem', dateParts[focusedItemIndex]);
+              break;
+            }
+            case 38: { // Up
+              const { [focusedItem]: unit } = { month: 'months', date: 'days', year: 'years' };
+              const itemValue = moment(selectorDate.formatted)[focusedItem]();
+              const incrementedItem = moment(selectorDate.formatted).add(1, unit);
+              const incrementedItemValue = incrementedItem[focusedItem]();
+              let newValue = Math.max(itemValue, incrementedItemValue);
+
+              if (newValue > itemValue) {
+                if (focusedItem === 'month') {
+                  newValue += 1;
+                }
+
+                console.dir(incrementedItem);
+                this.selectorDate = incrementedItem;
+              }
+
+              break;
+            }
+            case 39: { // Right
+              focusedItemIndex = Math.min(dateParts.length - 1, focusedItemIndex + 1);
+              Vue.set(this, 'focusedItem', dateParts[focusedItemIndex]);
+              break;
+            }
+            case 40: { // Down
+              break;
+            }
+            default: {
+
+            }
+        }
       }
     },
     hideSelector() {
