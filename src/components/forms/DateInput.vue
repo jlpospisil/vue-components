@@ -14,7 +14,7 @@
       <div class="input-group-append">
         <span
           class="input-group-text text-primary"
-          @click="showSelector"
+          @click="toggleSelector"
         >
           <icon
             type="solid"
@@ -25,53 +25,56 @@
       </div>
     </div>
 
-    <div
-      v-show="selectorVisible"
-      class="date-input-selector"
-      @click="stopPropagation"
-    >
-      <div class="date-input-selector-tip" />
+    <transition name="fade">
+      <div
+        v-show="selectorVisible"
+        class="date-input-selector"
+        @click="stopPropagation"
+      >
+        <div class="date-input-selector-tip" />
 
-      <div class="date-input-selector-content">
-        <div class="row py-1 flex-wrap">
-          <div
-            v-for="item in ['month', 'day', 'year']"
-            :key="item"
-            class="date-input-selector-item col"
-          >
-            <icon
-              class="selector-item-control"
-              :class="{ disabled: false }"
-              type="solid"
-              name="fa-caret-up"
-            />
+        <div class="date-input-selector-content">
+          <div class="row m-0 p-1 flex-wrap">
+            <div
+              v-for="item in ['month', 'day', 'year']"
+              :key="item"
+              class="date-input-selector-item col"
+            >
+              <icon
+                class="selector-item-control"
+                :class="{ disabled: false }"
+                type="solid"
+                name="fa-caret-up"
+              />
 
-            <div class="date-input-selector-item-value">
-              <div>
-                {{ selectorValues[item].value || '' }}
+              <div class="date-input-selector-item-value">
+                <div>
+                  {{ selectorValues[item].value || '&nbsp;' }}
+                </div>
+                <div>
+                  {{ selectorValues[item].label || '&nbsp;' }}
+                </div>
               </div>
-              <div>
-                {{ selectorValues[item].label || '' }}
-              </div>
+
+              <icon
+                class="selector-item-control"
+                :class="{ disabled: false }"
+                type="solid"
+                name="fa-caret-down"
+              />
             </div>
-
-            <icon
-              class="selector-item-control"
-              :class="{ disabled: false }"
-              type="solid"
-              name="fa-caret-down"
-            />
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <style lang="scss">
 @import '../../scss/variables';
-$selector-bg-color: #fff;
-$selector-border-color: map-get($theme-colors, primary);
+$selector-item-overlay-color: #fff;
+$selector-item-overlay-gradient-color: map-get($theme-colors, secondary);
+$selector-background-color: lighten(map-get($theme-colors, secondary), 50%);
 $selector-box-shadow: 0 0 2px $box-shadow-color;
 $selector-item-width: 8rem;
 $selector-item-height: 8rem;
@@ -95,7 +98,7 @@ $selector-item-height: 8rem;
     width: 100%;
     min-width: $selector-item-width;
     max-width: 3 * $selector-item-width;
-    background-color: $selector-bg-color;
+    background-color: $selector-background-color;
     box-shadow: $selector-box-shadow;
     z-index: 400;
 
@@ -108,7 +111,7 @@ $selector-item-height: 8rem;
         display: block;
         width: 20px;
         height: 20px;
-        background-color: $selector-bg-color;
+        background-color: $selector-background-color;
         transform: translate(10px, -8px) rotate(45deg);
         box-shadow: $selector-box-shadow;
       }
@@ -118,16 +121,38 @@ $selector-item-height: 8rem;
       position: relative;
       width: 100%;
       height: 100%;
-      background-color: $selector-bg-color;
+      background-color: $selector-background-color;
 
       .date-input-selector-item {
+        position: relative;
         height: $selector-item-height;
         width: $selector-item-width;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        background-color: $selector-item-overlay-color;
+        margin: 5px;
 
+        &::before {
+          content: '';
+          position: absolute;
+          display: block;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background:
+            linear-gradient(
+              to bottom,
+              rgba($selector-item-overlay-gradient-color, 0.5) 0%,
+              rgba($selector-item-overlay-gradient-color, 0.15) 25%,
+              rgba($selector-item-overlay-gradient-color, 0) 45%,
+              rgba($selector-item-overlay-gradient-color, 0.15) 80%,
+              rgba($selector-item-overlay-gradient-color, 0.5) 100%
+            );
+          box-shadow: $selector-box-shadow;
+        }
         .selector-item-control {
           color: rgba(0, 0, 0, 0.5);
 
@@ -233,9 +258,9 @@ export default {
     hideSelector() {
       this.selectorVisible = false;
     },
-    showSelector(event) {
+    toggleSelector(event) {
       event.stopPropagation();
-      this.selectorVisible = true;
+      this.selectorVisible = !this.selectorVisible;
     },
     stopPropagation(event) {
       event.stopPropagation();
