@@ -219,6 +219,7 @@ export default {
       focusedItem: 'month',
       rawSelectorDate: null,
       dateParts: ['month', 'date', 'year'],
+      shiftKeyPressed: false,
     };
   },
   computed: {
@@ -277,9 +278,10 @@ export default {
   },
   methods: {
     addEventListeners() {
-      const { hideSelector, keyDown } = this;
+      const { hideSelector, keyDown, keyUp } = this;
       document.addEventListener('click', hideSelector);
       document.addEventListener('keydown', keyDown);
+      document.addEventListener('keyup', keyUp);
     },
     inputBlur() {
       const { format, hideSelector } = this;
@@ -295,26 +297,46 @@ export default {
 
       Vue.set(this, 'selectorDate', inputValue);
     },
+    keyUp(event) {
+      const { keyCode } = event;
+
+      switch (keyCode) {
+          case 16: { // Shift
+            Vue.set(this, 'shiftKeyPressed', false);
+            break;
+          }
+          default:
+      }
+    },
     keyDown(event) {
       const {
-        selectorVisible, selectorDate, dateParts, focusedItem,
+        selectorVisible, selectorDate, focusedItem, shiftFocus, shiftKeyPressed,
+        hideSelector,
       } = this;
       const { keyCode } = event;
 
-      console.log({ keyCode });
-
       if (selectorVisible && selectorDate.formatted) {
-        let focusedItemIndex = dateParts.indexOf(focusedItem);
-
         switch (keyCode) {
-            case 27: {  // Esc
-              const { hideSelector } = this;
+            case 16: { // Shift
+              Vue.set(this, 'shiftKeyPressed', true);
+              break;
+            }
+            case 9: { // Tab
+              event.preventDefault();
+              const increment = shiftKeyPressed ? -1 : 1;
+              shiftFocus(increment);
+              break;
+            }
+            case 27: { // Esc
               hideSelector();
               break;
             }
             case 37: { // Left
-              focusedItemIndex = Math.max(0, focusedItemIndex - 1);
-              Vue.set(this, 'focusedItem', dateParts[focusedItemIndex]);
+              shiftFocus(-1);
+              break;
+            }
+            case 39: { // Right
+              shiftFocus();
               break;
             }
             case 38: { // Up
@@ -334,15 +356,6 @@ export default {
 
               break;
             }
-            case 9: { // Tab
-              // TODO: if shift is held down move left instead
-              event.preventDefault();
-            }
-            case 39: { // Right
-              focusedItemIndex = Math.min(dateParts.length - 1, focusedItemIndex + 1);
-              Vue.set(this, 'focusedItem', dateParts[focusedItemIndex]);
-              break;
-            }
             case 40: { // Down
               const { [focusedItem]: unit } = { month: 'months', date: 'days', year: 'years' };
               const itemValue = moment(selectorDate.formatted)[focusedItem]();
@@ -360,9 +373,7 @@ export default {
 
               break;
             }
-            default: {
-
-            }
+            default:
         }
       }
     },
@@ -373,13 +384,26 @@ export default {
       event.stopPropagation();
       this.selectorVisible = !this.selectorVisible;
     },
+    shiftFocus(increment = 1) {
+      const { dateParts, focusedItem } = this;
+      let focusedItemIndex = dateParts.indexOf(focusedItem) + increment;
+
+      if (increment > 0) {
+        focusedItemIndex = Math.min(dateParts.length - 1, focusedItemIndex);
+      } else {
+        focusedItemIndex = Math.max(0, focusedItemIndex);
+      }
+
+      Vue.set(this, 'focusedItem', dateParts[focusedItemIndex]);
+    },
     stopPropagation(event) {
       event.stopPropagation();
     },
     removeEventListeners() {
-      const { hideSelector, keyDown } = this;
+      const { hideSelector, keyDown, keyUp } = this;
       document.removeEventListener('click', hideSelector);
       document.removeEventListener('keydown', keyDown);
+      document.removeEventListener('keyup', keyUp);
     },
   },
 };
