@@ -335,6 +335,7 @@ export default {
               break;
             }
             case 9: { // Tab
+              // TODO: if shift is held down move left instead
               event.preventDefault();
             }
             case 39: { // Right
