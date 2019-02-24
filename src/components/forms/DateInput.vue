@@ -321,7 +321,6 @@ export default {
                   newValue += 1;
                 }
 
-                console.dir(incrementedItem);
                 this.selectorDate = incrementedItem;
               }
 
@@ -333,6 +332,20 @@ export default {
               break;
             }
             case 40: { // Down
+              const { [focusedItem]: unit } = { month: 'months', date: 'days', year: 'years' };
+              const itemValue = moment(selectorDate.formatted)[focusedItem]();
+              const incrementedItem = moment(selectorDate.formatted).subtract(1, unit);
+              const incrementedItemValue = incrementedItem[focusedItem]();
+              let newValue = Math.min(itemValue, incrementedItemValue);
+
+              if (newValue < itemValue) {
+                if (focusedItem === 'month') {
+                  newValue += 1;
+                }
+
+                this.selectorDate = incrementedItem;
+              }
+
               break;
             }
             default: {
