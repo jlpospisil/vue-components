@@ -293,8 +293,7 @@ export default {
         inputValue = moment(inputValue).format(format);
       }
 
-      Vue.set(this, 'inputValue', inputValue);
-      this.$emit('input', inputValue);
+      Vue.set(this, 'selectorDate', inputValue);
     },
     keyDown(event) {
       const {
@@ -302,10 +301,17 @@ export default {
       } = this;
       const { keyCode } = event;
 
+      console.log({ keyCode });
+
       if (selectorVisible && selectorDate.formatted) {
         let focusedItemIndex = dateParts.indexOf(focusedItem);
 
         switch (keyCode) {
+            case 27: {  // Esc
+              const { hideSelector } = this;
+              hideSelector();
+              break;
+            }
             case 37: { // Left
               focusedItemIndex = Math.max(0, focusedItemIndex - 1);
               Vue.set(this, 'focusedItem', dateParts[focusedItemIndex]);
@@ -327,6 +333,9 @@ export default {
               }
 
               break;
+            }
+            case 9: { // Tab
+              event.preventDefault();
             }
             case 39: { // Right
               focusedItemIndex = Math.min(dateParts.length - 1, focusedItemIndex + 1);
