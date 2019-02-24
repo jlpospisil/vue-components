@@ -34,11 +34,12 @@
         <div class="date-input-selector-tip" />
 
         <div class="date-input-selector-content">
-          <div class="row m-0 p-1 flex-wrap">
+          <div class="row m-0 p-2 flex-wrap">
             <div
               v-for="item in ['month', 'day', 'year']"
               :key="item"
               class="date-input-selector-item col"
+              :class="{ focused: focusedItem === item }"
             >
               <icon
                 class="selector-item-control"
@@ -73,9 +74,10 @@
 <style lang="scss">
 @import '../../scss/variables';
 $selector-item-overlay-color: #fff;
-$selector-item-overlay-gradient-color: map-get($theme-colors, secondary);
-$selector-background-color: lighten(map-get($theme-colors, secondary), 50%);
+$selector-item-overlay-gradient-color: #999;
+$selector-background-color: #fff;
 $selector-box-shadow: 0 0 2px $box-shadow-color;
+$focused-box-shadow: 0 0 2px 1px map-get($theme-colors, primary);
 $selector-item-width: 8rem;
 $selector-item-height: 8rem;
 
@@ -94,7 +96,6 @@ $selector-item-height: 8rem;
     position: absolute;
     margin-top: 10px;
     min-height: $selector-item-height + 0.8rem;
-    max-height: 3 * $selector-item-height + 0.8rem;
     width: 100%;
     min-width: $selector-item-width;
     max-width: 3 * $selector-item-width;
@@ -153,6 +154,17 @@ $selector-item-height: 8rem;
             );
           box-shadow: $selector-box-shadow;
         }
+
+        &.focused {
+          &::before {
+            box-shadow: $focused-box-shadow;
+          }
+
+          .date-input-selector-item-value {
+            color: map-get($theme-colors, primary);
+          }
+        }
+
         .selector-item-control {
           color: rgba(0, 0, 0, 0.5);
 
@@ -204,6 +216,7 @@ export default {
     return {
       inputValue: null,
       selectorVisible: false,
+      focusedItem: 'month',
       selectorValues: {
         month: {
           value: '02',
@@ -237,8 +250,9 @@ export default {
   },
   methods: {
     addEventListeners() {
-      const { hideSelector } = this;
+      const { hideSelector, keyDown } = this;
       document.addEventListener('click', hideSelector);
+      document.addEventListener('keydown', keyDown);
     },
     inputBlur() {
       const { format, hideSelector } = this;
@@ -255,6 +269,12 @@ export default {
       Vue.set(this, 'inputValue', inputValue);
       this.$emit('input', inputValue);
     },
+    keyDown(event) {
+      const { selectorVisible } = this;
+      if (selectorVisible) {
+        console.log({ keyDown: event });
+      }
+    },
     hideSelector() {
       this.selectorVisible = false;
     },
@@ -266,8 +286,9 @@ export default {
       event.stopPropagation();
     },
     removeEventListeners() {
-      const { hideSelector } = this;
+      const { hideSelector, keyDown } = this;
       document.removeEventListener('click', hideSelector);
+      document.removeEventListener('keydown', keyDown);
     },
   },
 };
