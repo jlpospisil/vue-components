@@ -1,5 +1,8 @@
 <template>
-  <div class="date-input" @click="stopPropagation">
+  <div
+    class="date-input"
+    :class="{ 'selector-visible': selectorVisible }"
+    @click="stopPropagation">
     <input-label v-if="label">
       {{ label }}
     </input-label>
@@ -40,6 +43,7 @@
               :key="item"
               class="date-input-selector-item col"
               :class="{ focused: focusedItem === item }"
+              @click="focusedItem = item"
             >
               <icon
                 class="selector-item-control"
@@ -78,11 +82,18 @@ $selector-item-overlay-gradient-color: #999;
 $selector-background-color: #fff;
 $selector-box-shadow: 0 0 2px $box-shadow-color;
 $focused-box-shadow: 0 0 2px 1px map-get($theme-colors, primary);
-$selector-item-width: 8rem;
+$selector-item-width: 7.5rem;
 $selector-item-height: 8rem;
 
 .date-input {
   position: relative;
+
+  &.selector-visible {
+    input {
+      border-color: lighten(map-get($theme-colors, primary), 25%);
+      box-shadow: 0 0 0 0.2rem rgba(map-get($theme-colors, primary), 0.25);
+    }
+  }
 
   .input-group-text {
     background-color: #fff;
