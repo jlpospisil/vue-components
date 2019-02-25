@@ -10,7 +10,7 @@
     <div class="input-group">
       <text-input
         v-model="inputValue"
-        @blur="inputBlur"
+        @blur="checkInputValue"
         ref="input"
       />
 
@@ -288,7 +288,7 @@ export default {
       document.addEventListener('keydown', keyDown);
       document.addEventListener('keyup', keyUp);
     },
-    inputBlur() {
+    checkInputValue() {
       const { format } = this;
       let { inputValue } = this;
 
@@ -316,7 +316,7 @@ export default {
     keyDown(event) {
       const {
         selectorVisible, selectorDate, focusedItem, shiftFocus, shiftKeyPressed,
-        hideSelector,
+        hideSelector, checkInputValue,
       } = this;
       const { keyCode } = event;
 
@@ -335,6 +335,7 @@ export default {
             case 13: // Enter
             case 27: { // Esc
               hideSelector();
+              checkInputValue();
               break;
             }
             case 37: { // Left
