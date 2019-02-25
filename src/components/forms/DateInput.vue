@@ -381,9 +381,13 @@ export default {
       }
     },
     hideSelector() {
+      const { selectorVisible } = this;
       const { input } = this.$refs;
-      this.selectorVisible = false;
-      input.focus();
+
+      if (selectorVisible) {
+        this.selectorVisible = false;
+        input.focus();
+      }
     },
     toggleSelector(event) {
       event.stopPropagation();
