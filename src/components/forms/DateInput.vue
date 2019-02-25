@@ -292,7 +292,9 @@ export default {
       const { format } = this;
       let { inputValue } = this;
 
-      if (!moment(inputValue).isValid()) {
+      if (inputValue && ['today', 'now'].includes(inputValue.toLowerCase())) {
+        inputValue = moment().format(format);
+      } else if (!moment(inputValue).isValid()) {
         inputValue = null;
       } else {
         inputValue = moment(inputValue).format(format);
@@ -330,6 +332,7 @@ export default {
               shiftFocus(increment);
               break;
             }
+            case 13: // Enter
             case 27: { // Esc
               hideSelector();
               break;
