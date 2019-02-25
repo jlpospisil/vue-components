@@ -1,5 +1,5 @@
 <template>
-  <div class="date-input">
+  <div class="date-input" @click="stopPropagation">
     <input-label v-if="label">
       {{ label }}
     </input-label>
@@ -8,7 +8,6 @@
       <text-input
         v-model="inputValue"
         @blur="inputBlur"
-        @click="stopPropagation"
         ref="input"
       />
 
@@ -97,9 +96,6 @@ $selector-item-height: 8rem;
     position: absolute;
     margin-top: 10px;
     min-height: $selector-item-height + 0.8rem;
-    width: 100%;
-    min-width: $selector-item-width;
-    max-width: 3 * $selector-item-width;
     background-color: $selector-background-color;
     box-shadow: $selector-box-shadow;
     z-index: 400;
@@ -121,20 +117,20 @@ $selector-item-height: 8rem;
 
     .date-input-selector-content {
       position: relative;
-      width: 100%;
-      height: 100%;
       background-color: $selector-background-color;
 
       .date-input-selector-item {
         position: relative;
         height: $selector-item-height;
-        width: $selector-item-width;
+        min-width: $selector-item-width;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         background-color: $selector-item-overlay-color;
         margin: 5px;
+        box-shadow: $selector-box-shadow;
+        overflow: hidden;
 
         &::before {
           content: '';
@@ -153,13 +149,10 @@ $selector-item-height: 8rem;
               rgba($selector-item-overlay-gradient-color, 0.15) 80%,
               rgba($selector-item-overlay-gradient-color, 0.5) 100%
             );
-          box-shadow: $selector-box-shadow;
         }
 
         &.focused {
-          &::before {
-            box-shadow: $focused-box-shadow;
-          }
+          box-shadow: $focused-box-shadow;
 
           .date-input-selector-item-value {
             color: map-get($theme-colors, primary);
@@ -285,10 +278,8 @@ export default {
       document.addEventListener('keyup', keyUp);
     },
     inputBlur() {
-      const { format, hideSelector } = this;
+      const { format } = this;
       let { inputValue } = this;
-
-      hideSelector();
 
       if (!moment(inputValue).isValid()) {
         inputValue = null;
@@ -387,7 +378,7 @@ export default {
       event.stopPropagation();
       const { input } = this.$refs;
       this.selectorVisible = !this.selectorVisible;
-      // input.focus(); // TODO: why is this causing issues?
+      input.focus();
     },
     shiftFocus(increment = 1) {
       const { dateParts, focusedItem } = this;
