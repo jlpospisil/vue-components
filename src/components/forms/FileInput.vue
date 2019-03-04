@@ -25,7 +25,7 @@
       <div class="input-group-append" @click="openFileSelector">
         <span class="input-group-text text-primary">
           <icon type="solid" name="fa-file-upload" />
-          <span class="ml-2 d-none d-sm-flex file-input-btn-text">Select File</span>
+          <span class="ml-2 d-none d-sm-flex file-input-btn-text" v-if="showButtonText">Select File</span>
         </span>
       </div>
     </div>
@@ -66,6 +66,7 @@ export default {
     label: { type: String, default: null },
     name: { type: String, default: null },
     value: { type: String, default: null },
+    showButtonText: { type: Boolean, default: true },
   },
   computed: {
     formattedValue() {
