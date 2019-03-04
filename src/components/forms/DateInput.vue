@@ -23,7 +23,7 @@
             type="solid"
             name="fa-calendar-alt"
           />
-          <span class="ml-2 d-none d-sm-flex date-input-btn-text">Select Date</span>
+          <span class="ml-2 d-none d-sm-flex date-input-btn-text" v-if="showButtonText">Select Date</span>
         </span>
       </div>
     </div>
@@ -216,6 +216,7 @@ export default {
     label: { type: String, default: null },
     name: { type: String, default: null },
     format: { type: String, default: 'YYYY-MM-DD' },
+    showButtonText: { type: Boolean, default: true },
   },
   data() {
     return {
