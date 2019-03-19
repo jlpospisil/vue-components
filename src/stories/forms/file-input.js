@@ -16,4 +16,9 @@ storiesOf('Forms|Inputs', module)
         v-model="file" 
       />
     `,
-  }));
+  }),
+  {
+    info: {
+      components: { FileInput },
+    },
+  });

@@ -3,6 +3,12 @@ import { storiesOf } from '@storybook/vue';
 import { Loading as LoadingOriginal } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
 
+const addons = {
+  info: {
+    components: { Loading: LoadingOriginal },
+  },
+};
+
 // Adjust style to accomodate storybook
 const Loading = {
   components: {
@@ -30,4 +36,4 @@ storiesOf('UI|Loading', module)
         <loading :loading="true" />
       </storybook-container>
     `,
-  }));
+  }), addons);

@@ -11,4 +11,9 @@ storiesOf('Forms|Inputs', module)
         label="Date Label"
       />
     `,
-  }));
+  }),
+  {
+    info: {
+      components: { DateInput },
+    },
+  });

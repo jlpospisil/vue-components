@@ -11,6 +11,14 @@ const common = {
   },
 };
 
+const addons = {
+  info: {
+    components: {
+      Icon,
+    },
+  },
+};
+
 // Create the stories
 storiesOf('General|Icons', module)
   .add('Regular', () => ({
@@ -21,7 +29,7 @@ storiesOf('General|Icons', module)
                 <icon type="regular" name="fa-address-book" class="mr-2" :size=2 color="#607d8b"></icon>
                 <icon type="regular" name="fa-address-book" :size=2.5 color="#43a047"></icon>
               </div>`,
-  }))
+  }), addons)
   .add('Solid', () => ({
     ...common,
     template: `<div>
@@ -30,4 +38,4 @@ storiesOf('General|Icons', module)
                 <icon type="solid" name="fa-address-book" class="mr-2" :size=2 color="#607d8b"></icon>
                 <icon type="solid" name="fa-address-book" :size=2.5 color="#43a047"></icon>
               </div>`,
-  }));
+  }), addons);

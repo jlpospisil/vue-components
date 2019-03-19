@@ -19,6 +19,12 @@ const common = {
   },
 };
 
+const addons = {
+  info: {
+    components: { SelectList },
+  },
+};
+
 const story = storiesOf('Forms|Inputs', module);
 
 story.add('SelectList single', () => ({
@@ -30,7 +36,7 @@ story.add('SelectList single', () => ({
       v-model="selected"
     />
   `,
-}));
+}), addons);
 
 story.add('SelectList multiple', () => ({
   ...common,
@@ -43,4 +49,4 @@ story.add('SelectList multiple', () => ({
       v-model="selected"
     />
   `,
-}));
+}), addons);
