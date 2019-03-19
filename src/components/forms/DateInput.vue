@@ -162,6 +162,21 @@ $selector-item-height: 8rem;
             );
         }
 
+        .date-input-selector-item-value {
+          div {
+            text-align: center;
+
+            &:first-child {
+              font-size: 2rem;
+            }
+
+            &:nth-child(2) {
+              font-size: 0.85rem;
+              text-transform: uppercase;
+            }
+          }
+        }
+
         &.focused {
           box-shadow: $focused-box-shadow;
 
@@ -175,21 +190,6 @@ $selector-item-height: 8rem;
 
           &.disabled {
             color: rgba(0, 0, 0, 0.2);
-          }
-        }
-
-        .date-input-selector-item-value {
-          div {
-            text-align: center;
-
-            &:first-child {
-              font-size: 2rem;
-            }
-
-            &:nth-child(2) {
-              font-size: 0.85rem;
-              text-transform: uppercase;
-            }
           }
         }
       }
