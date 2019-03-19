@@ -1,5 +1,4 @@
 import { addDecorator, configure, addParameters } from '@storybook/vue';
-import { withOptions } from '@storybook/addon-options';
 import { withNotes } from '@storybook/addon-notes';
 import { withInfo } from 'storybook-addon-vue-info';
 import { withKnobs } from '@storybook/addon-knobs';
