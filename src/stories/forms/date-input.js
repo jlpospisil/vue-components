@@ -1,5 +1,4 @@
 import { storiesOf } from '@storybook/vue';
-import { action } from '@storybook/addon-actions';
 /* eslint-disable-next-line import/no-unresolved */
 import { DateInput } from '@cdpjs/vue-components';
 
