@@ -24,4 +24,9 @@ storiesOf('Forms|Inputs', module)
         action('input updated')(inputValue);
       },
     },
-  }));
+  }),
+  {
+    info: {
+      components: { TextInput },
+    },
+  });

@@ -39,6 +39,14 @@ const components = {
   }),
 };
 
+const addons = {
+  info: {
+    components: {
+      ButtonItem,
+    },
+  },
+};
+
 storiesOf('General|Buttons', module)
-  .add('Without Icon', components.default)
-  .add('With Icon', components.withIcon);
+  .add('Without Icon', components.default, addons)
+  .add('With Icon', components.withIcon, addons);

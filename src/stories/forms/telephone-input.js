@@ -23,4 +23,9 @@ storiesOf('Forms|Inputs', module)
         v-model="telephoneNumber"
       />
     `,
-  }));
+  }),
+  {
+    info: {
+      components: { TelephoneInput },
+    },
+  });

@@ -17,6 +17,13 @@ const common = {
   },
 };
 
+const addons = {
+  info: {
+    components: { RadioGroup },
+  },
+};
+
+
 storiesOf('Forms|Inputs', module)
   .add('Radios inline', () => ({
     ...common,
@@ -27,7 +34,7 @@ storiesOf('Forms|Inputs', module)
         v-model="selected"
       />
     `,
-  }))
+  }), addons)
   .add('Radios stacked', () => ({
     ...common,
     template: `
@@ -38,4 +45,4 @@ storiesOf('Forms|Inputs', module)
         v-model="selected"
       />
     `,
-  }));
+  }), addons);

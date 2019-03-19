@@ -53,6 +53,12 @@ const common = {
     </storybook-container>`,
 };
 
+const addons = {
+  info: {
+    components: { ApplicationContent },
+  },
+};
+
 const story = storiesOf('UI|ApplicationContent', module);
 
 story.add('Top nav (default)', () => ({
@@ -61,7 +67,7 @@ story.add('Top nav (default)', () => ({
     ...common.props,
     topNav: { type: Boolean, default: true },
   },
-}));
+}), addons);
 
 story.add('Left nav open', () => ({
   ...common,
@@ -69,7 +75,7 @@ story.add('Left nav open', () => ({
     ...common.props,
     leftSideNavOpen: { type: Boolean, default: true },
   },
-}));
+}), addons);
 
 story.add('Right nav open', () => ({
   ...common,
@@ -77,4 +83,4 @@ story.add('Right nav open', () => ({
     ...common.props,
     rightSideNavOpen: { type: Boolean, default: true },
   },
-}));
+}), addons);

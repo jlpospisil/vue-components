@@ -1,39 +1,25 @@
-import { addDecorator, configure } from '@storybook/vue';
-import { withOptions } from '@storybook/addon-options';
+import { addDecorator, configure, addParameters } from '@storybook/vue';
 import { withNotes } from '@storybook/addon-notes';
 import { withInfo } from 'storybook-addon-vue-info';
 import { withKnobs } from '@storybook/addon-knobs';
-import createTheme from './create-theme';
+import theme from './theme';
 
 // Storybook options
-addDecorator(withOptions({
-  name: 'Style Guide',
-  hierarchySeparator: /\//,
-  hierarchyRootSeparator: /\|/,
-  sortStoriesByKind: true,
-  addonPanelInRight: true,
-  // selectedAddonPanel: 'storybooks/storybook-addon-knobs',
-  selectedAddonPanel: 'storybook/notes/panel',
-  theme: createTheme({
-    mainBackground: '#e0e0e0',
-    inputFill: '#eeeeee',
-  }),
-}));
+addParameters({
+  options: {
+    theme,
+    name: 'Style Guide',
+    hierarchySeparator: /\//,
+    hierarchyRootSeparator: /\|/,
+    sortStoriesByKind: true,
+  },
+});
 
 // Add notes
 addDecorator(withNotes);
 
 // Add info
-// addDecorator(VueInfoAddon);
-addDecorator((getStory, context) => {
-  const story = getStory(context);
-  const addons = story.addons || {};
-  const info = addons.info || {};
-  return withInfo({
-    propTablesExclude: ['storybook-container'],
-    ...info,
-  })(getStory)(context);
-});
+addDecorator(withInfo);
 
 // Add knobs
 addDecorator(withKnobs);

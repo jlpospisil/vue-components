@@ -31,4 +31,9 @@ storiesOf('Forms|Inputs', module)
         v-model="isChecked"
       />
     `,
-  }));
+  }),
+  {
+    info: {
+      components: { CheckBox },
+    },
+  });

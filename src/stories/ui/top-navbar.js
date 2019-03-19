@@ -20,7 +20,7 @@ const components = {
 
 const addons = {
   info: {
-    propTablesExclude: ['storybook-container', 'icon', 'body-content'],
+    components: { TopNavbar },
   },
 };
 

@@ -3,6 +3,11 @@ import { storiesOf } from '@storybook/vue';
 import { SplitPane } from '@cdpjs/vue-components';
 import StorybookContainer from '../../StorybookContainer.vue';
 
+const addons = {
+  info: {
+    components: { SplitPane },
+  },
+};
 
 const stories = storiesOf('General|SplitPanes', module);
 
@@ -18,7 +23,7 @@ stories.add('Horizontal', () => ({
         <div>Bottom</div>  
       </split-pane>
     </storybook-container>`,
-}));
+}), addons);
 
 stories.add('Vertical', () => ({
   components: {
@@ -32,7 +37,7 @@ stories.add('Vertical', () => ({
         <div>Right</div>  
       </split-pane>
     </storybook-container>`,
-}));
+}), addons);
 
 stories.add('Nested', () => ({
   components: {
@@ -54,4 +59,4 @@ stories.add('Nested', () => ({
         </split-pane>
       </split-pane>
     </storybook-container>`,
-}));
+}), addons);

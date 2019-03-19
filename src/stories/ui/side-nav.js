@@ -4,6 +4,11 @@ import {
 } from '@cdpjs/vue-components'; /* eslint-disable-line import/no-unresolved */
 import StorybookContainer from '../../StorybookContainer.vue';
 
+const addons = {
+  info: {
+    components: { SideNav: SideNavOriginal },
+  },
+};
 const SideNav = {
   components: {
     SideNavOriginal,
@@ -109,4 +114,4 @@ storiesOf('UI|SideNav', module)
         this.sideNavOpen = !this.sideNavOpen;
       },
     },
-  }));
+  }), addons);
