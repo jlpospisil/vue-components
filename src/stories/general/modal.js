@@ -35,5 +35,4 @@ storiesOf('General|Modals', module)
         Modal,
       },
     },
-  },
-);
+  });
