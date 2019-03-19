@@ -19,17 +19,16 @@ const components = {
 };
 
 const addons = {
-  info: {
-    components: { TopNavbar },
-  },
-};
-
-const notes = {
-  markdown: `
+  notes: {
+    markdown: `
   * navType="sticky-top" is being used to mimic the default fixed-top because the nav is in a container with relative positioning.
   
   * This could be used similarly to place a "fixed" navbar inside a container in an app, but keep in mind that position: sticky is not supported in all browsers
   `,
+  },
+  info: {
+    components: { TopNavbar },
+  },
 };
 
 const stories = storiesOf('UI|TopNavbar', module);
@@ -50,7 +49,7 @@ stories.add('Left links', () => ({
         
         <body-content />
     </storybook-container>`,
-}), { notes });
+}), addons);
 
 stories.add('Right links', () => ({
   addons,
@@ -68,7 +67,7 @@ stories.add('Right links', () => ({
         
         <body-content />
     </storybook-container>`,
-}), { notes });
+}), addons);
 
 stories.add('Custom content', () => ({
   addons,
@@ -103,4 +102,4 @@ stories.add('Custom content', () => ({
         
         <body-content />
     </storybook-container>`,
-}), { notes });
+}), addons);
