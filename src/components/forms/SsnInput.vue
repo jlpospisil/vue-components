@@ -32,7 +32,7 @@ const {
 } = TextInputInput.props;
 
 export default {
-  name: 'TelephoneInput',
+  name: 'SsnInput',
   components: {
     InputLabel,
     TextInputInput,
@@ -60,21 +60,15 @@ export default {
         let { rawValue: v } = this;
         v = v ? v.replace(/\D/g, '') : '';
 
-        if (v.length && v.substr(0, 1) !== '1') {
-          v = `1${v}`;
-        }
-
         const { length } = v;
 
         switch (true) {
-            case (length >= 11):
-              return `+${v.substr(0, 1)} (${v.substr(1, 3)}) ${v.substr(4, 3)}-${v.substr(7, 4)}`;
-            case (length > 6):
-              return `+${v.substr(0, 1)} (${v.substr(1, 3)}) ${v.substr(4, 3)}-${v.substr(7)}`;
+            case (length >= 9):
+              return `${v.substr(0, 3)}-${v.substr(3, 2)}-${v.substr(5, 4)}`;
+            case (length > 5):
+              return `${v.substr(0, 3)}-${v.substr(3, 2)}-${v.substr(5)}`;
             case (length > 3):
-              return `+${v.substr(0, 1)} (${v.substr(1, 3)}) ${v.substr(4)}`;
-            case (length > 1):
-              return `+${v.substr(0, 1)} (${v.substr(1)}`;
+              return `${v.substr(0, 3)}-${v.substr(3)}`;
             default:
               return v;
         }
