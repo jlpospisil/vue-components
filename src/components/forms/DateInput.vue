@@ -11,6 +11,7 @@
       <text-input
         v-model="inputValue"
         @blur="checkInputValue"
+        @keypress.enter="checkInputValue"
         ref="input"
       />
 

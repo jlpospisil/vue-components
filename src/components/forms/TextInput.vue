@@ -12,6 +12,8 @@
       @blur="$emit('blur', $event)"
       @select="$emit('select', $event)"
       @click="$emit('click', $event)"
+      @keypress="$emit('keypress', $event)"
+      @keypress.enter="$emit('keypress.enter', $event)"
     />
   </div>
 </template>
